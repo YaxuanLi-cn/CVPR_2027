@@ -1,0 +1,41 @@
+{
+  "rows_test": 6364,
+  "rows_train": 24909,
+  "stage0_mast3r_only": {
+    "MAE_x_m": 7.507598995784443,
+    "MAE_y_m": 7.473172060358476,
+    "MAE_z_m": 3.9677002496714193,
+    "MAE_tilt_deg": 2.25943186636502,
+    "MAE_heading_deg_circular": 2.040478602964498,
+    "MAE_distance_from_xyz_m": 6.007117274825132
+  },
+  "stage0_mlp_only": {
+    "MAE_x_m": 7.489868495713935,
+    "MAE_y_m": 7.395211120148149,
+    "MAE_z_m": 2.701370731955925,
+    "MAE_tilt_deg": 1.8581489710828374,
+    "MAE_heading_deg_circular": 1.8187772729837892,
+    "MAE_distance_from_xyz_m": 5.395275459987034
+  },
+  "fusion_xy_from_mlp": {
+    "MAE_x_m": 7.489868495713935,
+    "MAE_y_m": 7.395211120148149,
+    "MAE_z_m": 0.7898819453259139,
+    "MAE_tilt_deg": 0.4417305554101194,
+    "MAE_heading_deg_circular": 0.12118058483346204,
+    "MAE_distance_from_xyz_m": 4.734516108499797
+  },
+  "aux": {
+    "MAE_dist_direct": 0.9240634195596099,
+    "MAE_lx": 0.8224855478333568,
+    "MAE_ly": 0.9228615249092333
+  },
+  "oracle_abs_heading": {
+    "MAE_x_m": 0.8966852835796921,
+    "MAE_y_m": 0.8876445200779745,
+    "MAE_z_m": 0.7898819453259139,
+    "MAE_tilt_deg": 0.4417305554101194,
+    "MAE_heading_deg_circular": 0.12118058483346204,
+    "MAE_distance_from_xyz_m": 0.9988505171018836
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "split": "same tour-disjoint 60k sampled split",
+  "train_rows": 47687,
+  "test_rows": 12313,
+  "model": "same MLP size and optimizer as direct tilt head; two outputs trained against sin/cos targets",
+  "MAE_tilt_deg": 1.9474909683986497,
+  "MAE_tilt_deg_circular": 1.9474909683986497,
+  "direct_regression_MAE_tilt_deg": 1.8753341381204442,
+  "difference_sincos_minus_direct_deg": 0.07215683027820541,
+  "steps": 5610,
+  "checkpoint": "/root/rasr-pairuav/outputs/pairuav5d_60k/models/tilt_sincos.pt"
+}

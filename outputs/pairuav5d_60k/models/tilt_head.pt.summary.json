@@ -1,0 +1,10 @@
+{
+  "head_name": "distance_head_a",
+  "rows": 47687,
+  "feature_dim": 422,
+  "steps": 5610,
+  "initial_loss": 0.14583781361579895,
+  "final_loss": 0.0033324905671179295,
+  "loss_decreased": true,
+  "checkpoint": "/root/rasr-pairuav/outputs/pairuav5d_60k/models/tilt_head.pt"
+}

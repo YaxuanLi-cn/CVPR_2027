@@ -1,0 +1,117 @@
+<title>RASR 想象中间图</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+/* layout: one reading column of short notes, each followed by a full-width figure plate on a dark mat */
+:root {
+  --bg: #f3f5f4; --surface: #ffffff; --fg: #16201d; --muted: #586662; --line: #d5dcd9; --accent: #0b7a63; --mat: #0c1110;
+  --display: "Space Grotesk", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --body: Inter, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #101514; --surface: #171e1c; --fg: #e6ecea; --muted: #9aa8a4; --line: #2a3431; --accent: #4fd0b3; --mat: #060908; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #101514; --surface: #171e1c; --fg: #e6ecea; --muted: #9aa8a4; --line: #2a3431; --accent: #4fd0b3; --mat: #060908; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15px; line-height: 1.7; }
+.wrap { max-width: 1500px; margin: 0 auto; padding-block: 32px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 36px; }
+header { display: flex; flex-direction: column; gap: 10px; max-width: 46rem; }
+h1 { font-family: var(--display); font-size: 1.9rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+h2 { font-family: var(--display); font-size: 1.2rem; line-height: 1.35; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.lede { color: var(--muted); }
+.tag { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+section { display: flex; flex-direction: column; gap: 14px; }
+.note { max-width: 46rem; display: flex; flex-direction: column; gap: 8px; }
+.note ul { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 4px; }
+.plate { background: var(--mat); border: 1px solid var(--line); border-radius: 6px; overflow-x: auto; }
+.plate img { display: block; width: 100%; height: auto; min-width: 760px; }
+.plate a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.path { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.8rem; color: var(--muted); overflow-wrap: anywhere; }
+nav { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.9rem; }
+nav a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+nav a:hover, nav a:focus-visible { border-bottom-color: var(--accent); outline: none; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="tag">RASR · PairUAV-5D · 第二阶段</span>
+    <h1>想象出来的中间图</h1>
+    <p class="lede">第二阶段里实际生成并送去比对的图像。模块 A 把一张真实图按第一阶段的位姿重新渲染成另一台相机应该看到的画面；模块 B 把倾斜图像渲染成正下视的鸟瞰图，再旋转出一组朝向候选。这里的「想象」是几何渲染，不是扩散模型生成的。</p>
+    <nav aria-label="图目录">
+      <a href="#a1">A1 高度差大</a><a href="#a0">A0 高度差 −28 m</a><a href="#a2">A2 朝向近乎相反</a><a href="#a3">A3 两图都很斜</a><a href="#a4">A4 失败例</a><a href="#b">B 鸟瞰图候选</a>
+    </nav>
+  </header>
+
+  <hr>
+
+  <section id="a1">
+    <div class="note">
+      <span class="tag">模块 A · 想象目标视角</span>
+      <h2>A1　高度差 −32 m，朝向差 28°</h2>
+      <p>每张模块 A 的图都按同一个顺序排：</p>
+      <ul>
+        <li>第 1 行：真实的 b（源图）和真实的 a（目标图）。</li>
+        <li>第 2 行：用第一阶段位姿把 b 渲染成的「想象的 a」，以及它和真实 a 的棋盘格拼接。格子交界处的道路、屋顶连得上，说明想象对了。</li>
+        <li>第 3 行：对照，第一阶段 zoom pass 用的纯旋转对齐。尺度和位置都对不上。</li>
+        <li>第 4 行：原始分辨率的一小块，真实图、想象图，以及 SuperGlue 在这一块上的匹配。每个点上的短线是想象图到真实图的残余位移：绿色小于 8 px，橙色 8–30 px，红色更大。</li>
+      </ul>
+      <p>这一对的内点数从第一阶段的 590 升到 6,916。橙色的点集中在高楼屋顶上：想象用的是地面平面，屋顶会留下视差，这部分由后面重新解位姿来吸收。</p>
+    </div>
+    <div class="plate"><a href="A1_height_change.jpg"><img src="A1_height_change.jpg" alt="A1：真实源图与目标图、想象的目标图、棋盘格对比、原始分辨率匹配"></a></div>
+    <p class="path">/root/rasr-pairuav/stage2_imagination/assets/A1_height_change.jpg</p>
+  </section>
+
+  <section id="a0">
+    <div class="note">
+      <h2>A0　高度差 −28 m，朝向差 −120°，重叠区只占一角</h2>
+      <p>跑道的弧线在想象图和真实图之间是连续的；纯旋转对齐的版本里跑道明显偏小、错位。这张没有第 4 行。</p>
+    </div>
+    <div class="plate"><a href="imagination_example.jpg"><img src="imagination_example.jpg" alt="A0：田径场一角的想象图与真实图对比"></a></div>
+    <p class="path">/root/rasr-pairuav/stage2_imagination/assets/imagination_example.jpg</p>
+  </section>
+
+  <section id="a2">
+    <div class="note">
+      <h2>A2　两台相机朝向近乎相反</h2>
+      <p>从朝向差超过 140°、tilt 差超过 10° 的测试对里随机抽的一对。具体数值写在图的第一行。</p>
+    </div>
+    <div class="plate"><a href="A2_opposite_heading.jpg"><img src="A2_opposite_heading.jpg" alt="A2：朝向近乎相反的一对"></a></div>
+    <p class="path">/root/rasr-pairuav/stage2_imagination/assets/A2_opposite_heading.jpg</p>
+  </section>
+
+  <section id="a3">
+    <div class="note">
+      <h2>A3　两张图都很斜，第一阶段匹配很少</h2>
+      <p>从「两台相机 tilt 都超过 25°、第一阶段内点 60–160、想象之后内点超过 1,000」的测试对里随机抽的一对。这类中等难度的样本是模块 A 提升最大的一组。</p>
+    </div>
+    <div class="plate"><a href="A3_oblique_hard.jpg"><img src="A3_oblique_hard.jpg" alt="A3：两图都倾斜的难例"></a></div>
+    <p class="path">/root/rasr-pairuav/stage2_imagination/assets/A3_oblique_hard.jpg</p>
+  </section>
+
+  <section id="a4">
+    <div class="note">
+      <h2>A4　失败例：两个视野完全不重叠</h2>
+      <p>a 的 tilt 是 44°，b 是 5°，朝向差 −138°。按第一阶段位姿渲染后，b 的内容全部落在 a 的画面之外，想象图是全黑的，没有东西可以比对，内点数前后都是 0。这类样本约占测试集的 5%，第二阶段救不了。</p>
+    </div>
+    <div class="plate"><a href="A4_failure.jpg"><img src="A4_failure.jpg" alt="A4：视野不重叠的失败例，想象图为空"></a></div>
+    <p class="path">/root/rasr-pairuav/stage2_imagination/assets/A4_failure.jpg</p>
+  </section>
+
+  <hr>
+
+  <section id="b">
+    <div class="note">
+      <span class="tag">模块 B · 想象鸟瞰图</span>
+      <h2>B　真实图 → 正下视图 → 12 个朝向候选 → 北朝上</h2>
+      <p>三行分别是 tilt 约 5°、27°、43° 的测试图像。每行从左到右：</p>
+      <ul>
+        <li>真实图像，标题里是真实 tilt 和 SuperGlue 几何估出的 tilt。</li>
+        <li>去掉 tilt 之后的正下视图。</li>
+        <li>12 个候选：把正下视图每隔 30° 转一次。小标题「+30 → 211 deg」的意思是这张转了 30° 的图过网络后，投票认为原相机朝向是 211°。12 个候选的票很一致。</li>
+        <li>按预测朝向转成「北朝上」的图，和按真值转的图。两张几乎一样，说明朝向估对了。</li>
+      </ul>
+      <p>这三张是从误差小于 4° 的样本里挑的，用来展示渲染本身；模块 B 在整条 tour 朝向有歧义的样本上仍然会错。</p>
+    </div>
+    <div class="plate"><a href="B_bev.jpg"><img src="B_bev.jpg" alt="B：三张测试图像的正下视图、12 个旋转候选及北朝上结果"></a></div>
+    <p class="path">/root/rasr-pairuav/stage2_imagination/assets/B_bev.jpg</p>
+  </section>
+</div>

@@ -1,0 +1,17 @@
+{
+  "comparison": "same tour-disjoint train/test split and same frozen MASt3R features; only heading target encoding differs",
+  "train_pairs": 47687,
+  "test_pairs": 12313,
+  "metric": "circular absolute angular error in degrees",
+  "sincos": {
+    "model": "two ridge regressors trained on sin(theta) and cos(theta), reconstructed with atan2",
+    "MAE_heading_deg": 5.70638393117402
+  },
+  "raw_angle": {
+    "model": "one ridge regressor trained directly on signed heading degrees; no sin/cos encoding",
+    "MAE_heading_deg": 27.886743544974333
+  },
+  "raw_minus_sincos_deg": 22.180359613800313,
+  "distance_MAE_m_both": 2.6994006038086207,
+  "tilt_MAE_deg_both": 1.8753341381204442
+}

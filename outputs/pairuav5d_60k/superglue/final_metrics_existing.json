@@ -1,0 +1,144 @@
+{
+  "abs_heading_val_a": 6.335911218618109,
+  "abs_heading_val_ab": 4.7551312533873,
+  "abs_heading_test_a": 7.65062329530782,
+  "abs_heading_test_ab": 5.695734197968732,
+  "rho_bins": [
+    0.9750000000000001,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9750000000000001
+  ],
+  "val": {
+    "MASt3R-only MLP (control)": {
+      "MAE_x_m": 7.50429824200977,
+      "MAE_y_m": 7.474120606042512,
+      "MAE_z_m": 2.539256526915112,
+      "MAE_tilt_deg": 1.8676287717700368,
+      "MAE_heading_deg_circular": 1.898524935612804,
+      "MAE_distance_from_xyz_m": 5.170821001426358
+    },
+    "fusion + abs-heading (no shrink)": {
+      "MAE_x_m": 3.276588499798688,
+      "MAE_y_m": 3.272151137783506,
+      "MAE_z_m": 2.2261821170573803,
+      "MAE_tilt_deg": 1.604564071585426,
+      "MAE_heading_deg_circular": 0.966634734621483,
+      "MAE_distance_from_xyz_m": 2.5210746858202424
+    },
+    "fusion + abs-heading, norm rescaled to fused distance": {
+      "MAE_x_m": 3.2937021390435435,
+      "MAE_y_m": 3.260766601357647,
+      "MAE_z_m": 2.4246744186407314,
+      "MAE_tilt_deg": 1.604564071585426,
+      "MAE_heading_deg_circular": 0.966634734621483,
+      "MAE_distance_from_xyz_m": 2.221015244021332
+    },
+    "fusion + abs-heading, xy rescaled so |xyz| = fused distance (z kept)": {
+      "MAE_x_m": 3.6758177603879054,
+      "MAE_y_m": 3.5894287735518056,
+      "MAE_z_m": 2.2261821170573803,
+      "MAE_tilt_deg": 1.604564071585426,
+      "MAE_heading_deg_circular": 0.966634734621483,
+      "MAE_distance_from_xyz_m": 2.2167042022768677
+    },
+    "fusion + abs-heading, kappa-shrunk xy": {
+      "MAE_x_m": 3.2762870407220923,
+      "MAE_y_m": 3.270354179516817,
+      "MAE_z_m": 2.2261821170573803,
+      "MAE_tilt_deg": 1.604564071585426,
+      "MAE_heading_deg_circular": 0.966634734621483,
+      "MAE_distance_from_xyz_m": 2.527437393759152
+    },
+    "[oracle abs-heading upper bound]": {
+      "MAE_x_m": 3.174296385637666,
+      "MAE_y_m": 3.1329229960254596,
+      "MAE_z_m": 2.2261821170573803,
+      "MAE_tilt_deg": 1.604564071585426,
+      "MAE_heading_deg_circular": 0.966634734621483,
+      "MAE_distance_from_xyz_m": 2.5210746858202424
+    },
+    "fusion, xy from MASt3R MLP (no abs-heading)": {
+      "MAE_x_m": 7.50429824200977,
+      "MAE_y_m": 7.474120606042512,
+      "MAE_z_m": 2.2261821170573803,
+      "MAE_tilt_deg": 1.604564071585426,
+      "MAE_heading_deg_circular": 0.966634734621483,
+      "MAE_distance_from_xyz_m": 5.1246594095775695
+    },
+    "aux": {
+      "MAE_dist_direct": 2.2210152440213315,
+      "MAE_lx": 3.087220789474042,
+      "MAE_ly": 3.2146071318494056,
+      "rows": 1912
+    }
+  },
+  "test": {
+    "MASt3R-only MLP (control)": {
+      "MAE_x_m": 7.5994846543343035,
+      "MAE_y_m": 7.368588349026617,
+      "MAE_z_m": 2.735681245138199,
+      "MAE_tilt_deg": 1.8960184612802269,
+      "MAE_heading_deg_circular": 1.822695261812634,
+      "MAE_distance_from_xyz_m": 5.489058872213713
+    },
+    "fusion + abs-heading (no shrink)": {
+      "MAE_x_m": 3.340280825643673,
+      "MAE_y_m": 3.3139757170825304,
+      "MAE_z_m": 2.3295260798659405,
+      "MAE_tilt_deg": 1.6596844798731467,
+      "MAE_heading_deg_circular": 0.956698115442418,
+      "MAE_distance_from_xyz_m": 2.560079266847575
+    },
+    "fusion + abs-heading, norm rescaled to fused distance": {
+      "MAE_x_m": 3.3616216825102874,
+      "MAE_y_m": 3.3567454044522083,
+      "MAE_z_m": 2.5034353700890177,
+      "MAE_tilt_deg": 1.6596844798731467,
+      "MAE_heading_deg_circular": 0.956698115442418,
+      "MAE_distance_from_xyz_m": 2.262226731569586
+    },
+    "fusion + abs-heading, xy rescaled so |xyz| = fused distance (z kept)": {
+      "MAE_x_m": 3.6626927339976705,
+      "MAE_y_m": 3.734820915262431,
+      "MAE_z_m": 2.3295260798659405,
+      "MAE_tilt_deg": 1.6596844798731467,
+      "MAE_heading_deg_circular": 0.956698115442418,
+      "MAE_distance_from_xyz_m": 2.2604815951079176
+    },
+    "fusion + abs-heading, kappa-shrunk xy": {
+      "MAE_x_m": 3.3395385804196325,
+      "MAE_y_m": 3.3115020796721937,
+      "MAE_z_m": 2.3295260798659405,
+      "MAE_tilt_deg": 1.6596844798731467,
+      "MAE_heading_deg_circular": 0.956698115442418,
+      "MAE_distance_from_xyz_m": 2.569099096811971
+    },
+    "[oracle abs-heading upper bound]": {
+      "MAE_x_m": 3.1964335734272433,
+      "MAE_y_m": 3.160460920169363,
+      "MAE_z_m": 2.3295260798659405,
+      "MAE_tilt_deg": 1.6596844798731467,
+      "MAE_heading_deg_circular": 0.956698115442418,
+      "MAE_distance_from_xyz_m": 2.560079266847575
+    },
+    "fusion, xy from MASt3R MLP (no abs-heading)": {
+      "MAE_x_m": 7.5994846543343035,
+      "MAE_y_m": 7.368588349026617,
+      "MAE_z_m": 2.3295260798659405,
+      "MAE_tilt_deg": 1.6596844798731467,
+      "MAE_heading_deg_circular": 0.956698115442418,
+      "MAE_distance_from_xyz_m": 5.282396320356156
+    },
+    "aux": {
+      "MAE_dist_direct": 2.262226731569586,
+      "MAE_lx": 3.0406397119096344,
+      "MAE_ly": 3.3024379097319394,
+      "rows": 4887
+    }
+  }
+}

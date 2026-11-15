@@ -1,0 +1,10 @@
+{
+  "head_name": "coordinate_head_z",
+  "rows": 47687,
+  "feature_dim": 422,
+  "steps": 5610,
+  "initial_loss": 0.15974754095077515,
+  "final_loss": 0.006107544060796499,
+  "loss_decreased": true,
+  "checkpoint": "/root/rasr-pairuav/outputs/pairuav5d_60k/models/coordinate_head_z.pt"
+}

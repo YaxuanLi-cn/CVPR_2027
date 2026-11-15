@@ -1,0 +1,10 @@
+{
+  "head_name": "distance_head_d",
+  "rows": 47687,
+  "feature_dim": 422,
+  "steps": 5610,
+  "initial_loss": 0.16204442083835602,
+  "final_loss": 0.0037500886246562004,
+  "loss_decreased": true,
+  "checkpoint": "/root/rasr-pairuav/outputs/pairuav5d_60k/models/distance_head_d.pt"
+}

@@ -1,0 +1,220 @@
+{
+  "abs_heading_val_a": 8.836385991596126,
+  "abs_heading_val_ab": 7.055827211394821,
+  "abs_heading_test_a": 10.860186215750451,
+  "abs_heading_test_ab": 8.930118826944826,
+  "rho_bins": [
+    0.9500000000000001,
+    0.9750000000000001,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9750000000000001,
+    1.0
+  ],
+  "val": {
+    "MASt3R-only MLP (control)": {
+      "MAE_x_m": 7.56584928863025,
+      "MAE_y_m": 7.59925223351399,
+      "MAE_z_m": 2.618493945667588,
+      "MAE_tilt_deg": 1.9389388452209477,
+      "MAE_heading_deg_circular": 1.949390531010658,
+      "MAE_distance_from_xyz_m": 5.191185116545015
+    },
+    "fusion + abs-heading (no shrink)": {
+      "MAE_x_m": 1.7849652184255898,
+      "MAE_y_m": 1.786093239132665,
+      "MAE_z_m": 1.0347175775798594,
+      "MAE_tilt_deg": 0.6318686224354191,
+      "MAE_heading_deg_circular": 0.2010343705305886,
+      "MAE_distance_from_xyz_m": 1.2600399273668677
+    },
+    "fusion + abs-heading, norm rescaled to fused distance": {
+      "MAE_x_m": 1.7877888852341803,
+      "MAE_y_m": 1.7668526938141764,
+      "MAE_z_m": 1.107828447761724,
+      "MAE_tilt_deg": 0.6318686224354191,
+      "MAE_heading_deg_circular": 0.2010343705305886,
+      "MAE_distance_from_xyz_m": 1.116476561757575
+    },
+    "fusion + abs-heading, norm rescaled with exponent 0.25": {
+      "MAE_x_m": 1.7796071666735318,
+      "MAE_y_m": 1.777009187339808,
+      "MAE_z_m": 1.0331530500191972,
+      "MAE_tilt_deg": 0.6318686224354191,
+      "MAE_heading_deg_circular": 0.2010343705305886,
+      "MAE_distance_from_xyz_m": 1.1989908279162358
+    },
+    "fusion + abs-heading, norm rescaled with exponent 0.5": {
+      "MAE_x_m": 1.7770195223845193,
+      "MAE_y_m": 1.767896804917068,
+      "MAE_z_m": 1.0430972439140245,
+      "MAE_tilt_deg": 0.6318686224354191,
+      "MAE_heading_deg_circular": 0.2010343705305886,
+      "MAE_distance_from_xyz_m": 1.1488741135447254
+    },
+    "fusion + abs-heading, norm rescaled with exponent 0.75": {
+      "MAE_x_m": 1.7772308508604389,
+      "MAE_y_m": 1.7621838307718627,
+      "MAE_z_m": 1.0677478462428729,
+      "MAE_tilt_deg": 0.6318686224354191,
+      "MAE_heading_deg_circular": 0.2010343705305886,
+      "MAE_distance_from_xyz_m": 1.1182099685934912
+    },
+    "fusion + abs-heading, xy rescaled so |xyz| = fused distance (z kept)": {
+      "MAE_x_m": 1.9161417192548214,
+      "MAE_y_m": 1.8797632215625246,
+      "MAE_z_m": 1.0347175775798594,
+      "MAE_tilt_deg": 0.6318686224354191,
+      "MAE_heading_deg_circular": 0.2010343705305886,
+      "MAE_distance_from_xyz_m": 1.1134228377596782
+    },
+    "fusion + abs-heading, kappa-shrunk xy": {
+      "MAE_x_m": 1.7784835153572287,
+      "MAE_y_m": 1.7813285651259347,
+      "MAE_z_m": 1.0347175775798594,
+      "MAE_tilt_deg": 0.6318686224354191,
+      "MAE_heading_deg_circular": 0.2010343705305886,
+      "MAE_distance_from_xyz_m": 1.271458725514332
+    },
+    "[oracle abs-heading upper bound]": {
+      "MAE_x_m": 1.2431402324085874,
+      "MAE_y_m": 1.2308399127925864,
+      "MAE_z_m": 1.0347175775798594,
+      "MAE_tilt_deg": 0.6318686224354191,
+      "MAE_heading_deg_circular": 0.2010343705305886,
+      "MAE_distance_from_xyz_m": 1.2600399273668674
+    },
+    "fusion, xy from MASt3R MLP (no abs-heading)": {
+      "MAE_x_m": 7.56584928863025,
+      "MAE_y_m": 7.59925223351399,
+      "MAE_z_m": 1.0347175775798594,
+      "MAE_tilt_deg": 0.6318686224354191,
+      "MAE_heading_deg_circular": 0.2010343705305886,
+      "MAE_distance_from_xyz_m": 4.825107270415938
+    },
+    "aux": {
+      "MAE_dist_direct": 1.116476561757575,
+      "MAE_lx": 1.1859789446828781,
+      "MAE_ly": 1.24769237041365,
+      "rows": 2467
+    }
+  },
+  "test": {
+    "MASt3R-only MLP (control)": {
+      "MAE_x_m": 7.489868495713935,
+      "MAE_y_m": 7.395211120148149,
+      "MAE_z_m": 2.701370731955925,
+      "MAE_tilt_deg": 1.8581489710828374,
+      "MAE_heading_deg_circular": 1.8187772729837892,
+      "MAE_distance_from_xyz_m": 5.395275459987034
+    },
+    "fusion + abs-heading (no shrink)": {
+      "MAE_x_m": 1.9768343381449611,
+      "MAE_y_m": 1.9883450196055492,
+      "MAE_z_m": 1.074513974896488,
+      "MAE_tilt_deg": 0.6351640730124628,
+      "MAE_heading_deg_circular": 0.1836740048438553,
+      "MAE_distance_from_xyz_m": 1.2892228161302655
+    },
+    "fusion + abs-heading, norm rescaled to fused distance": {
+      "MAE_x_m": 1.983789539292707,
+      "MAE_y_m": 1.9978389421773233,
+      "MAE_z_m": 1.154503793864253,
+      "MAE_tilt_deg": 0.6351640730124628,
+      "MAE_heading_deg_circular": 0.1836740048438553,
+      "MAE_distance_from_xyz_m": 1.154953639024833
+    },
+    "fusion + abs-heading, norm rescaled with exponent 0.25": {
+      "MAE_x_m": 1.9705043242692672,
+      "MAE_y_m": 1.981129567667046,
+      "MAE_z_m": 1.076652365110363,
+      "MAE_tilt_deg": 0.6351640730124628,
+      "MAE_heading_deg_circular": 0.1836740048438553,
+      "MAE_distance_from_xyz_m": 1.2295603389375496
+    },
+    "fusion + abs-heading, norm rescaled with exponent 0.5": {
+      "MAE_x_m": 1.9683940631705885,
+      "MAE_y_m": 1.9781924395938855,
+      "MAE_z_m": 1.0875461875446786,
+      "MAE_tilt_deg": 0.6351640730124628,
+      "MAE_heading_deg_circular": 0.1836740048438553,
+      "MAE_distance_from_xyz_m": 1.182832093110015
+    },
+    "fusion + abs-heading, norm rescaled with exponent 0.75": {
+      "MAE_x_m": 1.9719767625066664,
+      "MAE_y_m": 1.9815493072240742,
+      "MAE_z_m": 1.1118901035843207,
+      "MAE_tilt_deg": 0.6351640730124628,
+      "MAE_heading_deg_circular": 0.1836740048438553,
+      "MAE_distance_from_xyz_m": 1.1512062458367673
+    },
+    "fusion + abs-heading, xy rescaled so |xyz| = fused distance (z kept)": {
+      "MAE_x_m": 2.090056076135056,
+      "MAE_y_m": 2.107717015716921,
+      "MAE_z_m": 1.074513974896488,
+      "MAE_tilt_deg": 0.6351640730124628,
+      "MAE_heading_deg_circular": 0.1836740048438553,
+      "MAE_distance_from_xyz_m": 1.153384421273284
+    },
+    "fusion + abs-heading, kappa-shrunk xy": {
+      "MAE_x_m": 1.9687409495720545,
+      "MAE_y_m": 1.9851463492748782,
+      "MAE_z_m": 1.074513974896488,
+      "MAE_tilt_deg": 0.6351640730124628,
+      "MAE_heading_deg_circular": 0.1836740048438553,
+      "MAE_distance_from_xyz_m": 1.3092301214871884
+    },
+    "[oracle abs-heading upper bound]": {
+      "MAE_x_m": 1.2940633204949763,
+      "MAE_y_m": 1.2740034603190793,
+      "MAE_z_m": 1.074513974896488,
+      "MAE_tilt_deg": 0.6351640730124628,
+      "MAE_heading_deg_circular": 0.1836740048438553,
+      "MAE_distance_from_xyz_m": 1.2892228161302655
+    },
+    "fusion, xy from MASt3R MLP (no abs-heading)": {
+      "MAE_x_m": 7.489868495713935,
+      "MAE_y_m": 7.395211120148149,
+      "MAE_z_m": 1.074513974896488,
+      "MAE_tilt_deg": 0.6351640730124628,
+      "MAE_heading_deg_circular": 0.1836740048438553,
+      "MAE_distance_from_xyz_m": 4.794526357816078
+    },
+    "aux": {
+      "MAE_dist_direct": 1.1549536390248327,
+      "MAE_lx": 1.206054911043028,
+      "MAE_ly": 1.3351895005347072,
+      "rows": 6364
+    }
+  },
+  "headline_variant": "fusion + abs-heading, norm rescaled with exponent 0.75",
+  "headline_test": {
+    "MAE_x_m": 1.9719767625066664,
+    "MAE_y_m": 1.9815493072240742,
+    "MAE_z_m": 1.1118901035843207,
+    "MAE_tilt_deg": 0.6351640730124628,
+    "MAE_heading_deg_circular": 0.1836740048438553,
+    "MAE_distance_from_xyz_m": 1.1512062458367673
+  },
+  "subset_original_superglue_coverage": {
+    "rows": 2502,
+    "control_mlp": {
+      "MAE_x_m": 7.624518746247363,
+      "MAE_y_m": 7.3982773344375925,
+      "MAE_z_m": 2.782197512992071,
+      "MAE_tilt_deg": 1.9017771436386064,
+      "MAE_heading_deg_circular": 1.8035565408873262,
+      "MAE_distance_from_xyz_m": 5.516072102892569
+    },
+    "headline": {
+      "MAE_x_m": 1.7606604005139634,
+      "MAE_y_m": 1.7517341121523546,
+      "MAE_z_m": 1.1842352166010197,
+      "MAE_tilt_deg": 0.654746771751972,
+      "MAE_heading_deg_circular": 0.1779861963084436,
+      "MAE_distance_from_xyz_m": 1.2278246071751038
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "split": "tour-disjoint 60k sampled test split",
+  "test_rows_valid": 12313,
+  "test_rows_invalid": 0,
+  "heading_mode": "sincos",
+  "distance_metric": "MAE of Euclidean distance computed from predicted xyz vs true xyz",
+  "MAE_x_m": 7.470155819020527,
+  "MAE_y_m": 7.446081985925802,
+  "MAE_z_m": 2.6808108969606343,
+  "MAE_tilt_deg": 1.8753341381204442,
+  "MAE_heading_deg_circular": 5.70638393117402,
+  "MAE_distance_from_xyz_m": 5.16386412569465
+}

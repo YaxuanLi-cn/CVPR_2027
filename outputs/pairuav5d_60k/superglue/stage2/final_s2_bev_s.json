@@ -1,0 +1,180 @@
+{
+  "stage 1 (SuperGlue fusion + abs-heading CNN v2)": {
+    "no_rescale": {
+      "MAE_x_m": 1.3749757318989777,
+      "MAE_y_m": 1.344104073501296,
+      "MAE_z_m": 0.7898819453259139,
+      "MAE_tilt_deg": 0.4417305554101194,
+      "MAE_heading_deg_circular": 0.12118058483346204,
+      "MAE_distance_from_xyz_m": 0.9988505171018836,
+      "abs_heading_mae": 5.748346586374309,
+      "abs_heading_median": 1.636629248921082
+    },
+    "rescale_exponent_chosen_on_val": 0.75,
+    "rescaled": {
+      "MAE_x_m": 1.3733291919017374,
+      "MAE_y_m": 1.346043426508755,
+      "MAE_z_m": 0.8085635515544036,
+      "MAE_tilt_deg": 0.4417305554101194,
+      "MAE_heading_deg_circular": 0.12118058483346204,
+      "MAE_distance_from_xyz_m": 0.9198433994763163
+    }
+  },
+  "stage 2: + module A (imagined target view + SuperGlue re-matching)": {
+    "no_rescale": {
+      "MAE_x_m": 1.035876968368502,
+      "MAE_y_m": 1.0188716812787029,
+      "MAE_z_m": 0.5458755817293551,
+      "MAE_tilt_deg": 0.20055479428399978,
+      "MAE_heading_deg_circular": 0.06570415584064,
+      "MAE_distance_from_xyz_m": 0.7072641894772854,
+      "abs_heading_mae": 5.744199648867709,
+      "abs_heading_median": 1.6286060066352377
+    },
+    "rescale_exponent_chosen_on_val": 0.5,
+    "rescaled": {
+      "MAE_x_m": 1.0346869535650411,
+      "MAE_y_m": 1.0181342377666882,
+      "MAE_z_m": 0.54438526344015,
+      "MAE_tilt_deg": 0.20055479428399978,
+      "MAE_heading_deg_circular": 0.06570415584064,
+      "MAE_distance_from_xyz_m": 0.6772267727084731
+    }
+  },
+  "stage 2: + module B (imagined BEV abs-heading)": {
+    "no_rescale": {
+      "MAE_x_m": 1.359245689574543,
+      "MAE_y_m": 1.3230638839139086,
+      "MAE_z_m": 0.7898819453259139,
+      "MAE_tilt_deg": 0.4417305554101194,
+      "MAE_heading_deg_circular": 0.12118058483346204,
+      "MAE_distance_from_xyz_m": 0.9988505171018836,
+      "abs_heading_mae": 5.472387533024576,
+      "abs_heading_median": 1.2713717579271133
+    },
+    "rescale_exponent_chosen_on_val": 0.75,
+    "rescaled": {
+      "MAE_x_m": 1.3599080003664608,
+      "MAE_y_m": 1.3238113230844382,
+      "MAE_z_m": 0.8085635515544036,
+      "MAE_tilt_deg": 0.4417305554101194,
+      "MAE_heading_deg_circular": 0.12118058483346204,
+      "MAE_distance_from_xyz_m": 0.9198433994763163
+    }
+  },
+  "stage 2: A + B": {
+    "no_rescale": {
+      "MAE_x_m": 1.0115358899580842,
+      "MAE_y_m": 0.9948734971328892,
+      "MAE_z_m": 0.5458755817293551,
+      "MAE_tilt_deg": 0.20055479428399978,
+      "MAE_heading_deg_circular": 0.06570415584064,
+      "MAE_distance_from_xyz_m": 0.7072641894772854,
+      "abs_heading_mae": 5.465846121256392,
+      "abs_heading_median": 1.2599506826560116
+    },
+    "rescale_exponent_chosen_on_val": 0.5,
+    "rescaled": {
+      "MAE_x_m": 1.0101418474608908,
+      "MAE_y_m": 0.9944985070799444,
+      "MAE_z_m": 0.54438526344015,
+      "MAE_tilt_deg": 0.20055479428399978,
+      "MAE_heading_deg_circular": 0.06570415584064,
+      "MAE_distance_from_xyz_m": 0.6772267727084731
+    }
+  },
+  "stage 2: A + B, abs-heading = BEV + CNN v2 ensemble": {
+    "no_rescale": {
+      "MAE_x_m": 0.9936914182460262,
+      "MAE_y_m": 0.9787806143501203,
+      "MAE_z_m": 0.5458755817293551,
+      "MAE_tilt_deg": 0.20055479428399978,
+      "MAE_heading_deg_circular": 0.06570415584064,
+      "MAE_distance_from_xyz_m": 0.7072641894772852,
+      "abs_heading_mae": 5.305676274027267,
+      "abs_heading_median": 1.3068073868197416
+    },
+    "rescale_exponent_chosen_on_val": 0.5,
+    "rescaled": {
+      "MAE_x_m": 0.9922384925933814,
+      "MAE_y_m": 0.978446363786565,
+      "MAE_z_m": 0.54438526344015,
+      "MAE_tilt_deg": 0.20055479428399978,
+      "MAE_heading_deg_circular": 0.06570415584064,
+      "MAE_distance_from_xyz_m": 0.6772267727084731
+    }
+  },
+  "[upper bound] stage 1 + true abs-heading": {
+    "no_rescale": {
+      "MAE_x_m": 0.8966852835796921,
+      "MAE_y_m": 0.8876445200779745,
+      "MAE_z_m": 0.7898819453259139,
+      "MAE_tilt_deg": 0.4417305554101194,
+      "MAE_heading_deg_circular": 0.12118058483346204,
+      "MAE_distance_from_xyz_m": 0.9988505171018836,
+      "abs_heading_mae": 0.0,
+      "abs_heading_median": 0.0
+    },
+    "rescale_exponent_chosen_on_val": 0.75,
+    "rescaled": {
+      "MAE_x_m": 0.8934142408107967,
+      "MAE_y_m": 0.8864830195935939,
+      "MAE_z_m": 0.8085635515544036,
+      "MAE_tilt_deg": 0.4417305554101194,
+      "MAE_heading_deg_circular": 0.12118058483346204,
+      "MAE_distance_from_xyz_m": 0.9198433994763163
+    }
+  },
+  "[upper bound] stage 2 A + true abs-heading": {
+    "no_rescale": {
+      "MAE_x_m": 0.48860718591080504,
+      "MAE_y_m": 0.4976337665950822,
+      "MAE_z_m": 0.5458755817293551,
+      "MAE_tilt_deg": 0.20055479428399978,
+      "MAE_heading_deg_circular": 0.06570415584064,
+      "MAE_distance_from_xyz_m": 0.7072641894772852,
+      "abs_heading_mae": 0.0,
+      "abs_heading_median": 0.0
+    },
+    "rescale_exponent_chosen_on_val": 0.5,
+    "rescaled": {
+      "MAE_x_m": 0.48551135299700543,
+      "MAE_y_m": 0.49693252211410316,
+      "MAE_z_m": 0.5443852634401501,
+      "MAE_tilt_deg": 0.20055479428399978,
+      "MAE_heading_deg_circular": 0.06570415584064,
+      "MAE_distance_from_xyz_m": 0.6772267727084731
+    }
+  },
+  "headline_variant": "stage 2: A + B, abs-heading = BEV + CNN v2 ensemble",
+  "headline_test": {
+    "no_rescale": {
+      "MAE_x_m": 0.9936914182460262,
+      "MAE_y_m": 0.9787806143501203,
+      "MAE_z_m": 0.5458755817293551,
+      "MAE_tilt_deg": 0.20055479428399978,
+      "MAE_heading_deg_circular": 0.06570415584064,
+      "MAE_distance_from_xyz_m": 0.7072641894772852,
+      "abs_heading_mae": 5.305676274027267,
+      "abs_heading_median": 1.3068073868197416
+    },
+    "rescale_exponent_chosen_on_val": 0.5,
+    "rescaled": {
+      "MAE_x_m": 0.9922384925933814,
+      "MAE_y_m": 0.978446363786565,
+      "MAE_z_m": 0.54438526344015,
+      "MAE_tilt_deg": 0.20055479428399978,
+      "MAE_heading_deg_circular": 0.06570415584064,
+      "MAE_distance_from_xyz_m": 0.6772267727084731
+    }
+  },
+  "val_xy_sum": {
+    "stage 2: + module A (imagined target view + SuperGlue re-matching)": 1.5893475045003056,
+    "stage 2: A + B": 1.4616762249702608,
+    "stage 2: A + B, abs-heading = BEV + CNN v2 ensemble": 1.4560902083590066
+  },
+  "rows": {
+    "test": 6364,
+    "val": 1183
+  }
+}

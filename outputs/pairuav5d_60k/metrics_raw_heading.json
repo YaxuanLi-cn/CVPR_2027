@@ -1,0 +1,10 @@
+{
+  "split": "tour-disjoint 60k sampled test split",
+  "test_rows_valid": 12313,
+  "test_rows_invalid": 0,
+  "distance_ensemble": "arithmetic mean of four RASR distance heads",
+  "heading_mode": "raw",
+  "MAE_distance_m": 2.6994006038086207,
+  "MAE_tilt_deg": 1.8753341381204442,
+  "MAE_heading_deg_circular": 27.886743544974333
+}

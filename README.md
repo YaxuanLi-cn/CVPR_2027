@@ -56,6 +56,19 @@ This repository does **not** include dataset images, private labels, or the
 large frozen CSV artifacts. Download the official datasets from their original
 sources and the frozen artifacts from the external bundle listed below.
 
+## CVPR 2027 Experimental Stages
+
+The experimental pipeline and per-stage results are documented in
+[`SUPERGLUE_EXPERIMENTS.md`](SUPERGLUE_EXPERIMENTS.md) and
+[`STAGE2_IMAGINATION.md`](STAGE2_IMAGINATION.md). The corresponding code is in
+`train_tilt_sincos.py`, `superglue_fusion/`, and `stage2_imagination/`;
+lightweight checkpoints, metrics, and prediction snapshots are under
+`outputs/pairuav5d_60k/`. These snapshots let you inspect and evaluate the
+recorded baseline, sin/cos, SuperGlue, and Stage 2 results. Re-training or
+re-running the full pipeline still requires the official datasets and external
+MASt3R/SuperGlue model weights. Large feature tables, image tensors, and bulk
+matching caches are intentionally kept out of Git.
+
 ## Quick Start
 
 ```bash

@@ -1,0 +1,53 @@
+runs/garden/gs_full/DONE	cd code && python train_gs.py --scene garden --tag gs_full --render_steps 1000 3000 7000 15000 30000
+runs/garden/gs_views64/DONE	cd code && python train_gs.py --scene garden --tag gs_views64 --views 64
+runs/garden/gs_views32/DONE	cd code && python train_gs.py --scene garden --tag gs_views32 --views 32
+runs/garden/gs_views16/DONE	cd code && python train_gs.py --scene garden --tag gs_views16 --views 16
+runs/garden/gs_views8/DONE	cd code && python train_gs.py --scene garden --tag gs_views8 --views 8
+runs/garden/gs_cap1000000/DONE	cd code && python train_gs.py --scene garden --tag gs_cap1000000 --cap 1000000
+runs/garden/gs_cap300000/DONE	cd code && python train_gs.py --scene garden --tag gs_cap300000 --cap 300000
+runs/garden/gs_cap100000/DONE	cd code && python train_gs.py --scene garden --tag gs_cap100000 --cap 100000
+runs/garden/gs_cap30000/DONE	cd code && python train_gs.py --scene garden --tag gs_cap30000 --cap 30000
+runs/garden/gs_cap10000/DONE	cd code && python train_gs.py --scene garden --tag gs_cap10000 --cap 10000
+runs/truck/gs_full/DONE	cd code && python train_gs.py --scene truck --tag gs_full --render_steps 1000 3000 7000 15000 30000
+runs/truck/gs_views64/DONE	cd code && python train_gs.py --scene truck --tag gs_views64 --views 64
+runs/truck/gs_views32/DONE	cd code && python train_gs.py --scene truck --tag gs_views32 --views 32
+runs/truck/gs_views16/DONE	cd code && python train_gs.py --scene truck --tag gs_views16 --views 16
+runs/truck/gs_views8/DONE	cd code && python train_gs.py --scene truck --tag gs_views8 --views 8
+runs/truck/gs_cap1000000/DONE	cd code && python train_gs.py --scene truck --tag gs_cap1000000 --cap 1000000
+runs/truck/gs_cap300000/DONE	cd code && python train_gs.py --scene truck --tag gs_cap300000 --cap 300000
+runs/truck/gs_cap100000/DONE	cd code && python train_gs.py --scene truck --tag gs_cap100000 --cap 100000
+runs/truck/gs_cap30000/DONE	cd code && python train_gs.py --scene truck --tag gs_cap30000 --cap 30000
+runs/truck/gs_cap10000/DONE	cd code && python train_gs.py --scene truck --tag gs_cap10000 --cap 10000
+runs/truck/gs_full_s1/DONE	cd code && python train_gs.py --scene truck --tag gs_full_s1 --seed 1
+runs/truck/gs_views16_s1/DONE	cd code && python train_gs.py --scene truck --tag gs_views16_s1 --views 16 --seed 1
+runs/truck/gs_cap100000_s1/DONE	cd code && python train_gs.py --scene truck --tag gs_cap100000_s1 --cap 100000 --seed 1
+runs/kitchen/gs_full/DONE	cd code && python train_gs.py --scene kitchen --tag gs_full --render_steps 1000 3000 7000 15000 30000
+runs/kitchen/gs_views64/DONE	cd code && python train_gs.py --scene kitchen --tag gs_views64 --views 64
+runs/kitchen/gs_views32/DONE	cd code && python train_gs.py --scene kitchen --tag gs_views32 --views 32
+runs/kitchen/gs_views16/DONE	cd code && python train_gs.py --scene kitchen --tag gs_views16 --views 16
+runs/kitchen/gs_views8/DONE	cd code && python train_gs.py --scene kitchen --tag gs_views8 --views 8
+runs/kitchen/gs_cap1000000/DONE	cd code && python train_gs.py --scene kitchen --tag gs_cap1000000 --cap 1000000
+runs/kitchen/gs_cap300000/DONE	cd code && python train_gs.py --scene kitchen --tag gs_cap300000 --cap 300000
+runs/kitchen/gs_cap100000/DONE	cd code && python train_gs.py --scene kitchen --tag gs_cap100000 --cap 100000
+runs/kitchen/gs_cap30000/DONE	cd code && python train_gs.py --scene kitchen --tag gs_cap30000 --cap 30000
+runs/kitchen/gs_cap10000/DONE	cd code && python train_gs.py --scene kitchen --tag gs_cap10000 --cap 10000
+runs/train/gs_full/DONE	cd code && python train_gs.py --scene train --tag gs_full --render_steps 1000 3000 7000 15000 30000
+runs/train/gs_views64/DONE	cd code && python train_gs.py --scene train --tag gs_views64 --views 64
+runs/train/gs_views32/DONE	cd code && python train_gs.py --scene train --tag gs_views32 --views 32
+runs/train/gs_views16/DONE	cd code && python train_gs.py --scene train --tag gs_views16 --views 16
+runs/train/gs_views8/DONE	cd code && python train_gs.py --scene train --tag gs_views8 --views 8
+runs/train/gs_cap1000000/DONE	cd code && python train_gs.py --scene train --tag gs_cap1000000 --cap 1000000
+runs/train/gs_cap300000/DONE	cd code && python train_gs.py --scene train --tag gs_cap300000 --cap 300000
+runs/train/gs_cap100000/DONE	cd code && python train_gs.py --scene train --tag gs_cap100000 --cap 100000
+runs/train/gs_cap30000/DONE	cd code && python train_gs.py --scene train --tag gs_cap30000 --cap 30000
+runs/train/gs_cap10000/DONE	cd code && python train_gs.py --scene train --tag gs_cap10000 --cap 10000
+runs/bicycle/gs_full/DONE	cd code && python train_gs.py --scene bicycle --tag gs_full --render_steps 1000 3000 7000 15000 30000
+runs/bicycle/gs_views64/DONE	cd code && python train_gs.py --scene bicycle --tag gs_views64 --views 64
+runs/bicycle/gs_views32/DONE	cd code && python train_gs.py --scene bicycle --tag gs_views32 --views 32
+runs/bicycle/gs_views16/DONE	cd code && python train_gs.py --scene bicycle --tag gs_views16 --views 16
+runs/bicycle/gs_views8/DONE	cd code && python train_gs.py --scene bicycle --tag gs_views8 --views 8
+runs/bicycle/gs_cap1000000/DONE	cd code && python train_gs.py --scene bicycle --tag gs_cap1000000 --cap 1000000
+runs/bicycle/gs_cap300000/DONE	cd code && python train_gs.py --scene bicycle --tag gs_cap300000 --cap 300000
+runs/bicycle/gs_cap100000/DONE	cd code && python train_gs.py --scene bicycle --tag gs_cap100000 --cap 100000
+runs/bicycle/gs_cap30000/DONE	cd code && python train_gs.py --scene bicycle --tag gs_cap30000 --cap 30000
+runs/bicycle/gs_cap10000/DONE	cd code && python train_gs.py --scene bicycle --tag gs_cap10000 --cap 10000

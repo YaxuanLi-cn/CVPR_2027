@@ -1,0 +1,10 @@
+ppd 56.55010328411696
+truck        3DGS           F=300 fps=30 psnr=26.2942 ssim=0.8946 lpips_vgg=0.1784 lpips_alex=0.1009 flip=0.1584 cvvdp_img=8.2263 cvvdp_vid=7.455 tpsnr=28.85 (27s)
+truck        EAGLES         F=300 fps=30 psnr=26.1657 ssim=0.8908 lpips_vgg=0.1806 lpips_alex=0.1020 flip=0.1601 cvvdp_img=8.1808 cvvdp_vid=7.390 tpsnr=28.92 (40s)
+truck        LightGaussian  F=300 fps=30 psnr=24.6571 ssim=0.8609 lpips_vgg=0.2239 lpips_alex=0.1482 flip=0.1846 cvvdp_img=7.8848 cvvdp_vid=6.930 tpsnr=27.62 (47s)
+truck        Mip-Splatting  F=300 fps=30 psnr=26.8191 ssim=0.9057 lpips_vgg=0.1598 lpips_alex=0.0911 flip=0.1546 cvvdp_img=8.3935 cvvdp_vid=7.705 tpsnr=29.62 (53s)
+truck        Octree-GS      F=300 fps=30 psnr=27.1904 ssim=0.9031 lpips_vgg=0.1541 lpips_alex=0.0928 flip=0.1439 cvvdp_img=8.3180 cvvdp_vid=7.566 tpsnr=29.61 (54s)
+truck        Scaffold-GS    F=300 fps=30 psnr=26.9630 ssim=0.8980 lpips_vgg=0.1662 lpips_alex=0.0978 flip=0.1455 cvvdp_img=8.2789 cvvdp_vid=7.517 tpsnr=29.27 (27s)
+truck        SOG (w/o SH)   F=300 fps=30 psnr=26.2456 ssim=0.8834 lpips_vgg=0.1909 lpips_alex=0.1154 flip=0.1650 cvvdp_img=8.0932 cvvdp_vid=7.238 tpsnr=29.00 (11s)
+truck        SOG            F=300 fps=30 psnr=26.6513 ssim=0.8923 lpips_vgg=0.1768 lpips_alex=0.1053 flip=0.1585 cvvdp_img=8.2147 cvvdp_vid=7.444 tpsnr=29.35 (10s)
+DONE

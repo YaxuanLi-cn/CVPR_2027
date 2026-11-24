@@ -1,0 +1,9 @@
+runs/truck/q_full/DONE	cd code && python train_gs.py --scene truck --tag q_full --max_steps 7000 --render_steps 1000 3000 7000
+runs/truck/q_views16/DONE	cd code && python train_gs.py --scene truck --tag q_views16 --max_steps 7000 --views 16 --render_steps 7000
+runs/truck/q_views16_s1/DONE	cd code && python train_gs.py --scene truck --tag q_views16_s1 --max_steps 7000 --views 16 --seed 1 --render_steps 7000
+runs/truck/q_cap100000/DONE	cd code && python train_gs.py --scene truck --tag q_cap100000 --max_steps 7000 --cap 100000 --render_steps 7000
+runs/truck/q_views8/DONE	cd code && python train_gs.py --scene truck --tag q_views8 --max_steps 7000 --views 8 --render_steps 7000
+runs/truck/q_cap10000/DONE	cd code && python train_gs.py --scene truck --tag q_cap10000 --max_steps 7000 --cap 10000 --render_steps 7000
+runs/truck/q_full_s1/DONE	cd code && python train_gs.py --scene truck --tag q_full_s1 --max_steps 7000 --seed 1 --render_steps 7000
+runs/truck/q_views32/DONE	cd code && python train_gs.py --scene truck --tag q_views32 --max_steps 7000 --views 32 --render_steps 7000
+runs/truck/q_cap1000000/DONE	cd code && python train_gs.py --scene truck --tag q_cap1000000 --max_steps 7000 --cap 1000000 --render_steps 7000

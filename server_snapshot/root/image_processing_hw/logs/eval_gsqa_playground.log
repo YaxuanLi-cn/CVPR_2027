@@ -1,0 +1,10 @@
+ppd 56.55010328411696
+playground   3DGS           F=300 fps=30 psnr=25.2156 ssim=0.8333 lpips_vgg=0.2449 lpips_alex=0.1780 flip=0.1991 cvvdp_img=7.6527 cvvdp_vid=6.805 tpsnr=27.24 (27s)
+playground   EAGLES         F=300 fps=30 psnr=24.8596 ssim=0.8336 lpips_vgg=0.2432 lpips_alex=0.1755 flip=0.2068 cvvdp_img=7.6882 cvvdp_vid=6.908 tpsnr=27.19 (40s)
+playground   LightGaussian  F=300 fps=30 psnr=24.1868 ssim=0.8059 lpips_vgg=0.3102 lpips_alex=0.2455 flip=0.2192 cvvdp_img=7.4220 cvvdp_vid=6.554 tpsnr=26.27 (47s)
+playground   Mip-Splatting  F=300 fps=30 psnr=25.7247 ssim=0.8428 lpips_vgg=0.2324 lpips_alex=0.1697 flip=0.1936 cvvdp_img=7.7657 cvvdp_vid=6.996 tpsnr=27.65 (53s)
+playground   Octree-GS      F=300 fps=30 psnr=25.3074 ssim=0.8462 lpips_vgg=0.2413 lpips_alex=0.1815 flip=0.2062 cvvdp_img=7.8428 cvvdp_vid=7.177 tpsnr=28.15 (54s)
+playground   Scaffold-GS    F=300 fps=30 psnr=25.9675 ssim=0.8675 lpips_vgg=0.2056 lpips_alex=0.1425 flip=0.1914 cvvdp_img=8.0007 cvvdp_vid=7.303 tpsnr=28.38 (27s)
+playground   SOG (w/o SH)   F=300 fps=30 psnr=24.5266 ssim=0.8097 lpips_vgg=0.2751 lpips_alex=0.2028 flip=0.2153 cvvdp_img=7.4479 cvvdp_vid=6.715 tpsnr=26.38 (11s)
+playground   SOG            F=300 fps=30 psnr=25.0813 ssim=0.8270 lpips_vgg=0.2569 lpips_alex=0.1920 flip=0.2094 cvvdp_img=7.6401 cvvdp_vid=6.871 tpsnr=27.42 (10s)
+DONE

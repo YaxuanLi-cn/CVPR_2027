@@ -1,0 +1,15 @@
+runs/truck/nerf_full/DONE	cd code && python train_nerf.py --scene truck --tag nerf_full --rays 4096 --render_steps 1000 3000 7000 15000 30000
+runs/truck/nerf_views64/DONE	cd code && python train_nerf.py --scene truck --tag nerf_views64 --rays 4096 --views 64
+runs/truck/nerf_views32/DONE	cd code && python train_nerf.py --scene truck --tag nerf_views32 --rays 4096 --views 32
+runs/truck/nerf_views16/DONE	cd code && python train_nerf.py --scene truck --tag nerf_views16 --rays 4096 --views 16
+runs/truck/nerf_views8/DONE	cd code && python train_nerf.py --scene truck --tag nerf_views8 --rays 4096 --views 8
+runs/garden/nerf_full/DONE	cd code && python train_nerf.py --scene garden --tag nerf_full --rays 4096 --render_steps 1000 3000 7000 15000 30000
+runs/garden/nerf_views64/DONE	cd code && python train_nerf.py --scene garden --tag nerf_views64 --rays 4096 --views 64
+runs/garden/nerf_views32/DONE	cd code && python train_nerf.py --scene garden --tag nerf_views32 --rays 4096 --views 32
+runs/garden/nerf_views16/DONE	cd code && python train_nerf.py --scene garden --tag nerf_views16 --rays 4096 --views 16
+runs/garden/nerf_views8/DONE	cd code && python train_nerf.py --scene garden --tag nerf_views8 --rays 4096 --views 8
+runs/kitchen/nerf_full/DONE	cd code && python train_nerf.py --scene kitchen --tag nerf_full --rays 4096 --render_steps 1000 3000 7000 15000 30000
+runs/kitchen/nerf_views64/DONE	cd code && python train_nerf.py --scene kitchen --tag nerf_views64 --rays 4096 --views 64
+runs/kitchen/nerf_views32/DONE	cd code && python train_nerf.py --scene kitchen --tag nerf_views32 --rays 4096 --views 32
+runs/kitchen/nerf_views16/DONE	cd code && python train_nerf.py --scene kitchen --tag nerf_views16 --rays 4096 --views 16
+runs/kitchen/nerf_views8/DONE	cd code && python train_nerf.py --scene kitchen --tag nerf_views8 --rays 4096 --views 8

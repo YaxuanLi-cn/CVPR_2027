@@ -1,0 +1,7 @@
+Using Python 3.12.15 environment at: /root/image_processing_hw/.venv
+Resolved 1 package in 13.38s
+   Building tinycudann @ file:///root/image_processing_hw/third_party/tiny-cuda-nn/bindings/torch
+      Built tinycudann @ file:///root/image_processing_hw/third_party/tiny-cuda-nn/bindings/torch
+Prepared 1 package in 3m 03s
+Installed 1 package in 21ms
+ + tinycudann==2.0 (from file:///root/image_processing_hw/third_party/tiny-cuda-nn/bindings/torch)

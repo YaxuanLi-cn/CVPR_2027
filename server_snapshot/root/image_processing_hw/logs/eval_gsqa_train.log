@@ -1,0 +1,10 @@
+ppd 56.55010328411696
+train        3DGS           F=300 fps=30 psnr=21.3100 ssim=0.8406 lpips_vgg=0.1918 lpips_alex=0.1262 flip=0.2898 cvvdp_img=7.9277 cvvdp_vid=7.037 tpsnr=24.95 (27s)
+train        EAGLES         F=300 fps=30 psnr=20.8779 ssim=0.8434 lpips_vgg=0.1896 lpips_alex=0.1265 flip=0.2960 cvvdp_img=7.9305 cvvdp_vid=7.074 tpsnr=24.96 (40s)
+train        LightGaussian  F=300 fps=30 psnr=20.1456 ssim=0.8215 lpips_vgg=0.2433 lpips_alex=0.1977 flip=0.3122 cvvdp_img=7.7861 cvvdp_vid=6.986 tpsnr=24.91 (47s)
+train        Mip-Splatting  F=300 fps=30 psnr=21.3037 ssim=0.8471 lpips_vgg=0.1846 lpips_alex=0.1324 flip=0.2851 cvvdp_img=7.9944 cvvdp_vid=7.155 tpsnr=25.23 (53s)
+train        Octree-GS      F=300 fps=30 psnr=21.0847 ssim=0.8395 lpips_vgg=0.1864 lpips_alex=0.1322 flip=0.3027 cvvdp_img=7.9956 cvvdp_vid=7.285 tpsnr=25.12 (54s)
+train        Scaffold-GS    F=300 fps=30 psnr=21.4700 ssim=0.8481 lpips_vgg=0.1825 lpips_alex=0.1261 flip=0.2976 cvvdp_img=8.0620 cvvdp_vid=7.377 tpsnr=25.41 (27s)
+train        SOG (w/o SH)   F=300 fps=30 psnr=19.1828 ssim=0.8189 lpips_vgg=0.2250 lpips_alex=0.1544 flip=0.3446 cvvdp_img=7.7442 cvvdp_vid=6.119 tpsnr=24.46 (10s)
+train        SOG            F=300 fps=30 psnr=19.6372 ssim=0.8287 lpips_vgg=0.2049 lpips_alex=0.1395 flip=0.3380 cvvdp_img=7.9111 cvvdp_vid=7.074 tpsnr=24.91 (10s)
+DONE

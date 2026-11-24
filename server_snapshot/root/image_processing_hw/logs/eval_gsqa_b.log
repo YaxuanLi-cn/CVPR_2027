@@ -1,0 +1,20 @@
+ppd 56.55010328411696
+m60          3DGS           F=240 fps=24 psnr=19.9132 ssim=0.7960 lpips_vgg=0.2679 lpips_alex=0.2118 flip=0.2599 cvvdp_img=6.8308 cvvdp_vid=5.085 tpsnr=24.12 (34s)
+m60          EAGLES         F=240 fps=24 psnr=20.4841 ssim=0.8052 lpips_vgg=0.2595 lpips_alex=0.1979 flip=0.2516 cvvdp_img=6.9772 cvvdp_vid=5.193 tpsnr=24.19 (34s)
+[rawvideo @ 0x5d1ac6d01040] ff_frame_thread_encoder_init failed
+[vost#0:0/rawvideo @ 0x5d1ac6d00d80] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+Error while filtering: Resource temporarily unavailable
+[out#0/rawvideo @ 0x5d1ac6cff580] Nothing was written into output file, because at least one of its streams received no packets.
+Traceback (most recent call last):
+  File "/root/image_processing_hw/code/eval_gsqa.py", line 32, in <module>
+    test, fps2 = read_video(f"{GS}/Synthesized Videos/{grp}/{scene}/{scene}_{suf}.mp4")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/image_processing_hw/code/common.py", line 165, in read_video
+    raw = subprocess.check_output(
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ffmpeg', '-v', 'error', '-i', '/root/image_processing_hw/data/gsqa/Synthesized Videos/T&T/m60/m60_lightgaussian.mp4', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-sws_flags', 'accurate_rnd+full_chroma_int+bicubic', '-']' returned non-zero exit status 245.

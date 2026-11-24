@@ -71,6 +71,8 @@ matching caches are intentionally kept out of Git.
 
 The PairUAV-5D baseline adaptations, metric reports, and lightweight prediction
 snapshots are archived in [`baselines/pairuav5d/README.md`](baselines/pairuav5d/README.md).
+The broader server inventory and root-level snapshots are indexed in
+[`server_snapshot/README.md`](server_snapshot/README.md).
 
 ## Quick Start
 

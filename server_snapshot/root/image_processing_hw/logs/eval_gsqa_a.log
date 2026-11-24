@@ -1,0 +1,27 @@
+ppd 56.55010328411696
+antique      Octree-GS      F=250 fps=25 psnr=30.5403 ssim=0.9595 lpips_vgg=0.2032 lpips_alex=0.0469 flip=0.1402 cvvdp_img=9.2399 cvvdp_vid=9.006 tpsnr=31.76 (37s)
+antique      Scaffold-GS    F=250 fps=25 psnr=30.8922 ssim=0.9596 lpips_vgg=0.2085 lpips_alex=0.0487 flip=0.1334 cvvdp_img=9.2018 cvvdp_vid=8.952 tpsnr=31.74 (38s)
+antique      SOG (w/o SH)   F=250 fps=25 psnr=30.1218 ssim=0.9531 lpips_vgg=0.2357 lpips_alex=0.0733 flip=0.1431 cvvdp_img=8.8534 cvvdp_vid=8.358 tpsnr=31.27 (37s)
+antique      SOG            F=250 fps=25 psnr=29.7688 ssim=0.9542 lpips_vgg=0.2237 lpips_alex=0.0623 flip=0.1731 cvvdp_img=9.0710 cvvdp_vid=8.735 tpsnr=31.25 (34s)
+flowers      3DGS           F=252 fps=25 psnr=29.0099 ssim=0.9444 lpips_vgg=0.2321 lpips_alex=0.0899 flip=0.1413 cvvdp_img=9.1014 cvvdp_vid=8.737 tpsnr=30.56 (20s)
+flowers      EAGLES         F=252 fps=25 psnr=29.2782 ssim=0.9446 lpips_vgg=0.2466 lpips_alex=0.0925 flip=0.1378 cvvdp_img=9.0881 cvvdp_vid=8.727 tpsnr=30.53 (20s)
+flowers      LightGaussian  F=252 fps=25 psnr=29.2174 ssim=0.9421 lpips_vgg=0.2462 lpips_alex=0.0915 flip=0.1385 cvvdp_img=9.0282 cvvdp_vid=8.637 tpsnr=30.65 (33s)
+flowers      Mip-Splatting  F=252 fps=25 psnr=29.8856 ssim=0.9471 lpips_vgg=0.2293 lpips_alex=0.0772 flip=0.1308 cvvdp_img=9.2363 cvvdp_vid=8.978 tpsnr=30.61 (24s)
+flowers      Octree-GS      F=252 fps=25 psnr=29.4124 ssim=0.9440 lpips_vgg=0.2382 lpips_alex=0.0839 flip=0.1385 cvvdp_img=9.1796 cvvdp_vid=8.896 tpsnr=30.34 (37s)
+[rawvideo @ 0x5c5f875b3900] ff_frame_thread_encoder_init failed
+[vost#0:0/rawvideo @ 0x5c5f875b3640] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+Error while filtering: Resource temporarily unavailable
+[out#0/rawvideo @ 0x5c5f8751f0c0] Nothing was written into output file, because at least one of its streams received no packets.
+Traceback (most recent call last):
+  File "/root/image_processing_hw/code/eval_gsqa.py", line 32, in <module>
+    test, fps2 = read_video(f"{GS}/Synthesized Videos/{grp}/{scene}/{scene}_{suf}.mp4")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/image_processing_hw/code/common.py", line 165, in read_video
+    raw = subprocess.check_output(
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ffmpeg', '-v', 'error', '-i', '/root/image_processing_hw/data/gsqa/Synthesized Videos/IST/flowers/flowers_scaffold.mp4', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-sws_flags', 'accurate_rnd+full_chroma_int+bicubic', '-']' returned non-zero exit status 245.

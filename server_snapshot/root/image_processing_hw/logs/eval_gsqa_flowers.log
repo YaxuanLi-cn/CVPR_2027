@@ -1,0 +1,5 @@
+ppd 56.55010328411696
+flowers      Scaffold-GS    F=252 fps=25 psnr=29.4288 ssim=0.9458 lpips_vgg=0.2397 lpips_alex=0.0839 flip=0.1411 cvvdp_img=9.1672 cvvdp_vid=8.844 tpsnr=30.45 (23s)
+flowers      SOG (w/o SH)   F=252 fps=25 psnr=29.5572 ssim=0.9379 lpips_vgg=0.2609 lpips_alex=0.1041 flip=0.1392 cvvdp_img=8.9394 cvvdp_vid=8.488 tpsnr=30.21 (30s)
+flowers      SOG            F=252 fps=25 psnr=26.2391 ssim=0.9309 lpips_vgg=0.2758 lpips_alex=0.1076 flip=0.1916 cvvdp_img=8.9587 cvvdp_vid=8.490 tpsnr=30.08 (35s)
+DONE

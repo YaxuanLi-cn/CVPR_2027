@@ -1,0 +1,15 @@
+[2] Which image quality metric should we use for
+novel view synthesis?
+NeRF and 3D Gaussian Splatting papers almost always report PSNR, SSIM and LPIPS on held-out
+views. However, these methods produce artefacts that differ from classical distortions, such as
+floaters, blurry backgrounds, needle-like splats and view-dependent flicker, and it is unclear which
+metrics capture them. Several subjective datasets of neural view-synthesis quality have recently been
+published (e.g., Liang et al. 2023, on front-facing NeRF views).
+You will train (or download pre-trained) 3DGS and/or NeRF models on a few scenes. You will
+generate degraded variants, for example by training with fewer input views, fewer iterations or fewer
+Gaussians, and render the test views or camera paths. The research part is to compare how well
+common metrics (PSNR, SSIM, LPIPS, FLIP, ColorVideoVDP) agree with each other and with
+subjective data. That data can come from a public dataset (e.g., this one). You should also check
+whether video metrics capture temporal artefacts that per-frame metrics miss.
+Associated lectures: Image-based rendering (NeRF, Gaussian splatting); Assessing image quality
+(metrics, pairwise comparisons, scaling)

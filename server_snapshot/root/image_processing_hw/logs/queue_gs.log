@@ -1,0 +1,1 @@
+FAIL    349s cd code && python train_gs.py --scene garden --tag gs_views64 --views 64

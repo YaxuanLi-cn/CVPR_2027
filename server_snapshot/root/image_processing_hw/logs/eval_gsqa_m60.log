@@ -1,0 +1,8 @@
+ppd 56.55010328411696
+m60          LightGaussian  F=240 fps=24 psnr=19.9883 ssim=0.7761 lpips_vgg=0.3072 lpips_alex=0.2725 flip=0.2832 cvvdp_img=6.6193 cvvdp_vid=4.954 tpsnr=24.16 (21s)
+m60          Mip-Splatting  F=240 fps=24 psnr=20.6670 ssim=0.8131 lpips_vgg=0.2427 lpips_alex=0.1804 flip=0.2414 cvvdp_img=7.0821 cvvdp_vid=5.617 tpsnr=24.32 (24s)
+m60          Octree-GS      F=240 fps=24 psnr=20.9785 ssim=0.8028 lpips_vgg=0.2704 lpips_alex=0.1943 flip=0.2426 cvvdp_img=7.0195 cvvdp_vid=5.636 tpsnr=24.41 (32s)
+m60          Scaffold-GS    F=240 fps=24 psnr=21.2092 ssim=0.8141 lpips_vgg=0.2544 lpips_alex=0.1759 flip=0.2371 cvvdp_img=7.0965 cvvdp_vid=5.755 tpsnr=24.78 (37s)
+m60          SOG (w/o SH)   F=240 fps=24 psnr=20.7996 ssim=0.8019 lpips_vgg=0.2696 lpips_alex=0.1903 flip=0.2468 cvvdp_img=6.9574 cvvdp_vid=5.560 tpsnr=24.60 (42s)
+m60          SOG            F=240 fps=24 psnr=21.0123 ssim=0.8016 lpips_vgg=0.2685 lpips_alex=0.1887 flip=0.2489 cvvdp_img=6.9826 cvvdp_vid=5.557 tpsnr=24.48 (45s)
+DONE

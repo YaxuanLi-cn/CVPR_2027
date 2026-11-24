@@ -1,0 +1,11 @@
+ppd 56.55010328411696
+antique      3DGS           F=250 fps=25 psnr=30.4707 ssim=0.9582 lpips_vgg=0.1955 lpips_alex=0.0504 flip=0.1336 cvvdp_img=9.1626 cvvdp_vid=8.885 tpsnr=31.53 (189s)
+antique      EAGLES         F=250 fps=25 psnr=30.5721 ssim=0.9584 lpips_vgg=0.2099 lpips_alex=0.0507 flip=0.1319 cvvdp_img=9.1602 cvvdp_vid=8.882 tpsnr=31.56 (185s)
+antique      LightGaussian  F=250 fps=25 psnr=30.1123 ssim=0.9558 lpips_vgg=0.2109 lpips_alex=0.0555 flip=0.1365 cvvdp_img=9.1131 cvvdp_vid=8.820 tpsnr=31.22 (183s)
+antique      Mip-Splatting  F=250 fps=25 psnr=31.0009 ssim=0.9610 lpips_vgg=0.1960 lpips_alex=0.0445 flip=0.1297 cvvdp_img=9.2488 cvvdp_vid=9.033 tpsnr=31.83 (190s)
+[vost#0:0/rawvideo @ 0x61156d23fa40] Error submitting a packet to the muxer: Broken pipe
+[out#0/rawvideo @ 0x61156d23e180] Error muxing a packet
+[out#0/rawvideo @ 0x61156d23e180] Error writing trailer: Broken pipe
+[out#0/rawvideo @ 0x61156d23e180] Error closing file: Broken pipe
+/venv/main/lib/python3.12/multiprocessing/resource_tracker.py:279: UserWarning: resource_tracker: There appear to be 6 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

@@ -1,0 +1,9 @@
+ppd 56.55010328411696
+statue       EAGLES         F=250 fps=25 psnr=28.0727 ssim=0.8602 lpips_vgg=0.2273 lpips_alex=0.1611 flip=0.1316 cvvdp_img=7.9772 cvvdp_vid=7.450 tpsnr=27.39 (21s)
+statue       LightGaussian  F=250 fps=25 psnr=27.9007 ssim=0.8501 lpips_vgg=0.2536 lpips_alex=0.1909 flip=0.1344 cvvdp_img=7.8843 cvvdp_vid=7.319 tpsnr=27.37 (28s)
+statue       Mip-Splatting  F=250 fps=25 psnr=28.3554 ssim=0.8655 lpips_vgg=0.1986 lpips_alex=0.1361 flip=0.1252 cvvdp_img=8.0476 cvvdp_vid=7.503 tpsnr=27.50 (34s)
+statue       Octree-GS      F=250 fps=25 psnr=28.7790 ssim=0.8742 lpips_vgg=0.1648 lpips_alex=0.1079 flip=0.1183 cvvdp_img=8.2275 cvvdp_vid=7.767 tpsnr=27.62 (42s)
+statue       Scaffold-GS    F=250 fps=25 psnr=28.8098 ssim=0.8744 lpips_vgg=0.1673 lpips_alex=0.1125 flip=0.1199 cvvdp_img=8.2360 cvvdp_vid=7.788 tpsnr=27.65 (45s)
+statue       SOG (w/o SH)   F=250 fps=25 psnr=28.9425 ssim=0.8700 lpips_vgg=0.1754 lpips_alex=0.1169 flip=0.1193 cvvdp_img=8.2135 cvvdp_vid=7.787 tpsnr=27.67 (45s)
+statue       SOG            F=250 fps=25 psnr=28.1313 ssim=0.8623 lpips_vgg=0.1962 lpips_alex=0.1271 flip=0.1465 cvvdp_img=8.1159 cvvdp_vid=7.683 tpsnr=27.58 (25s)
+DONE

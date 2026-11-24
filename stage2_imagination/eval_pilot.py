@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-"""Raw geometric accuracy (no learning) of the imagination pass vs the stage-1 zoom pass on the same pairs.
-Usage: eval_pilot.py <im_geom.pkl> [<im_geom2.pkl> ...]"""
 import sys, numpy as np, pandas as pd
 sys.path.insert(0, '/root/rasr-pairuav/superglue_fusion')
 from fusion_lib import *

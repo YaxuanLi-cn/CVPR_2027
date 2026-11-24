@@ -1,0 +1,37 @@
+\begin{table*}[t]
+\centering
+\caption{\textbf{Component inventory} on the 6{,}364 test pairs. All columns but the last are in the camera frame and involve no absolute heading. Pairs whose pose cannot be solved predict zero motion (``fail''). Angular errors are mean / median. The last column is the endpoint success in ENU with the learned absolute heading.}
+\label{tab:inventory}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lcccccccccc@{}}
+\toprule
+& fail & $d$ MAE & \SRd@1\,m & \multicolumn{2}{c}{EPE (m)} & \SRe@1\,m & $\dth$ error ($^\circ$) & $\dpsi$ error ($^\circ$) & Dir. med. & ENU \\
+Configuration & (\%) & (m) & (\%) & mean & med. & (\%) & mean / med. & mean / med. & ($^\circ$) & \SRe@1\,m \\
+\midrule
+\multicolumn{11}{@{}l}{\emph{Learned priors only (no correspondences)}}\\
+P\quad MLP on pooled MASt3R statistics & 0.0 & 3.15 & 21.5 & 6.73 & 6.08 & 0.6 & 1.82 / 1.140 & 1.86 / 1.350 & 14.98 & 0.1 \\
+\midrule\multicolumn{11}{@{}l}{\emph{Two-view geometry only: no learned prior, no fusion; scale from the flight-height prior}}\\
+G0\quad Frozen SuperGlue, one pass, E & 53.8 & 14.71 & 22.8 & 16.12 & 13.69 & 17.5 & 68.06 / 73.467 & 12.56 / 6.455 & 90.00 & -- \\
+G1\quad Rotation-aware matching, E & 0.7 & 2.97 & 58.3 & 4.78 & 1.11 & 46.1 & 1.43 / 0.032 & 1.85 / 0.180 & 1.65 & -- \\
+G3\quad \quad + zoom re-matching, E & 1.1 & 2.22 & 64.6 & 3.48 & 0.91 & 54.1 & 0.99 / 0.026 & 1.33 / 0.136 & 1.23 & -- \\
+G5\quad \quad + imagination re-matching, E & 0.5 & 1.19 & 80.3 & 1.70 & 0.55 & 77.2 & 0.59 / 0.007 & 0.59 / 0.036 & 0.36 & -- \\
+\midrule\multicolumn{11}{@{}l}{\emph{Geometry with learned priors in the pose refinement (\cref{eq:map}); scale from the flight-height prior; no fusion}}\\
+G2\quad Rotation-aware matching, refined & 0.7 & 2.11 & 60.2 & 3.55 & 1.07 & 47.2 & 1.26 / 0.032 & 1.24 / 0.170 & 1.57 & -- \\
+G4\quad \quad + zoom re-matching, refined & 1.0 & 1.59 & 65.8 & 2.57 & 0.92 & 53.8 & 0.92 / 0.027 & 0.96 / 0.135 & 1.23 & -- \\
+G6\quad \quad + imagination re-matching, refined & 0.5 & 0.98 & 80.6 & 1.37 & 0.56 & 77.4 & 0.57 / 0.007 & 0.47 / 0.037 & 0.38 & -- \\
+\midrule\multicolumn{11}{@{}l}{\emph{Same geometry, scale from the learned distance regression instead of the flight-height prior}}\\
+G2$'$\quad Rotation-aware matching, refined & 0.7 & 2.79 & 24.9 & 4.87 & 2.93 & 16.0 & 1.26 / 0.032 & 1.24 / 0.170 & 1.57 & -- \\
+G6$'$\quad Imagination re-matching, refined & 0.5 & 2.76 & 25.0 & 3.32 & 2.28 & 22.9 & 0.57 / 0.007 & 0.47 / 0.037 & 0.38 & -- \\
+\midrule\multicolumn{11}{@{}l}{\emph{Planar pose model: homography decomposition instead of the essential matrix; scale from the flight height; no learning}}\\
+H1\quad Rotation-aware matching, H & 14.8 & 21.12 & 16.7 & 26.02 & 7.54 & 2.7 & 14.18 / 0.287 & 8.17 / 1.790 & 18.48 & -- \\
+H3\quad \quad + zoom re-matching, H & 1.4 & 7.03 & 24.8 & 11.36 & 4.82 & 5.0 & 1.63 / 0.161 & 3.24 / 1.030 & 11.27 & -- \\
+H5\quad \quad + imagination re-matching, H & 0.8 & 5.00 & 27.7 & 8.64 & 4.17 & 6.3 & 1.11 / 0.132 & 2.50 / 0.820 & 9.31 & -- \\
+\midrule\multicolumn{11}{@{}l}{\emph{Reliability-weighted fusion of all candidates and scale cues (the rows of Table~3)}}\\
+F1\quad Rotation-aware pass only & 0.0 & 1.14 & 65.1 & 2.43 & 1.05 & 48.0 & 0.19 / 0.030 & 0.64 / 0.162 & 1.63 & 35.2 \\
+F2\quad + zoom re-matching (Stage I) & 0.0 & 0.92 & 73.1 & 1.71 & 0.82 & 59.9 & 0.12 / 0.021 & 0.44 / 0.105 & 1.04 & 44.3 \\
+F3\quad + geometric imagination (Stage II) & 0.0 & 0.68 & 83.3 & 1.01 & 0.53 & 78.7 & 0.07 / 0.006 & 0.20 / 0.028 & 0.35 & 61.9 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

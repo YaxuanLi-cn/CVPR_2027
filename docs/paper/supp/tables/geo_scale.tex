@@ -1,0 +1,27 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Where the metric scale comes from.} Upper part: translation direction and rotation from SIFT + essential matrix on the pairs of \cref{tab:geometric}; only the source of the length changes. Lower part: our own direction with the true length, for reference.}
+\label{tab:geo_scale}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+& $d$ MAE & \SRd & EPE med. & \SRe \\
+Source of the length & (m) & (\%) & (m) & (\%) \\
+\midrule
+MASt3R metric depth, as is & 20.37 & 0.0 & 20.38 & 0.0 \\
+MASt3R metric depth $\times$ one constant & 2.03 & 35.3 & 1.54 & 32.6 \\
+Flight-height prior & 0.89 & 78.9 & 0.61 & 74.2 \\
+Learned distance regression & 2.69 & 24.7 & 2.20 & 22.7 \\
+Flight height and regression, blended & 0.85 & 79.0 & 0.62 & 74.2 \\
+\midrule
+Fused distance of our Stage I & 0.95 & 73.7 & 0.69 & 68.3 \\
+Fused distance of our Stage II & 0.68 & 82.1 & 0.58 & 76.6 \\
+True distance (oracle) & 0.00 & 100.0 & 0.19 & 93.4 \\
+\midrule\multicolumn{5}{@{}l}{\emph{Direction and rotation of our stages, true distance (oracle)}}\\
+Stage I & 0.00 & 100.0 & 0.35 & 78.5 \\
+Stage II & 0.00 & 100.0 & 0.12 & 92.1 \\
+\bottomrule
+\end{tabular}}
+\end{table}

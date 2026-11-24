@@ -1,14 +1,3 @@
-#!/usr/bin/env python3
-"""Stage 2 / module B: absolute heading from an IMAGINED canonical bird's-eye view.
-
-Imagination step: the tilted image is re-rendered as the view of a virtual nadir camera at the same position
-(rotation-only homography -> exact for any scene depth). The tilt comes from the label for train tours and from the
-SuperGlue geometry (X-Z-X decomposition of the relative rotation, fused in stage 1) for val/test pairs.
-In the nadir view a heading change of delta is exactly an in-plane rotation, so
-  * training uses exact continuous-rotation augmentation,
-  * inference verifies K heading candidates: for each candidate rotation the imagined view is scored by the network and the
-    von Mises outputs are combined.
-Everything (rectification + rotation + scale + shift) is one grid_sample on the GPU from the cached 448x256 images."""
 import argparse, math, time, threading, queue, sys, numpy as np, pandas as pd, torch, torch.nn as nn, torch.nn.functional as F, timm
 ap = argparse.ArgumentParser(); ap.add_argument('--epochs', type=int, default=10); ap.add_argument('--bs', type=int, default=128); ap.add_argument('--lr', type=float, default=2e-4)
 ap.add_argument('--model', default='convnext_small.fb_in22k_ft_in1k'); ap.add_argument('--tag', default='bev_s'); ap.add_argument('--S', type=int, default=256)

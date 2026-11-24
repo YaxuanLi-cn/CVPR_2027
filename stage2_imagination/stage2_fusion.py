@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-"""Stage 2 fusion: refine the stage-1 prediction with the imagination pass.
-
-For every target the candidates are {stage-1 fused prediction, pose from the imagination-pass matches (E-matrix), its MAP variant}
-(+ geometric scale candidates for the distance). As in stage 1, a GBDT predicts each candidate's error from quality features -- now
-including the candidate-verification scores (how well each stage-1 pose candidate explains the imagined-vs-real correspondences) and
-the imagination discrepancy -- the candidates are blended by inverse predicted error and an L1 GBDT learns the residual.
-Train rows use the tour-grouped OOF stage-1 predictions, so stage 2 is fitted on the same kind of input it sees at test time."""
 import sys, json, argparse, warnings, numpy as np, pandas as pd
 warnings.filterwarnings("ignore")
 sys.path.insert(0, '/root/rasr-pairuav/superglue_fusion')

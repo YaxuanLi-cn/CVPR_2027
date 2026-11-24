@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-"""Per-(pair, side) table for stage-2 inference on the val/test pairs of the stage-1 result set.
-Per-camera tilt estimate = SuperGlue geometry (zoom-MAP, else pass-1 MAP, else MLP prior), then made consistent with the fused relative tilt."""
 import sys, numpy as np, pandas as pd
 sys.path.insert(0, '/root/rasr-pairuav/superglue_fusion')
 from fusion_lib import *

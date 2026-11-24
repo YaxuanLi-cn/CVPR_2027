@@ -1,0 +1,29 @@
+\noindent This document contains the Appendix~I announced in the main paper and new experiments that answer the questions raised on the submission. It is organised by question.
+
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=3pt]
+\item \textbf{How is each step implemented, and how fast is it?} \Cref{sec:impl}: conventions, Eq.~(1) with its constants, the zoom crop, all candidates of Eq.~(2), the fusion, the ground normal $\mathbf{n}$ and height $h$ of Eq.~(5), the running time, and the training protocol of every baseline.
+\item \textbf{What do $d$, SR and the Pose AUC measure?} \Cref{sec:metrics}: formulas, the definition used by each table of the main paper, and all methods re-scored with the range error, the 3-D endpoint error and a joint 5-DoF success.
+\item \textbf{How does DreamNav compare with geometric relative-pose pipelines?} \Cref{sec:geometric}: off-the-shelf matchers with a calibrated essential matrix, and feed-forward reconstruction models, with native, calibrated and learned metric scale.
+\item \textbf{Is the gain due to the warp, to more matching, or to more learning?} \Cref{sec:ablation}: component inventory of Table~3, compute-matched controls, and iteration without motion.
+\item \textbf{How much depends on the absolute heading?} \Cref{sec:heading}: results in the camera frame and in ENU, error of the heading prior, its behaviour on unseen sites and under photometric changes, and baselines re-trained in the camera frame.
+\item \textbf{When does a ground-plane warp hold?} \Cref{sec:planarity}: relief of the scenes and accuracy against relief, tilt and flight height.
+\item \textbf{What does the closed-loop experiment establish?} \Cref{sec:closedloop}: repeated noise draws, internal refinement \vs physical steps, classical visual servoing.
+\item \textbf{Real photographs.} \Cref{sec:real}: protocol, uncertainty, pairs beyond the training range, geometric baselines.
+\item \textbf{The dataset.} \Cref{sec:dataset}: sampling ranges, screening statistics, results on unscreened pairs, release.
+\item \textbf{Related and concurrent work.} \Cref{sec:related}.
+\item \textbf{Corrections.} \Cref{sec:corrections} lists the statements of the main paper that this document corrects or narrows.
+\end{itemize}
+
+\noindent\textbf{Main outcomes.} Several of the new experiments do not support statements of the main paper. We give the outcomes here without ranking them by how favourable they are; \cref{sec:corrections} lists the resulting corrections.
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=3pt]
+\item \emph{Metrics.} The SR of Tables~2--4 thresholds the error of the predicted distance. With the 3-D endpoint error the refined stage succeeds on \SiiCamSRe\% of the test pairs in the camera frame and \SiiEnuSRe\% in ENU, instead of 83.3\% (\cref{sec:metrics}).
+\item \emph{Geometric baselines.} SIFT with an essential matrix and a flight-height prior reaches \sfSiftSRd\% / \sfSiftSRe\% (\SRd{} / \SRe), above our coarse stage and five points below our refined stage; RoMa is level with the refined stage on a subset; on the real photographs both are more accurate than DreamNav (\cref{sec:geometric,sec:real}).
+\item \emph{Components.} The gain of the refinement comes from a second, accurate match set at the original resolution. The plane-induced warp adds \ctPlaneGainSRe{} points of \SRe{} over a rotation-only alignment with the same budget, and a classical SIFT match set fed to the same fusion gives almost the same result. The learned fusion of several pose and scale estimates is what improves on classical geometry on PairUAV (\cref{sec:ablation,sec:siftfusion}).
+\item \emph{Absolute heading.} The ENU results rely on a learned heading that is accurate only near training buildings: on sites never seen by the heading network the ENU success is \hdSdUnseenSRe\% instead of \hdSdSeenSRe\%. Camera-frame results are unaffected. The baselines of Table~2 do not fail because of the frame (\cref{sec:heading}).
+\item \emph{Planarity.} The scenes are not planar (median relief \plReliefMed\% of the flight height); the refinement gain decreases with relief and remains positive (\cref{sec:planarity}).
+\item \emph{Closed loop.} The row ``Ours (Stage~II)'' of Table~5 includes a short-range solver that the paper does not describe; without it the refined stage does not improve the closed loop over the coarse stage. A classical image-based servo reaches \svIbvsFinal\% with 20 steps (\cref{sec:closedloop}).
+\item \emph{Real photographs.} The results of Table~4 use the flight height of the aircraft and hold within the baseline range of the training data (\cref{sec:real}).
+\item \emph{Dataset.} Sampling ranges, screening statistics and results on unscreened pairs (\unSiiSRd\% / \unSiiSRe\%) are given in \cref{sec:dataset}.
+\end{itemize}
+
+\noindent\textbf{Evaluation set.} Unless stated otherwise, the experiments use the test pairs behind Tables~2 and~3 of the main paper: \nTest{} pairs from \nBuildings{} buildings that are held out from every training step of DreamNav and of the baselines. Brackets give 95\% bootstrap intervals over buildings. Tables, figures and equations of this document are numbered with the prefix~S.

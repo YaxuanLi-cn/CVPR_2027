@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Accuracy against scene relief} (6{,}193 test pairs). Relief: height of the tallest matched structures over the flight height. $S$: that height in metres (median). Res.: median displacement between the imagined and the real view. I / II: coarse / refined stage, camera frame.}
+\label{tab:planarity}
+\footnotesize
+\setlength{\tabcolsep}{2.6pt}
+\begin{tabular}{@{}lrrrcccccc@{}}
+\toprule
+& & $S$ & Res. & \multicolumn{2}{c}{\SRd@1\,m} & \multicolumn{2}{c}{\SRe@1\,m} & \multicolumn{2}{c}{$\dpsi$ MAE} \\
+Relief & Pairs & (m) & (px) & I & II & I & II & I & II \\
+\midrule
+$<$2\% & 34 & 4 & 27.1 & 29.4 & 52.9 & 11.8 & 26.5 & 1.74 & 1.18 \\
+2-5\% & 447 & 9 & 12.4 & 51.0 & 71.1 & 28.0 & 58.4 & 0.93 & 0.45 \\
+5-10\% & 3683 & 17 & 7.1 & 75.2 & 86.3 & 61.9 & 82.7 & 0.37 & 0.12 \\
+10-15\% & 1426 & 25 & 7.3 & 79.0 & 85.1 & 69.3 & 82.5 & 0.25 & 0.09 \\
+15-20\% & 330 & 38 & 7.8 & 77.3 & 83.9 & 67.0 & 80.0 & 0.27 & 0.12 \\
+20-30\% & 191 & 51 & 8.6 & 78.5 & 87.4 & 70.2 & 84.8 & 0.29 & 0.07 \\
+$\geq$30\% & 82 & 79 & 11.6 & 73.2 & 79.3 & 63.4 & 74.4 & 0.22 & 0.15 \\
+\bottomrule
+\end{tabular}
+\end{table}

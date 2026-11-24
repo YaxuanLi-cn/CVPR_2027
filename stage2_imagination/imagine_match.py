@@ -1,13 +1,3 @@
-#!/usr/bin/env python3
-"""Stage 2 / module A: imagine the other view from the stage-1 pose, then compare imagination and reality with SuperGlue.
-
-Imagination: with the calibrated intrinsics, the stage-1 pose (relative heading, both tilts, metric displacement) and the height of the
-camera above the ground, the ground-plane-induced homography  H_ab = K (R + t n^T / H) K^-1  renders one image into the other camera.
-If the pose is right the imagined and the real image coincide on the ground (roofs keep a small parallax), so
-  * corresponding TILES can be cut from both and matched at (up to) native resolution -- impossible without the alignment,
-  * the residual displacement of the matches is the imagination-vs-reality discrepancy (the 'MSE' of the reference figure, but sub-pixel
-    and robust), used downstream to verify pose candidates and to re-estimate the pose.
-Canvas = image a's pixel frame; image b is the one that is re-rendered (so the keypoints of a stay un-interpolated when scale = 1)."""
 import argparse, sys, time, math
 from pathlib import Path
 import numpy as np, pandas as pd, torch, cv2

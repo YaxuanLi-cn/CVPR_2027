@@ -1,0 +1,24 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Candidates $c_k$ of Eq.~(2).} E: essential-matrix pose; R: pose refined with \cref{eq:map}; P1: first matching pass; Z: zoom pass; IM: imagined match set. ``Alt.'' is the second first-pass solution (fine matches \vs union). A direction candidate is multiplied by the fused distance. In Fig.~2(b) of the main paper, ``Stage~1'' is the coarse estimate, ``Re-match'' is E-IM and ``MAP'' is R-IM.}
+\label{tab:cands}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}l >{\raggedright\arraybackslash}p{0.62\columnwidth} c@{}}
+\toprule
+Parameter & Candidates & \# \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Coarse-estimation stage}}\\
+$\dth$ & E-P1, Alt.-P1, R-P1, E-Z, R-Z, prior MLP, prior trees & 7\\
+$\dpsi$ & the 7 above; $\bar\psi_G{-}\bar\psi_S$ of the prior; $(\psi_S{+}\psi_G)_{\text{E-P1}}{-}2\bar\psi_S$; $2\bar\psi_G{-}(\psi_S{+}\psi_G)_{\text{E-P1}}$ & 10\\
+$\log\|\dpv\|$ & prior MLP, prior trees; depth cue with 3 MASt3R depth statistics (E-P1); flight-height cue for $S$, $G$, their mean (E-P1, 4 variants), R-P1 (2), E-Z, R-Z & 13\\
+$\Delta z$ & directions of E-P1, Alt.-P1, R-P1, E-Z, R-Z; prior MLP (direct and via its direction); prior trees & 8\\
+$\ell_x$, $\ell_y$ & directions of E-P1, Alt.-P1, R-P1, E-Z, R-Z; prior MLP; prior trees & 7\\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Imagination-refined stage}}\\
+$\dth$, $\dpsi$ & coarse estimate, E-IM, R-IM & 3\\
+$\log\|\dpv\|$ & coarse estimate; depth cue with 2 MASt3R depth statistics (R-IM); flight-height cue (E-IM: 2 variants; R-IM: $S$, $G$, mean) & 8\\
+$\Delta z$, $\ell_x$, $\ell_y$ & coarse estimate, directions of E-IM and R-IM & 3\\
+\bottomrule
+\end{tabular}
+\end{table}

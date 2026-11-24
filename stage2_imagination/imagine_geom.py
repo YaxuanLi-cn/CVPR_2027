@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-"""Pose from the imagination-pass matches (E-matrix `im_*`, MAP `imap_*`) + candidate verification scores.
-
-Candidate verification: every pose candidate that stage 1 produced (pass-1 E / MAP, zoom E / MAP, the fused stage-1 pose) is scored
-against the imagination-vs-reality correspondences (share of matches within 1.5 px / 3 px of its epipolar geometry, median residual).
-Also exported: statistics of the residual displacement between imagined and real view (how wrong the imagined view was).
-Usage: imagine_geom.py <matches_dir> <out.pkl>"""
 import sys, os, glob, numpy as np, pandas as pd, cv2
 from multiprocessing import Pool
 sys.path.insert(0, '/root/rasr-pairuav/superglue_fusion')

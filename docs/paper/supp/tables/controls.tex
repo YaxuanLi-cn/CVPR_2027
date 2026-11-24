@@ -1,0 +1,30 @@
+\begin{table*}[t]
+\centering
+\caption{\textbf{Controls for the refinement stage} on 3{,}000 test pairs; every fusion is fitted on the same 3{,}000 training pairs. Camera frame. The last two columns are paired differences to the coarse stage in percentage points with 95\% bootstrap intervals over buildings.}
+\label{tab:controls}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lccccccccc@{}}
+\toprule
+& $d$ MAE & \SRd@1\,m & \multicolumn{2}{c}{EPE (m)} & \SRe@1\,m & $\dth$ & $\dpsi$ & $\Delta$\SRd & $\Delta$\SRe \\
+Variant & (m) & (\%) & mean & med. & (\%) & MAE ($^\circ$) & MAE ($^\circ$) & \vs coarse & \vs coarse \\
+\midrule
+Coarse stage (input of all rows below) & 0.91 & 73.5 & 1.69 & 0.82 & 60.5 & 0.132 & 0.405 & -- & -- \\
+\midrule\multicolumn{10}{@{}l}{\emph{(a) Learned capacity without new correspondences}}\\
+Second fusion stage on the coarse candidates & 0.93 & 72.4 & 1.71 & 0.85 & 58.0 & 0.135 & 0.412 & $-1.1$ \ci{-2.1}{-0.2} & $-2.4$ \ci{-3.4}{-1.4} \\
+\midrule\multicolumn{10}{@{}l}{\emph{(b) New correspondences, full fusion; what the second matching pass sees}}\\
+Rotation-only alignment, $\le 3{\times}3$ tiles (compute-matched) & 0.72 & 82.1 & 1.11 & 0.57 & 76.0 & 0.086 & 0.234 & $+8.6$ \ci{+7.2}{+10.1} & $+15.6$ \ci{+13.8}{+17.5} \\
+Plane-induced warp, 1 tile (no extra budget) & 0.79 & 77.5 & 1.37 & 0.72 & 65.8 & 0.105 & 0.359 & $+4.0$ \ci{+2.8}{+5.3} & $+5.3$ \ci{+3.9}{+6.8} \\
+Plane-induced warp at $512{\times}288$, 1 tile & 0.93 & 72.3 & 1.72 & 0.87 & 57.1 & 0.132 & 0.415 & $-1.2$ \ci{-2.2}{-0.4} & $-3.4$ \ci{-4.4}{-2.4} \\
+Plane-induced warp, $\le 3{\times}3$ tiles = Stage II & 0.70 & 82.7 & 1.03 & 0.54 & 78.3 & 0.073 & 0.207 & $+9.2$ \ci{+7.7}{+10.7} & $+17.8$ \ci{+16.1}{+19.5} \\
+\midrule\multicolumn{10}{@{}l}{\emph{(c) Plane-induced warp with $\le 3{\times}3$ tiles; how the re-estimated pose is used}}\\
+Re-estimated pose replaces the coarse pose (no fusion) & 0.93 & 73.8 & 1.59 & 0.65 & 69.1 & 0.171 & 0.484 & $+0.3$ \ci{-0.2}{+0.8} & $+8.6$ \ci{+7.4}{+9.8} \\
+Uniform candidate weights, no residual & 1.09 & 68.2 & 1.53 & 0.77 & 61.8 & 0.191 & 0.495 & $-5.4$ \ci{-7.5}{-3.5} & $+1.3$ \ci{-0.8}{+3.5} \\
+Predicted-error weights, no residual & 0.72 & 82.0 & 1.03 & 0.54 & 77.9 & 0.074 & 0.213 & $+8.5$ \ci{+7.1}{+10.0} & $+17.4$ \ci{+15.8}{+19.2} \\
+Full fusion without verification scores & 0.69 & 83.0 & 1.03 & 0.54 & 77.9 & 0.074 & 0.212 & $+9.5$ \ci{+8.1}{+10.9} & $+17.4$ \ci{+15.7}{+19.2} \\
+Full fusion, scale kept from the coarse stage & 0.89 & 74.9 & 1.25 & 0.62 & 70.1 & 0.081 & 0.235 & $+1.3$ \ci{+0.6}{+2.2} & $+9.7$ \ci{+8.4}{+10.9} \\
+Full fusion = Stage II & 0.70 & 82.7 & 1.03 & 0.54 & 78.3 & 0.073 & 0.207 & $+9.2$ \ci{+7.7}{+10.7} & $+17.8$ \ci{+16.1}{+19.5} \\
+\bottomrule
+\end{tabular}}
+\end{table*}

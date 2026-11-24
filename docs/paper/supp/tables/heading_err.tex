@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Error of the absolute-heading prior} on the 6{,}364 test pairs (degrees; heading of the source view, wrapped absolute error).}
+\label{tab:heading_err}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Estimator & Mean & Median & P90 & $>10^\circ$ (\%) & $>45^\circ$ (\%) \\
+\midrule
+Raw-view network, one image & 6.71 \ci{5.12}{8.62} & 1.97 & 12.8 & 13.7 & 2.4 \\
+Nadir-rectified network, one image & 6.49 \ci{4.92}{8.50} & 1.59 & 12.1 & 12.0 & 2.8 \\
+Coarse stage: raw-view, both images & 5.75 \ci{4.07}{7.66} & 1.64 & 10.7 & 11.0 & 1.9 \\
+Refined stage: both networks, both images & 5.31 \ci{3.61}{7.33} & 1.31 & 9.6 & 9.6 & 1.9 \\
+\bottomrule
+\end{tabular}}
+\end{table}

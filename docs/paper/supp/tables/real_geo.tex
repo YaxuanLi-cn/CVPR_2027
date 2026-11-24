@@ -1,0 +1,31 @@
+\begin{table*}[t]
+\centering
+\caption{\textbf{Geometric baselines on the real photographs}, zero-shot, with the flight height of 60\,m given to every method (our rows: displacement rescaled by $60/220$; baselines: flight-height prior with $H{=}60$\,m). Camera frame; 95\,\% intervals by bootstrap over source photographs. Last column: difference of \SRe{} to our refined stage on the same pairs.}
+\label{tab:real_geo}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llrccccccc@{}}
+\toprule
+& & & Fail & \SRd@1\,m & EPE med. & \SRe@1\,m & $\dth$ med. & Dir. med. & $\Delta$\SRe{} \vs \\
+Method & Rot. & Pairs & (\%) & (\%) & (m) & (\%) & ($^\circ$) & ($^\circ$) & Stage~II (points) \\
+\midrule
+\multicolumn{10}{@{}l}{\emph{Within the training range} (mean true distance 7.2\,m)}\\
+SIFT + ratio test & inv. & 300 & 3.3 & 76.0 \ci{71.0}{80.5} & 0.53 \ci{0.43}{0.60} & 72.7 \ci{67.4}{77.4} & 0.549 & 1.9 & $+15.0$ \ci{+8.2}{+21.1} \\
+SuperPoint + SuperGlue, our first pass & ours & 300 & 4.3 & 52.3 \ci{45.9}{58.2} & 1.32 \ci{0.96}{1.82} & 44.7 \ci{38.7}{50.3} & 0.845 & 4.9 & $-13.0$ \ci{-19.0}{-7.3} \\
+SuperPoint + LightGlue & TTA & 300 & 8.7 & 46.0 \ci{40.5}{51.5} & 1.67 \ci{1.33}{2.16} & 36.7 \ci{31.4}{42.1} & 0.886 & 8.0 & $-21.0$ \ci{-27.5}{-14.8} \\
+ALIKED + LightGlue & TTA & 300 & 5.0 & 59.0 \ci{53.7}{64.5} & 1.06 \ci{0.89}{1.40} & 48.3 \ci{42.7}{54.1} & 0.749 & 4.7 & $-9.3$ \ci{-15.4}{-3.3} \\
+LoFTR & TTA & 300 & 1.0 & 66.3 \ci{61.2}{71.8} & 0.64 \ci{0.49}{0.74} & 61.0 \ci{55.4}{66.4} & 0.682 & 2.5 & $+3.3$ \ci{-2.3}{+9.0} \\
+DeDoDe + rotation steerer & eq.+TTA & 300 & 2.3 & 65.0 \ci{58.9}{70.8} & 0.75 \ci{0.62}{0.93} & 58.0 \ci{51.9}{64.0} & 0.818 & 3.0 & $+0.3$ \ci{-5.3}{+5.9} \\
+RoMa & TTA & 80 & 3.7 & 76.2 \ci{66.7}{85.7} & 0.33 \ci{0.27}{0.50} & 75.0 \ci{64.9}{84.7} & 0.784 & 1.3 & $+21.3$ \ci{+10.8}{+31.3} \\
+MASt3R descriptors & TTA & 100 & 2.0 & 45.0 \ci{34.7}{55.4} & 2.17 \ci{1.47}{3.14} & 31.0 \ci{21.6}{42.0} & 0.975 & 9.2 & $-26.0$ \ci{-37.4}{-15.0} \\
+MASt3R pointmap + PnP, flight height & TTA & 100 & 0.0 & 14.0 \ci{6.8}{21.6} & 10.28 \ci{8.12}{11.97} & 0.0 \ci{0.0}{0.0} & 1.04 & 43.7 & $-57.0$ \ci{-67.0}{-47.4} \\
+Ours (Stage I) &  & 300 & 0.0 & 45.0 \ci{39.5}{50.7} & 1.43 \ci{1.25}{1.77} & 34.0 \ci{29.0}{39.4} & 0.720 & 4.4 & $-23.7$ \ci{-29.1}{-18.5} \\
+Ours (Stage II) &  & 300 & 0.0 & 63.3 \ci{57.2}{68.9} & 0.84 \ci{0.72}{0.98} & 57.7 \ci{51.5}{63.8} & 0.666 & 1.9 & -- \\
+\midrule\multicolumn{10}{@{}l}{\emph{Beyond the training range} (mean true distance 20.8\,m)}\\
+SIFT + ratio test & inv. & 300 & 48.3 & 19.7 \ci{15.2}{24.0} & 18.47 \ci{17.81}{19.44} & 15.0 \ci{11.1}{18.9} & 83.6 & 90.0 & $+13.3$ \ci{+9.4}{+17.6} \\
+Ours (Stage I) &  & 300 & 0.0 & 0.0 \ci{0.0}{0.0} & 18.27 \ci{17.13}{19.33} & 0.0 \ci{0.0}{0.0} & 3.88 & 48.1 & $-1.7$ \ci{-3.2}{-0.3} \\
+Ours (Stage II) &  & 300 & 0.0 & 5.0 \ci{2.6}{7.4} & 18.03 \ci{16.45}{19.01} & 1.7 \ci{0.3}{3.2} & 3.32 & 45.5 & -- \\
+\bottomrule
+\end{tabular}}
+\end{table*}

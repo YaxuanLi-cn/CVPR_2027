@@ -1,0 +1,37 @@
+\begin{table*}[t]
+\centering
+\caption{\textbf{Real photographs: Table~4 re-scored with uncertainty}, in the camera frame of the first image unless noted, for the pairs within the baseline-to-height range of the training data (the pairs of Table~4) and beyond it. EPE: endpoint error; Table~4 reports its median as ``Pos.'' and \SRd{} as SR. Brackets: 95\% bootstrap intervals over source images. Angular errors of $\dth$ are mean / median. ``No flight height'': the output is not rescaled by the height reported by the aircraft.}
+\label{tab:real}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lccccccccc@{}}
+\toprule
+& \multicolumn{2}{c}{EPE (m)} & \SRe@1\,m & \SRe@2\,m & \SRd@1\,m & \SRd@2\,m & $\dth$ error ($^\circ$) & $\dpsi$ MAE & Dir. med. \\
+Method & median & mean & (\%) & (\%) & (\%) & (\%) & mean / med. & ($^\circ$) & ($^\circ$) \\
+\midrule
+\multicolumn{10}{@{}l}{\emph{Within the training range: 300 pairs, baselines 0.7--10.3\,m}}\\
+ViNT & 7.75 \ci{7.55}{8.05} & 7.32 & 0.3 \ci{0.0}{1.0} & 3.3 & 3.7 & 8.0 & 71.34 / 60.29 & 14.53 & 90.6 \\
+NoMaD & 21.21 \ci{20.31}{21.95} & 20.76 & 0.0 \ci{0.0}{0.0} & 0.0 & 0.3 & 2.3 & 86.01 / 81.75 & 17.86 & 89.5 \\
+$\pi_0$-FAST & 25.93 \ci{25.46}{26.51} & 26.06 & 0.0 \ci{0.0}{0.0} & 0.0 & 0.0 & 0.0 & 94.26 / 113.22 & 4.43 & 91.8 \\
+Constant (zero motion) & 7.84 \ci{7.45}{8.08} & 7.18 & 1.3 \ci{0.3}{2.7} & 3.7 & 1.3 & 3.7 & 83.71 / 89.34 & 0.45 & 90.0 \\
+MASt3R-statistics MLP, flight height & 5.10 \ci{4.79}{5.30} & 5.28 & 1.7 \ci{0.3}{3.2} & 8.3 & 18.3 & 34.3 & 3.72 / 1.93 & 3.40 & 41.0 \\
+\cmidrule(l){1-10}
+Ours (Stage I), no flight height & 15.18 \ci{14.23}{16.09} & 14.95 & 0.0 \ci{0.0}{0.0} & 0.0 & 2.3 & 3.3 & 2.31 / 0.72 & 1.90 & 4.4 \\
+Ours (Stage II), no flight height & 16.42 \ci{15.64}{17.58} & 16.39 & 0.0 \ci{0.0}{0.0} & 0.0 & 2.0 & 3.7 & 2.25 / 0.67 & 1.62 & 1.9 \\
+Ours (Stage I) & 1.43 \ci{1.25}{1.77} & 2.74 & 34.0 \ci{29.0}{39.4} & 59.0 & 45.0 & 69.3 & 2.31 / 0.72 & 1.90 & 4.4 \\
+Ours (Stage II) & 0.84 \ci{0.72}{0.98} & 2.13 & 57.7 \ci{51.5}{63.8} & 72.3 & 63.3 & 80.3 & 2.25 / 0.67 & 1.62 & 1.9 \\
+Ours (Stage II), ENU with learned heading & 4.85 \ci{4.24}{5.57} & 5.43 & 7.3 \ci{4.5}{10.5} & 18.0 & 63.3 & 80.3 & 2.25 / 0.67 & 1.62 & 43.0 \\
+\midrule
+\multicolumn{10}{@{}l}{\emph{Beyond the training range: 300 pairs, baselines 10.4--29.8\,m}}\\
+Constant (zero motion) & 21.71 \ci{20.50}{22.80} & 20.81 & 0.0 \ci{0.0}{0.0} & 0.0 & 0.0 & 0.0 & 101.73 / 91.45 & 0.55 & 90.0 \\
+MASt3R-statistics MLP, flight height & 18.88 \ci{18.03}{19.48} & 17.81 & 0.0 \ci{0.0}{0.0} & 0.0 & 0.0 & 2.0 & 19.95 / 6.52 & 7.27 & 55.5 \\
+\cmidrule(l){1-10}
+Ours (Stage I), no flight height & 22.29 \ci{21.57}{22.87} & 21.84 & 0.0 \ci{0.0}{0.0} & 0.0 & 1.0 & 2.7 & 17.37 / 3.88 & 5.12 & 48.1 \\
+Ours (Stage II), no flight height & 24.13 \ci{23.34}{24.83} & 24.59 & 0.0 \ci{0.0}{0.0} & 0.0 & 1.0 & 2.3 & 17.11 / 3.32 & 4.94 & 45.5 \\
+Ours (Stage I) & 18.27 \ci{17.13}{19.33} & 16.59 & 0.0 \ci{0.0}{0.0} & 4.3 & 0.0 & 7.3 & 17.37 / 3.88 & 5.12 & 48.1 \\
+Ours (Stage II) & 18.03 \ci{16.45}{19.01} & 15.92 & 1.7 \ci{0.3}{3.2} & 9.0 & 5.0 & 11.0 & 17.11 / 3.32 & 4.94 & 45.5 \\
+Ours (Stage II), ENU with learned heading & 20.06 \ci{19.14}{20.94} & 18.82 & 0.0 \ci{0.0}{0.0} & 1.0 & 5.0 & 11.0 & 17.11 / 3.32 & 4.94 & 65.0 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

@@ -1,0 +1,29 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Where the plane-induced part of the warp helps.} Endpoint success (\%) of the coarse stage, of the compute-matched refinement with rotation-only alignment and of the refinement with the plane-induced warp, and their paired difference in points with a 95\% bootstrap interval. Same pairs and protocol as \cref{tab:controls}.}
+\label{tab:plane_vs_rot}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}lrcccc@{}}
+\toprule
+& & & Rot. & Plane & Plane $-$ rot. \\
+Bin & Pairs & Coarse & only & warp & (points) \\
+\midrule
+\multicolumn{6}{@{}l}{\emph{Larger tilt of the pair}}\\
+0-15$^\circ$ & 396 & 87.9 & 91.9 & 91.9 & $+0.0$ \ci{-1.8}{+2.0} \\
+15-25$^\circ$ & 662 & 76.6 & 85.8 & 84.7 & $-1.1$ \ci{-3.1}{+0.9} \\
+25-35$^\circ$ & 894 & 60.5 & 76.7 & 79.1 & $+2.3$ \ci{+0.2}{+4.4} \\
+35-45$^\circ$ & 1048 & 39.9 & 63.3 & 68.3 & $+5.1$ \ci{+2.6}{+7.6} \\
+\midrule\multicolumn{6}{@{}l}{\emph{Altitude change $|\Delta z|$}}\\
+0-5\,m & 478 & 57.1 & 77.4 & 77.6 & $+0.2$ \ci{-2.7}{+3.5} \\
+5-15\,m & 949 & 53.7 & 73.6 & 75.2 & $+1.7$ \ci{-0.8}{+4.1} \\
+15-25\,m & 1027 & 64.5 & 76.0 & 79.1 & $+3.0$ \ci{+1.2}{+4.8} \\
+$\geq$25\,m & 546 & 67.6 & 79.1 & 82.6 & $+3.5$ \ci{+1.0}{+5.9} \\
+\midrule\multicolumn{6}{@{}l}{\emph{Relief}}\\
+$<$5\% & 241 & 24.9 & 47.3 & 49.8 & $+2.5$ \ci{-3.9}{+8.7} \\
+5-10\% & 1803 & 61.7 & 78.6 & 81.0 & $+2.3$ \ci{+0.6}{+3.9} \\
+10-20\% & 812 & 69.0 & 80.5 & 82.5 & $+2.0$ \ci{+0.4}{+3.7} \\
+$\geq$20\% & 119 & 67.2 & 78.2 & 81.5 & $+3.4$ \ci{-0.8}{+8.7} \\
+\bottomrule
+\end{tabular}
+\end{table}

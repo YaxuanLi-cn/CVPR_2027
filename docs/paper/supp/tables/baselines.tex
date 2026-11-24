@@ -1,0 +1,23 @@
+\begin{table*}[t]
+\centering
+\caption{\textbf{Adaptation and training of the baselines of Table~2.} $A$/$B$: source/target image. All targets are the five labels with $(\Delta x,\Delta y)$ in ENU. ``Train.''/``Total'': trainable and total parameters in millions. Time: wall-clock training time on one RTX~5090 (shared between ViNT and NoMaD); $^\dagger$ bound from file times, not logged.}
+\label{tab:baselines}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}l L{2.3cm} L{2.75cm} L{2.75cm} L{3.3cm} L{2.2cm} r r r@{}}
+\toprule
+Method & Initialisation & Trained part & Input & Output and loss & Schedule & Train. & Total & Time \\
+\midrule
+$\pi_{0.5}$ & official $\pi_{0.5}$ base & SigLIP tower; LoRA on PaliGemma (rank 16) and action expert (rank 32) & $A$, $B$ letterboxed to $224^2$ in two camera slots; fixed prompt & one-step 5-D action, quantile-normalised; flow matching; 1 sample, 10 Euler steps & 1 epoch (2{,}980 steps), batch 16, lr $5{\cdot}10^{-5}$ cosine & 467 & 3{,}403 & 80\,min \\
+$\pi_0$-FAST & official $\pi_0$-FAST base & SigLIP tower; LoRA on PaliGemma (rank 16) & as $\pi_{0.5}$ & 5-D pose repeated over 10 steps as FAST tokens; cross-entropy; greedy decoding & as $\pi_{0.5}$ & 443 & 2{,}951 & 72\,min \\
+ViNT & official ViNT & all; new 6-D action head, distance head re-initialised & $85{\times}64$ (4:3 centre crop); $A$ fills the context, $B$ is the goal & the five labels, heading as sine and cosine, and the distance; smooth-$L_1$ & 60 epochs, batch 256, lr $3{\cdot}10^{-4}$ cosine, EMA & 29.7 & 29.7 & 27\,min \\
+NoMaD & official NoMaD & all; action-dependent U-Net layers and last distance layer re-initialised & $96{\times}96$; as ViNT & same pose as an 8-step trajectory (DDPM, 10 steps) and the distance; first of 8 samples & as ViNT & 19.1 & 19.1 & 50\,min \\
+DINO-WM & DINOv2 ViT-S/14 (frozen); predictor from scratch & ViT predictor, action embedding & $224^2$ centre crop, $196^2$ tokens & no head: latent prediction loss; pose by CEM (16 candidates, 3 iterations) on the latent distance to $B$ & 1 epoch (2{,}981 steps), batch 16, lr $5{\cdot}10^{-4}$ & 19.8 & 41.8 & $\le$32\,min$^\dagger$ \\
+Visual Foresight & none (method re-implemented on features) & residual MLP dynamics & cached DINOv3 ViT-7B CLS features of $A$, $B$ & no head: feature prediction with a contrastive action term; pose by CEM as above & 5 epochs, batch 256, lr $5{\cdot}10^{-4}$ & 6.9 & 6.9 & $<$1\,min$^\dagger$ \\
+DINOv3 ViT-7B & official ViT-7B/16 (frozen) & linear head on $[f(A),f(B)]$ & resize 256, centre crop $224^2$; CLS token & 5 linear outputs; smooth-$L_1$ & 1 epoch (187 steps), batch 256, lr $10^{-3}$ & 0.04 & 6{,}716 & $\le$81\,min$^\dagger$ \\
+Sample4Geo & official University-1652 ConvNeXt-B (frozen) & linear head on $[f(A),f(B)]$ & full frame resized to $384^2$ & 5 linear outputs; smooth-$L_1$ & 1 epoch, SGD, lr $10^{-3}$ & 0.01 & 87.6 & 45\,min \\
+\bottomrule
+\end{tabular}}
+\end{table*}

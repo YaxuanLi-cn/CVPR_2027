@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{What the heading costs in the pose output.} Same estimates, expressed in the camera frame or rotated into ENU with different sources of the absolute heading; the compass rows add Gaussian noise to the true heading. Horizontal MAE and EPE in metres.}
+\label{tab:heading_cost}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+& Coarse & \multicolumn{3}{c}{Refined} \\
+\cmidrule(lr){2-2}\cmidrule(lr){3-5}
+Frame and heading source & \SRe & $\Delta x$ / $\Delta y$ & EPE med. & \SRe \\
+\midrule
+Camera frame (no heading) & 59.9 & 0.46 / 0.50 & 0.53 & 78.7 \ci{77.0}{80.2} \\
+ENU, learned heading (paper) & 44.3 & 0.99 / 0.98 & 0.76 & 61.9 \ci{58.9}{64.9} \\\midrule
+ENU, compass, $\sigma{=}1^\circ$ & 58.6 & 0.52 / 0.53 & 0.58 & 77.7 \\
+ENU, compass, $\sigma{=}2^\circ$ & 53.7 & 0.58 / 0.59 & 0.69 & 72.5 \\
+ENU, compass, $\sigma{=}5^\circ$ & 35.9 & 0.82 / 0.84 & 1.02 & 49.0 \\
+ENU, compass, $\sigma{=}10^\circ$ & 21.8 & 1.29 / 1.30 & 1.57 & 29.5 \\
+\bottomrule
+\end{tabular}}
+\end{table}

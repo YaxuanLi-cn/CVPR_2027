@@ -1,0 +1,134 @@
+\section{Implementation details}
+\label{sec:impl}
+
+This section is the Appendix~I that Sec.~5 of the main paper refers to. It specifies the conventions (\cref{sec:conv}), every step of the two stages of DreamNav (\cref{sec:coarse,sec:cands,sec:fusion,sec:absh,sec:imag,sec:shortrange}), its running time (\cref{sec:runtime}) and the protocol of the baselines (\cref{sec:baselines}).
+
+\subsection{Conventions}
+\label{sec:conv}
+
+\noindent\textbf{Cameras.} PairUAV images are $3686{\times}2073$ pixels. All cameras share one pinhole calibration $K$ with focal length $f{=}3324.9$\,px and principal point $(1841.6, 1078.0)$\,px. $K$ is estimated once, on training pairs only, by minimising the Sampson error of matches under the ground-truth poses; it is a constant of the renderer and no label is used at test time. A camera pose is $(\mathbf{p},\theta,\psi)$: position $\mathbf{p}$ in a local east--north--up (ENU) frame, heading $\theta$ clockwise from north, tilt $\psi$ from the nadir, and zero roll. With camera axes $x$ right, $y$ down, $z$ forward, the camera-to-world rotation is
+\begin{equation}
+\begin{aligned}
+R_{wc}(\theta,\psi)&=\big[\,\mathbf{r},\,-\mathbf{u},\,\mathbf{f}\,\big],\qquad \mathbf{r}=(\cos\theta,\,-\sin\theta,\,0)^{\!\top},\\
+\mathbf{f}&=(\sin\psi\sin\theta,\,\sin\psi\cos\theta,\,-\cos\psi)^{\!\top},\\
+\mathbf{u}&=(\cos\psi\sin\theta,\,\cos\psi\cos\theta,\,\sin\psi)^{\!\top}.
+\end{aligned}
+\label{eq:rwc}
+\end{equation}
+
+\noindent\textbf{Labels and relative pose.} For a source image $S$ and a target image $G$, the labels are $\dpv=\mathbf{p}_G-\mathbf{p}_S=(\Delta x,\Delta y,\Delta z)$ in ENU, $\dth=\theta_G\wrapd\theta_S$ and $\dpsi=\psi_G-\psi_S$, where $\wrapd$ wraps a difference of angles to $(-180^\circ,180^\circ]$. A point with coordinates $\mathbf{X}_S$ in the source camera has coordinates $\mathbf{X}_G=R\,\mathbf{X}_S+\mathbf{t}$ in the target camera, with
+\begin{equation}
+\begin{aligned}
+R&=R_{wc}(\theta_G,\psi_G)^{\!\top}R_{wc}(\theta_S,\psi_S),\\
+\mathbf{t}&=-R_{wc}(\theta_G,\psi_G)^{\!\top}\dpv .
+\end{aligned}
+\end{equation}
+Because the roll is zero, $R_{wc}(\theta,\psi)=R_z(-\theta)A(\psi)$ with $A(\psi)=R_{wc}(0,\psi)$, so that
+\begin{equation}
+R=A(\psi_G)^{\!\top}R_z(\dth)\,A(\psi_S)
+\label{eq:rdecomp}
+\end{equation}
+depends on three angles only, and $(\dth,\psi_S,\psi_G)$ are read off an estimated $R$ in closed form. This is the decomposition used throughout: one relative rotation gives the heading change \emph{and} the tilt of each camera, hence the gravity direction in both views.
+
+\noindent\textbf{Levelled frame.} We express the displacement in the \emph{levelled frame} of the source camera, whose axes are the camera's right direction, its horizontal forward direction, and up:
+\begin{equation}
+\lv=(\ell_x,\ell_y,\Delta z)^{\!\top}=A(\psi_S)\,(-R^{\!\top}\mathbf{t})=R_z(\theta_S)\,\dpv .
+\label{eq:level}
+\end{equation}
+Two calibrated views determine $(\dth,\psi_S,\psi_G)$ and the direction $\lv/\|\lv\|$. The length $\|\lv\|=\|\dpv\|$ requires a scale cue (\cref{sec:cands}), and the world-frame components require the absolute heading of the source camera (\cref{sec:absh}):
+\begin{equation}
+\begin{aligned}
+\Delta x&=\phantom{-}\cos\theta_S\,\ell_x+\sin\theta_S\,\ell_y,\\
+\Delta y&=-\sin\theta_S\,\ell_x+\cos\theta_S\,\ell_y .
+\end{aligned}
+\label{eq:world}
+\end{equation}
+We call $\lv$ the \emph{camera-frame} output and $\dpv$ the \emph{ENU} output. $\Delta z$, $\dth$, $\dpsi$ and $\|\dpv\|$ are identical in both.
+
+\subsection{Coarse-estimation stage}
+\label{sec:coarse}
+
+\noindent\textbf{Rotation-aware matching.} SuperPoint and SuperGlue (outdoor weights) are frozen. The coarse pass matches $S$ at $640{\times}360$ with 768 keypoints against $G$ rotated by $k\cdot90^\circ$, $k\in\{0,1,2,3\}$, and keeps the rotation $k^\star$ with the largest sum of match confidences. The fine pass re-matches at $1280{\times}720$ with 2048 keypoints for $k^\star$, and also for the runner-up rotation when its score reaches half of the best one (\rtFine{} fine passes per pair on average). The detection threshold is 0.005, the non-maximum suppression radius is 4\,px (coarse) or 3\,px (fine), and SuperGlue runs 20 Sinkhorn iterations with a match threshold of 0.2. Keypoints are mapped back to the unrotated $3686{\times}2073$ pixel grid, on which all geometry is computed.
+
+\noindent\textbf{Essential matrix.} Matches with confidence at least 0.2 are passed to MAGSAC++ (inlier threshold 3\,px, confidence $1{-}10^{-5}$). Of the four decompositions of $E$ we keep the one that maximises the fraction of matches with positive depth in both views minus $0.05$ times the number of degrees by which the two tilts of \cref{eq:rdecomp} leave the interval $[-8^\circ,53^\circ]$; this is what ``consistent with UAV imagery'' means in Sec.~4.2. The five degrees of freedom are then refined on the Sampson error with a Huber loss, the inliers are re-selected at 3\,px, and the refinement is repeated. The pose is first computed from the fine matches alone. If these yield fewer than 100 inliers, and fewer than 70\% of the inliers obtained from the union of the fine matches and the coarse matches of all four rotations, the union is used instead. Both solutions are kept as candidates.
+
+\noindent\textbf{Learned priors.} The ``MLP over pooled features of a frozen MASt3R'' of Sec.~4.2 is built as follows. MASt3R (ViT-L, metric checkpoint) processes the pair at 512\,px. Its dense outputs (the pointmaps of both views in the source frame and their difference, the two confidence maps, and the first 24 descriptor channels) are pooled over the image into 422 statistics: per-channel mean, standard deviation and percentiles, and the fractions of pixels above fixed confidence levels. This pooled descriptor is the one of RASR~\cite{liang2026rasr}. On this vector, 14 independent heads (LayerNorm, two hidden layers of 256 and 128 units, GELU, dropout 0.1) regress $\Delta x$, $\Delta y$, $\Delta z$, $\dpsi$, $\|\dpv\|$, $\sin\dth$, $\cos\dth$, $\psi_S$, $\psi_G$, $\ell_x$, $\ell_y$ and the unit direction $\lv/\|\lv\|$. They are trained with a smooth-$L_1$ loss, AdamW (learning rate $3{\cdot}10^{-4}$, weight decay $10^{-4}$), 30 epochs and batches of 256 pairs. Gradient-boosted trees fitted to the same vector give a second set of predictions, used as additional candidates.
+
+\noindent\textbf{Pose refinement with priors (Eq.~1).} We restate Eq.~(1) with all symbols explicit. The unknowns are $\mathbf{q}=(\dth,\psi_S,\psi_G,\tilde{\mathbf{t}})$, where $\tilde{\mathbf{t}}$ is the unit translation direction, parameterised by two coordinates in the tangent plane of its initial value. With $\bar\psi_S,\bar\psi_G,\overline{\dth}$ the predictions of the prior MLP,
+\begin{multline}
+E(\mathbf{q})=\sum_{i=1}^{N}\rho\!\Big(\frac{e_i(\mathbf{q})}{\sigma_e}\Big)+\frac{(\psi_S-\bar\psi_S)^2+(\psi_G-\bar\psi_G)^2}{\sigma_\psi^2}\\
++\frac{(\dth\wrapd\overline{\dth})^2}{\sigma_\theta^2},
+\label{eq:map}
+\end{multline}
+where $e_i$ is the Sampson distance of match $i$ in pixels under $E=[\tilde{\mathbf{t}}]_\times R(\dth,\psi_S,\psi_G)$ and $\rho(r)=2(\sqrt{1+r^2}-1)$ is the pseudo-Huber cost. In Eq.~(1) of the main paper the bar on the prior heading change in the last term was lost in typesetting; \cref{eq:map} is the function that is minimised. The constants are $\sigma_e{=}1.5$\,px, $\sigma_\psi{=}2^\circ$ and $\sigma_\theta{=}5^\circ$. They were set once from the error scale of each term (the prior MLP has a tilt error of about $1.5^\circ$ and a heading error of about $2^\circ$) and were not tuned. \Cref{eq:map} is minimised with a trust-region least-squares solver, with at most 40 function evaluations, from two initialisations: the essential-matrix pose with its inliers at 3\,px, and the prior pose with the matches within 8\,px and then 3\,px of its epipolar geometry. The second initialisation is the only one available when RANSAC fails. We keep the solution with the larger number of inliers at 3\,px minus twice the tilt-prior penalty. The result is a maximum-a-posteriori estimate under the angle priors, which is what the box labelled ``MAP'' denotes in Fig.~2(b) of the main paper.
+
+\noindent\textbf{Zoom re-matching.} The ``region shared by the two views'' of Sec.~4.2 is computed from the rotation only, so no depth is needed. With $\hat R$ the rotation of the refined pose (the prior rotation if no pose could be solved), the infinite homography $H_\infty=K\hat R^{\!\top}K^{-1}$ maps target pixels into the source image. We take the axis-aligned bounding box of the four mapped corners of $G$, intersect it with the source image, pad it by 300\,px, enlarge it to a $16{:}9$ box of at least $640{\times}360$\,px, and resample this box of $S$ to a $1280{\times}720$ canvas through a similarity $Z$. The target is resampled to the same canvas through $ZH_\infty$, so that the two crops are rotationally aligned; target keypoints outside the valid area are discarded. The pair of crops is matched once with 2048 keypoints, the matches are mapped back through $Z^{-1}$ and $(ZH_\infty)^{-1}$, and the pose estimation (essential matrix, then \cref{eq:map}) is repeated on them. The translation is not compensated at this point; this is what the plane-induced warp of the refinement stage adds (\cref{sec:imag}).
+
+\subsection{Scale cues and pose candidates}
+\label{sec:cands}
+
+\noindent\textbf{Metric scale.} Every pose solution comes with a triangulation in which the baseline has unit length. Two quantities of this triangulation are turned into a metric distance. (i) \emph{Depth cue}: the median depth $\tilde z$ of the inliers, in units of the baseline, is compared with the median metric depth $z^{\mathrm{M}}$ that MASt3R predicts for the same view, which gives $\|\dpv\|\approx c_1\,z^{\mathrm{M}}/\tilde z$. (ii) \emph{Flight-height cue}: with the gravity direction $\mathbf{g}_S=(0,\sin\psi_S,\cos\psi_S)^{\!\top}$ in source-camera coordinates, $b_i=\mathbf{X}_i^{\!\top}\mathbf{g}_S$ is the depth of a triangulated point below the camera, and $\tilde h$ is the 75th percentile of the $b_i$; then $\|\dpv\|\approx c_2/\tilde h$. Both are used in log space, and the constants $\log c_1$, $\log c_2$ are the medians of the log-ratio to the true distance over the training pairs. They evaluate to $c_1\approx 96$ and $c_2\approx 221$\,m. The first number says that the metric depth of MASt3R, used out of the box at this altitude, is too small by two orders of magnitude; it is nevertheless a consistent cue once calibrated. The second is the typical height of the cameras above the ground in PairUAV (\cref{sec:dataset}): the flight-height cue is a prior of the dataset. No metric quantity of a test pair is used. The third cue is the direct regression of $\|\dpv\|$ by the prior heads.
+
+\noindent\textbf{Candidates.} \Cref{tab:cands} lists the candidates $c_k$ of Eq.~(2) for each parameter and stage. A candidate for $\ell_x$, $\ell_y$ or $\Delta z$ is the fused distance times the corresponding component of a unit direction.
+
+\input{tables/cands}
+
+\subsection{Reliability-weighted fusion (Eq.~2)}
+\label{sec:fusion}
+
+\noindent\textbf{Predicted error.} For each candidate $k$ of a parameter $y$, a gradient-boosted regression tree model $s_k(\mathbf{f})$ is fitted with a squared loss to $\sqrt{|c_k-y|}$ on the training pairs for which the candidate exists. The predicted absolute error is $\hat e_k=\max(s_k,0)^2$, which is non-negative by construction, and it is floored at $10^{-3}$ (degrees, metres, or log-metres) before it enters the weights $\hat e_k^{-2}/\sum_j\hat e_j^{-2}$. Candidates that do not exist for a pair (\eg, no pose could be solved) receive zero weight. Regressing the square root gives large failures more influence than regressing the logarithm and less than regressing the error itself; this choice and the exponent $-2$ were selected on out-of-fold training predictions.
+
+\noindent\textbf{Circular parameter.} For $\dth$ the blend is the weighted circular mean, $\bar y=\operatorname{atan2}(\sum_k w_k\sin c_k,\sum_k w_k\cos c_k)$, the offsets $c_k-\bar y$ are wrapped, and the output is wrapped after the residual is added.
+
+\noindent\textbf{Residual regressor.} $g$ is a gradient-boosted model with an $L_1$ objective. Its inputs are the features $\mathbf{f}$, the predicted errors $\hat e_k$, the index of the most reliable candidate, and the offsets $c_k-\bar y$.
+
+\noindent\textbf{Features.} $\mathbf{f}$ contains no image content, only measurements of the estimation process. In the coarse stage (294 features): for each matching pass, the number of matches, inliers and their ratio, the median residual, the conditioning of the translation direction, the spatial coverage of the matches and the spread of the triangulated depths; the disagreement between solutions (angles between translation directions, differences of heading and tilt); the scale cues; the prior predictions; and the depth and confidence statistics of MASt3R. In the refinement stage (209 features): the coarse estimate, a subset of the above, the same quality measures for the imagined match set $\mathcal{M}_{\mathrm{im}}$, the verification scores and the residual statistics of \cref{sec:imag}.
+
+\noindent\textbf{Training.} All models use LightGBM~\cite{ke2017lightgbm} with a learning rate of 0.04, 63 leaves, at least 30 samples per leaf, feature and row subsampling of 0.3 and 0.8; 500 trees for $s_k$ and 900 for $g$. They are fitted with five-fold cross-fitting grouped by building: the out-of-fold predictions on the training pairs are the inputs on which the next model is fitted, and the model fitted on all training pairs is applied to the test pairs. The refinement stage is therefore trained on coarse estimates that were not fitted to their own pairs, which is the meaning of ``held-out predictions of the coarse stage'' in Sec.~4.3. The coarse fusion is fitted on 24{,}909 training pairs and the refinement fusion on 12{,}000 of them.
+
+\noindent\textbf{Output.} The fused displacement $(\hat\ell_x,\hat\ell_y,\Delta\hat z)$ is finally rescaled by $(\hat d/\|\hat\lv\|)^{\alpha}$ towards the separately fused distance $\hat d$, with $\alpha{=}0.75$ after the coarse stage and $\alpha{=}0.5$ after the refinement stage, both chosen on validation buildings.
+
+\subsection{Absolute heading}
+\label{sec:absh}
+
+The network of Eqs.~(3)--(4) is a ConvNeXt-S initialised from ImageNet weights. Its input is a $256{\times}256$ crop of the image downsized to $448{\times}256$; its output is a unit vector for the mean direction $\mu$ and a concentration $\kappa$ obtained with a softplus. It is trained with the loss of Eq.~(3) for 10 epochs with AdamW (peak learning rate $2{\cdot}10^{-4}$, one-cycle schedule, weight decay 0.05, batches of 128, stochastic depth 0.2) on the 150 images of every training building, of which 10\% of the buildings are held out for validation. The augmentations are random square crops, the eight dihedral transforms with the corresponding change of the label ($90^\circ$ rotations add $90^\circ$, mirroring negates the heading), and brightness and contrast jitter. At test time the natural parameters of three crops times eight dihedral transforms are averaged.
+
+The refinement stage adds a second network of the same architecture that reads a \emph{nadir-rectified} view: the estimated tilt of the camera is removed by a pure rotation of the image, which is exact for any scene, and in that view a change of heading is exactly an in-plane rotation, so the network is trained with continuous rotation augmentation and tested on 12 rotations and their mirror images. The refined output sums the natural parameters of both networks in Eq.~(4). The main paper describes a single network for brevity; \cref{sec:heading} reports the accuracy of each variant, and shows that the gain of the second network is small.
+
+\subsection{Geometric imagination}
+\label{sec:imag}
+
+This paragraph specifies the quantities of Eq.~(5) that the reviewers found under-specified.
+
+\noindent\textbf{Normal $\mathbf{n}$.} The plane is horizontal, so its normal in source-camera coordinates is the gravity direction, which the zero-roll decomposition of \cref{eq:rdecomp} provides: $\mathbf{n}=(0,\sin\hat\psi_S,\cos\hat\psi_S)^{\!\top}$, where $\hat\psi_S$ is the tilt of the source camera in the coarse solution. The tilts $(\hat\psi_S,\hat\psi_G)$ are taken from the pose refined on the zoom matches (from the first-pass pose, then from the prior, if that fails), and are shifted symmetrically so that their difference equals the fused $\Delta\hat\psi$.
+
+\noindent\textbf{Height $h$.} The height is metric because it is the product of the metric distance of the coarse stage and a ratio measured in the scale-free reconstruction: $h=\hat d\,\tilde h$, with $\tilde h$ the 75th percentile of the depths $b_i$ of the triangulated inliers below the source camera, in units of the baseline (\cref{sec:cands}). An upper percentile is used because the ground is the lowest surface of the scene: points on roofs and facades have smaller $b_i$, and the 75th percentile reaches the ground as soon as a quarter of the matches lie on it, while remaining robust to outliers below it. We do not classify ground points explicitly. $h$ is clipped to $[0.75,1.3]\,H_0$, where $H_0{=}220.2$\,m is the median of $h$ over well-matched training pairs, and it is set to $H_0$ when the pose has 100 inliers or fewer or could not be solved. This is the handling of failed plane estimates.
+
+\noindent\textbf{Homography.} With $R$ from $(\Delta\hat\theta,\hat\psi_S,\hat\psi_G)$ and $\mathbf{t}=-R\,A(\hat\psi_S)^{\!\top}\hat\lv$, $H=K(R+\mathbf{t}\mathbf{n}^{\!\top}/h)K^{-1}$ maps a source pixel to the target view for points on the plane. Our implementation resamples the target image into the source frame with $H^{-1}$ rather than the source into the target frame; the two are equivalent, and matches are always mapped back to the two original pixel grids.
+
+\noindent\textbf{Role of the plane.} The plane is used \emph{only} to bring the two images into alignment before matching. The pose is then re-estimated from $\mathcal{M}_{\mathrm{im}}$ with the essential matrix and \cref{eq:map}, which hold for any scene structure; matched points on roofs are valid epipolar constraints and are kept. A structure of height $s$ above the ground appears displaced in the imagined view by about $f\,\|\dpv\|\,s/h^2$ pixels, \ie about 14\,px per 10\,m of height for a baseline of 20\,m (\cref{sec:planarity}), which is far below the tile size.
+
+\noindent\textbf{Tiles.} The overlap of the two aligned images (bounding box padded by 150\,px, at least $640{\times}360$\,px, $16{:}9$) is covered by $n{\times}n$ tiles of $1280{\times}720$\,px at the original resolution, $n\le3$, spread evenly over the box, so that tiles overlap when the box is not a multiple of the tile size. Tiles in which the warped image covers less than 3\% of the area are skipped; \imTilesMean{} tiles are matched per pair on average. Each tile pair is matched with 2048 keypoints per image.
+
+\noindent\textbf{Verification and residuals.} Five coarse hypotheses are verified: the essential-matrix and refined poses of the first pass and of the zoom pass, and the fused coarse pose. For each one we compute the fractions of matches of $\mathcal{M}_{\mathrm{im}}$ within 1.5\,px and 3\,px of its epipolar geometry and the median Sampson distance. The residual of a match is its displacement between the imagined and the real view in source pixels; its median, 90th percentile, median horizontal and vertical components, and the fractions below 8\,px and 30\,px are the residual statistics passed to the fusion.
+
+\subsection{Short-range translation in closed loop}
+\label{sec:shortrange}
+
+The fusion is fitted on pairs that are rarely closer than 5\,m, and the essential matrix loses the translation direction as the baseline vanishes. In the closed-loop experiment of Sec.~5.4, the row ``Ours (Stage~II)'' therefore switches, when its own estimate of the remaining distance falls below 5\,m, to a translation computed directly from the imagined match set on the ground plane. With the rotation fixed to the refined estimate, points on the plane satisfy $\mathbf{x}_G\sim R\,\mathbf{x}_S+\mathbf{w}\,(\mathbf{n}^{\!\top}\mathbf{x}_S)$ with $\mathbf{w}=\mathbf{t}/h$ in normalised coordinates, which is linear in $\mathbf{w}$ and well conditioned at zero baseline. We solve it by iteratively re-weighted least squares with Cauchy weights of scale 2\,px (12 iterations), which down-weights roofs and mismatches, and use it when at least 200 matches agree within 4\,px. The height $h$ is the estimate of the first step, updated by the commanded climbs. This estimator uses no additional model. It was omitted from the main paper; \cref{sec:closedloop} reports the closed-loop results with and without it.
+
+\subsection{Running time}
+\label{sec:runtime}
+
+\input{tables/runtime}
+
+\Cref{tab:runtime} gives the wall-clock time of every step on one RTX~5090, for one image pair at a time and without loader parallelism. A pair requires \rtSG{} SuperGlue forward passes on average (4 coarse, \rtFine{} fine, 1 zoom, \rtTiles{} tiles) and at most \rtSGmax, and \rtSP{} SuperPoint passes. The complete pipeline takes \rtTotal\,s per pair (\rtHz\,Hz); without the absolute heading, which a platform with a compass does not need (\cref{sec:heading}), the two stages take \rtBoth\,s, and the coarse stage alone \rtStageOne\,s. The implementation is a research prototype: \rtMast\,s are spent in MASt3R and its pooled statistics, each step decodes the two JPEG files again, and the 96 test-time views of the two heading networks are evaluated one by one. Processing pairs in batches with parallel loading reaches \rtBatch\,s per pair. The peak GPU memory is \rtMem\,GB. DreamNav is thus suited to a stop-and-estimate final approach such as the one of Sec.~5.4, which needs about two estimates, not to high-rate control; we do not claim real-time operation.
+
+\subsection{Baselines}
+\label{sec:baselines}
+
+\input{tables/baselines}
+
+\Cref{tab:baselines} gives the adaptation and the training protocol of each baseline of Table~2. The following holds for all of them. (i) \emph{Data.} They are trained on the training pairs of the same split and supervised by the same five labels, with $(\Delta x,\Delta y)$ in ENU as the labels are defined; ViNT and NoMaD hold out 60 training buildings to monitor training. (ii) \emph{Selection.} The model after the last step is evaluated once; there is no model selection on the test pairs. (iii) \emph{Search.} No hyper-parameter search was run for any baseline: each one was trained once with the settings listed in the table. Their budgets are modest, between one epoch for the two vision-language-action models and the linear probes and 60 epochs for ViNT and NoMaD, and a tuned adaptation could do better. (iv) \emph{Evaluation.} Every table of the paper and of this document uses the \nTest{} test pairs, from \nBuildings{} held-out buildings, for which all methods have a prediction.
+
+Three points of the table qualify how the comparison of Table~2 should be read. First, DINO-WM and Visual Foresight are not evaluated with their released weights, which do not exist for this domain: the two methods are re-implemented on frozen DINO features, with the pose obtained by planning in the learned latent dynamics as in the original methods. Second, DINOv3 and Sample4Geo are linear probes of frozen representations and measure what these representations expose, not what a fine-tuned network could reach. Third, none of the eight models is a relative-pose estimator by design; the phrase ``widely used relative-pose regressors'' of the abstract is inaccurate (\cref{sec:corrections}). The reference points that are closest to DreamNav in input, output and sensing are the correspondence-based pipelines of \cref{sec:geometric}, and the fairest version of the learned baselines is the one trained with camera-frame targets in \cref{sec:heading}.

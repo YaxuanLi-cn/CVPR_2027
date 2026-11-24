@@ -1,0 +1,61 @@
+\section{Closed-loop experiment}
+\label{sec:closedloop}
+
+The reviews raise four points about Sec.~5.4: Table~5 reports one draw of the actuation noise on 160 episodes, without uncertainty; the abstract mixes the internal refinement with physical steps; the one-step success of Table~5 (38.8\%) is far below the 83.3\% of Table~2; and there is no classical visual-servoing baseline, which limits what the experiment shows. While preparing the answers we found that the row ``Ours (Stage~II)'' of Table~5 contains a component that the main paper does not describe. We start with it, because it changes the reading of the table.
+
+\subsection{What the rows of Table~5 are}
+\label{sec:tablefive}
+
+\noindent\textbf{Simulator.} Each of the \clSites{} held-out sites is reconstructed by 3-D Gaussian splatting~\cite{kerbl20233d,ye2025gsplat} from 135 of its 150 posed images; the 15 other images are never seen by the reconstruction (their rendering has a PSNR of 23.9\,dB on average). An episode takes one of these held-out \emph{real} photographs as the goal and the pose of another camera of the site as the start (10 goals per site, 2 starts per goal, \clEpisodes{} episodes). At every step the estimator receives a view \emph{rendered} at the current pose and the goal photograph, and outputs a displacement in the levelled frame of the current camera, which is applied to the pose with noise: 3\% of the commanded move plus 5\,cm per axis, $0.2^\circ$ in heading and $0.1^\circ$ in tilt. There are no dynamics, no flight controller, no wind and no obstacles; the absolute heading is not used.
+
+\noindent\textbf{Three estimators, not two.} ``Ours (Stage~I)'' is the coarse stage. ``Ours (Stage~II)'' is the refined stage of Sec.~4.3 \emph{plus} the short-range ground-plane solver of \cref{sec:shortrange}, which replaces the fused translation whenever the estimated remaining distance is below 5\,m and at least 200 matches support it. The main paper does not mention this solver, although it provides the translation in \clPlaneSteps\% of all steps of this row (\clPlaneFirst\% of the first steps, \clPlaneSecond\% of the second and \clPlaneThird\% of the third) and acts at least once in \clPlaneFlights\% of the episodes. \Cref{tab:closedloop} therefore adds the missing row, the refined stage as described in the paper.
+
+\input{tables/closedloop}
+\input{tables/fixedsteps}
+
+\subsection{Uncertainty, and where the gain comes from}
+\label{sec:cluncertainty}
+
+\Cref{tab:closedloop} repeats the experiment with the actuation noise re-drawn (\clDrawsText; the estimator itself is deterministic) and gives bootstrap intervals over episodes.\clSpreadText{} With the stopping threshold $\tau{=}1$\,m the coarse stage reaches \clSiSR\% on average, the refined stage \clSiiPlainSR\% and the refined stage with the short-range solver \clSiiSR\%; the draw of Table~5 was a favourable one for all three (56.9\%, 55.6\% and 81.9\%). On the same episodes the differences are
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=2pt]
+\item refined $-$ coarse: \clDrefine{} points \ci{\clDrefineLo}{\clDrefineHi};
+\item short-range solver on top of the refined stage: \clDplane{} points \ci{\clDplaneLo}{\clDplaneHi};
+\item Table~5, ``Stage~II'' $-$ ``Stage~I'': \clDfull{} points \ci{\clDfullLo}{\clDfullHi} (bootstrap over sites: \ci{\clDfullSiteLo}{\clDfullSiteHi}).
+\end{itemize}
+The difference between the two rows of Table~5 is therefore real, but it is the contribution of the short-range solver. \emph{The imagination-refined stage by itself does not improve the closed loop over the coarse stage.} The sentence of Sec.~5.4 that attributes the improvement to the refinement, and the corresponding sentence of the abstract, are not supported (\cref{sec:corrections}).
+
+The reason is visible in \cref{tab:fixedsteps}. Without a stopping rule, the success of the coarse and of the refined stage \emph{decreases} after the second step (\clSiFixTwo\% to \clSiFixFive\%, and \clSiiPlainFixTwo\% to \clSiiPlainFixFive\%): within a few metres of the goal both estimators are inaccurate and move the camera away again. The released pairs contain almost no such configuration: \dsShortFive\% of them have a baseline below 5\,m, and \dsFusionShortFive{} of the \dsFusionRows{} pairs on which the fusion is fitted, of which \dsFusionShortTwo{} are below 2\,m (\cref{sec:dataset}). The learned fusion therefore extrapolates near the goal, and the essential matrix loses the translation direction as the baseline vanishes. The short-range solver addresses exactly this regime (\clSiiFixTwo\% after two steps), although its success also decreases when the loop continues (\clSiiFixFive\% after five). The stopping rule is thus an essential part of the result: the success at $\tau{=}1$\,m is the highest of the four thresholds of Table~5 (\clSiiSRhalf\% at 0.5\,m, \clSiiSRtwo\% at 2\,m), and $\tau$ was not selected on separate episodes.
+
+\subsection{Internal refinement and physical steps}
+\label{sec:internalphysical}
+
+The 2.2 steps of the abstract are physical steps: each one is a commanded move followed by a new observation rendered at the new pose, and each estimate runs the refinement once. Nothing is iterated inside the estimator. The sentences ``Iterating the refinement 2.2 times [...]'' and ``the loop closes inside the estimator rather than in the air'' describe a different mechanism from the one that was evaluated and are withdrawn. When the refinement \emph{is} iterated on a fixed pair, without motion, the endpoint success changes by \itThreeASRe{} to \itThreeBSRe{} points after three rounds (\cref{sec:iteration}); the gain of the closed loop comes from new observations taken closer to the goal.
+
+\input{tables/onestep}
+
+\subsection{From Table~2 to the one-step column of Table~5}
+\label{sec:onestep}
+
+One review asks why a single step succeeds in 38.8\% of the episodes when 83.3\% of the test pairs are within 1\,m. \Cref{tab:onestep} follows the estimate from one setting to the other.
+
+\noindent\textbf{Definition.} Table~2 counts the range error; Table~5 counts the distance between the reached and the goal position. On the test pairs the corresponding endpoint success is \SiiCamSRe\% (\cref{sec:whichdef}).
+
+\noindent\textbf{Pair distribution.} The test pairs of the simulator sites are as easy as the others (\ogSiteSRd\% / \ogSiteSRe\% on \ogSiteN{} pairs). The episodes, however, pair a goal with an arbitrary camera of the site: they are not screened for overlap, and \ogOutside\% of them lie outside the ranges of horizontal displacement of the released pairs. On the real start photographs of the episodes the refined stage succeeds on \ogRealSRd\% / \ogRealSRe\% (\ogRealInSRe\% of endpoint success inside the released ranges, \ogRealOutSRe\% outside). This step accounts for about 18 of the 39 points and is the effect of the pair selection that the reviews ask about (\cref{sec:unscreened}).
+
+\noindent\textbf{Rendering.} When the start view is rendered by the simulator instead of photographed, the endpoint success falls to \ogRendSRe\%. The estimator is sensitive to the rendering gap of the simulator, and this affects every later observation of an episode. The closed-loop numbers are therefore conservative with respect to real images in this respect, and say nothing about the opposite direction, a real aircraft.
+
+\noindent\textbf{Execution.} Executing the commanded displacement without noise leaves \ogNoNoise\% of the episodes within 1\,m. The actuation noise alone moves the camera by \ogNoiseDisp\,m in the median at these distances; in expectation over 2{,}000 draws the success is \ogNoise\%, and 95\% of single draws fall in \ci{\ogNoiseLo}{\ogNoiseHi}. The 38.8\% of Table~5 is one such draw, for the row with the short-range solver; the refined stage alone drew 41.9\%.
+
+\input{tables/servo}
+
+\subsection{Classical visual servoing}
+\label{sec:servo}
+
+\Cref{tab:servo} adds three classical controllers in the same simulator, with the same episodes and noise. All three use the matches of our first pass, because off-the-shelf matching leaves half of the episodes without any feature (\cref{sec:georesults}), and take the depth of the features from the flight height. \emph{IBVS} is image-based visual servoing on point features~\cite{chaumette2006visual} with the point interaction matrix and robust weights, with a gain of 0.5 over 20 steps or a gain of 1 over 5 steps. The \emph{direct geometric servo} executes at each step the pose of the essential matrix with the flight-height scale, with no learned component.
+
+IBVS with the small gain and 20 steps ends within 1\,m of the goal in \svIbvsFinal\% of the episodes, more than any row of Table~5, with a median final error of \svIbvsMed\,m. It needs many steps (\svIbvsStopSteps{} with the stopping rule at 1\,m, for \svIbvsStopSR\%), and its trajectories are not acceptable as they are: in \svIbvsExc\% of the episodes the camera moves more than 50\,m away from the goal before converging; we attribute this to a control law that is only locally valid and to the few, poorly distributed features of the first steps. The direct geometric servo reaches \svGeoFinal\% after five steps. Our estimators are the most accurate at the first step (\svSiiAfterOne\% against \svGeoAfterOne\% and \svIbvsAfterOne\%) and never leave the neighbourhood of the goal, and with the short-range solver and the stopping rule they need \svSiipStopSteps{} steps for \svSiipStopSR\%.
+
+\subsection{What the experiment supports}
+\label{sec:clscope}
+
+The closed-loop experiment shows that, in a simulator without dynamics, a few pose estimates with a stopping rule bring a camera from about 19\,m to within 1\,m of an image goal in about four fifths of the cases, provided that a solver adapted to short baselines takes over near the goal. It does not show that the imagination-refined stage improves the closed loop, that the method is preferable to classical servoing when more steps are allowed, or that the result transfers to an aircraft: flight dynamics, a controller, wind, obstacles and the difference between rendered and real views are outside the experiment. The statements of the abstract and of the conclusion on closed-loop navigation should be limited to this (\cref{sec:corrections}).

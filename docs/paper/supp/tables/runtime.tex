@@ -1,0 +1,27 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Running time} of DreamNav for one image pair on an RTX~5090 (mean over 40 test pairs, single process, including image decoding).}
+\label{tab:runtime}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Step & ms & \% \\
+\midrule
+MASt3R forward pass, pooled statistics, prior heads & 668 & 24 \\
+First matching pass (4 coarse + 1--2 fine) & 248 & 9 \\
+Pose: essential matrix and \cref{eq:map}, first pass & 86 & 3 \\
+Zoom re-matching & 105 & 4 \\
+Pose, zoom pass & 51 & 2 \\
+Fusion, coarse stage & 73 & 3 \\
+\rowcolor{rowgray} \emph{Coarse stage, total} & 1232 & 44 \\
+Imagination: warp and tile-wise matching & 332 & 12 \\
+Pose and verification on $\mathcal{M}_{\mathrm{im}}$ & 87 & 3 \\
+Fusion, refinement stage & 55 & 2 \\
+\rowcolor{rowgray} \emph{Refinement stage, total} & 474 & 17 \\
+Absolute heading (2 networks, 96 views) & 1089 & 39 \\
+\midrule
+Total & 2797 & 100 \\
+\bottomrule
+\end{tabular}
+\end{table}

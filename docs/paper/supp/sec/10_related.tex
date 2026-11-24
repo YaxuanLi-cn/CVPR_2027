@@ -1,0 +1,37 @@
+\section{Relation to concurrent last-meter work}
+\label{sec:related}
+
+One review lists seven recent works that the main paper does not discuss. We read all of them. Three address pose alignment on the two-parameter protocol of PairUAV used in the UAVM~2026 challenge~\cite{li2026lastmeter,liang2026rasr,zhou2026airalign}; four address neighbouring problems~\cite{deng2026anyimagenav,deng2026aeromap3d,zhu2026uanwm,sui2026protovisnav}. \Cref{tab:related} summarises them, and they will be discussed in the related work of the revised paper.
+
+\begin{table*}[t]
+\centering
+\caption{\textbf{Concurrent works named by the reviewers.} ``Pair'': the method runs on one RGB image pair without other sensing.}
+\label{tab:related}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}l p{3.2cm} p{3.6cm} p{3.4cm} c p{3.9cm}@{}}
+\toprule
+Work & Task & Input & Output & Pair & Evaluation \\
+\midrule
+Li \etal~\cite{li2026lastmeter} & UAV pose alignment, 2 parameters & RGB pair, $512^2$, pitch fixed at $45^\circ$ & heading and range & \checkmark & PairUAV, two-parameter protocol; success at 10\,m \\
+RASR~\cite{liang2026rasr} & same & RGB pair & heading and range, snapped to the label grid & \checkmark & UAVM~2026 leaderboard (relative errors) \\
+AirAlign~\cite{zhou2026airalign} & same & RGB pair, $448^2$ & heading and signed range & \checkmark & UAVM~2026 leaderboard \\
+\midrule
+AnyImageNav~\cite{deng2026anyimagenav} & indoor image-goal navigation & RGB-D stream with odometry, keyframe history & 6-DoF pose of the goal image & -- & Habitat (Gibson, HM3D) \\
+AeroMap3D~\cite{deng2026aeromap3d} & absolute UAV localization & RGB, satellite imagery, DEM, OSM & geo-referenced 6-DoF pose & -- & own flights; mean error 5.9\,m \\
+UA-NWM~\cite{zhu2026uanwm} & long-range aerial image-goal navigation & RGB stream, goal image & cost of candidate trajectories & -- & AirSim; success at 20\,m \\
+ProtoVis-Nav~\cite{sui2026protovisnav} & vision-language UAV navigation & RGB, instruction, state & next waypoint & -- & OpenUAV; success at 20\,m \\
+\midrule
+DreamNav (ours) & UAV pose alignment, 5-DoF & RGB pair, arbitrary heading, tilt $0^\circ$--$45^\circ$ & metric 3-D displacement, heading and tilt change & \checkmark & PairUAV (5-DoF), success at 1\,m; real photographs \\
+\bottomrule
+\end{tabular}}
+\end{table*}
+
+\noindent\textbf{The two-parameter protocol.} The benchmark of Li~\etal~\cite{li2026lastmeter}, used for the UAVM~2026 challenge~\cite{deuser2026uavm}, shares its name and its source buildings with ours but defines a different task: a method predicts the heading and the range between two of the 54 drone views of a University-1652 building~\cite{zheng2020university}, rendered at $512{\times}512$ pixels with a fixed pitch, and success is counted within 10\,m. The labels lie on a regular grid, and the challenge overview notes that several entries exploit this regularity~\cite{deuser2026uavm}; RASR, for instance, snaps its outputs to multiples of 2.5\,m and $20^\circ$~\cite{liang2026rasr}. The benchmark of this paper is its five-degree-of-freedom counterpart: 150 views per building with continuous positions, headings and tilts, labels in metres and degrees, and a success threshold of 1\,m. Scores on the two protocols are not comparable, and grid snapping has no equivalent here.
+
+\noindent\textbf{What can be compared.} The leading entries of the challenge, including RASR and AirAlign, regress the two parameters from the features of a frozen 3-D reconstruction model (MASt3R, $\pi^3$, VGGT). We evaluate this design on our task in three ways. (i) The public pipeline of RASR, re-trained on our five labels, is the regression from pooled MASt3R statistics of \cref{tab:main_metrics}; it is also the first row of Table~3 of the main paper (\cref{sec:inventory}). It reaches a range error of 5.14\,m and a heading error of $5.7^\circ$, and \mlpCamD\,m and $1.8^\circ$ with the improved heads and a camera-frame target. (ii) AirAlign has no public implementation; its design, MLP heads on cached features of a frozen reconstruction model, belongs to the same family. (iii) The reconstruction models themselves, used as two-view pose estimators without any head, are evaluated in \cref{sec:geometric}. The outcome is consistent: regression from pooled features of a frozen geometric model reaches a few metres and a few degrees, which suits the two-parameter protocol, whereas the sub-metre, sub-degree regime of our benchmark requires correspondences.
+
+\noindent\textbf{Diffusion-refined servoing.} The refinement stage of Li~\etal synthesises, with a pose-conditioned latent diffusion model at 512\,px, the views of a $3{\times}3$ grid of candidate poses spaced by $10^\circ$ in heading and 1.5 in range, and keeps the candidate whose synthesised view is closest to the target in pixel-wise error. On our benchmark the coarse stage is already accurate to $0.12^\circ$ and 0.9\,m, an order of magnitude finer than that candidate spacing. One metre of displacement moves the ground by 15 pixels in the full-resolution image and by 2 pixels at 512\,px, so that selecting between metre-level hypotheses requires the synthesised view to be geometrically exact to about one pixel. The control of \cref{sec:controls} that renders our geometrically exact warp at $512{\times}288$ gives an upper bound for an imagination of that resolution, whatever generates it: it yields \ctLowResSRd\% \SRd, below the \ctCoarseSRd\% of the coarse stage it starts from, against \ctFullSRd\% at the original resolution. \todoauthors{If the diffusion re-ranking experiment on top of our coarse stage is to be reported here, please add its protocol (model, candidate grid, number of test pairs); the result table on file shows all five errors increasing after re-ranking.}
+
+\noindent\textbf{Neighbouring problems.} AnyImageNav~\cite{deng2026anyimagenav} registers a goal image to the observations of an indoor agent equipped with depth and odometry, using a history of keyframes to fix the metric scale; it shares our view of the goal image as a geometric query but does not apply to an isolated RGB pair. AeroMap3D~\cite{deng2026aeromap3d} localises a UAV in a geo-referenced map from satellite imagery, a terrain model and building footprints, with errors of several metres; such a system provides the coarse position from which a last-meter estimator starts. UA-NWM~\cite{zhu2026uanwm} plans long-range trajectories towards an image goal with a latent world model and counts success within 20\,m; it would hand over to a terminal estimator. ProtoVis-Nav~\cite{sui2026protovisnav} follows language instructions and has no goal image. We do not compare with these four methods because none of them outputs the relative pose of an image pair.

@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\caption{\textbf{Closed loop of Table~5 with the three estimators separated} (160 episodes on 8 held-out sites, at most 5 steps; SR: mean\,$\pm$\,standard deviation over 4 draws of the actuation noise, the first being the draw of Table~5; other columns: mean). The run stops when the estimated remaining distance is below $\tau$. SR: final position within 1\,m; Err.: median final position error; brackets: 95\,\% interval of a bootstrap over episodes.}
+\label{tab:closedloop}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lcccccccccc@{}}
+\toprule
+& One step & \multicolumn{2}{c}{$\tau{=}0.5$\,m} & \multicolumn{3}{c}{$\tau{=}1$\,m} & \multicolumn{2}{c}{$\tau{=}1.5$\,m} & \multicolumn{2}{c}{$\tau{=}2$\,m} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-7}\cmidrule(lr){8-9}\cmidrule(lr){10-11}
+Estimator & SR (\%) & Steps & SR (\%) & Steps & Err. (m) & SR (\%) & Steps & SR (\%) & Steps & SR (\%) \\
+\midrule
+Coarse (Table~5, ``Stage~I'') & 35.5\,$\pm$\,1.7 & 4.9 & 25.6\,$\pm$\,3.3 & 3.9 & 1.01 & 50.3\,$\pm$\,5.9 \ci{45.9}{55.2} & 2.9 & 68.6\,$\pm$\,1.8 & 2.3 & 66.1\,$\pm$\,3.2 \\
+Coarse + refined & 41.1\,$\pm$\,1.2 & 4.8 & 24.5\,$\pm$\,2.1 & 3.8 & 1.01 & 49.8\,$\pm$\,4.5 \ci{45.3}{54.5} & 2.7 & 70.5\,$\pm$\,2.1 & 2.1 & 68.6\,$\pm$\,4.0 \\
+Coarse + refined + short-range (Table~5, ``Stage~II'') & 38.4\,$\pm$\,2.3 & 3.7 & 64.5\,$\pm$\,2.1 & 2.3 & 0.62 & 80.3\,$\pm$\,4.6 \ci{76.9}{83.9} & 1.8 & 71.6\,$\pm$\,3.0 & 1.6 & 63.6\,$\pm$\,4.9 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

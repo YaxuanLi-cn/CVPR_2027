@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-"""Guide poses for a SECOND imagination iteration: same as build_guide.py but taken from the stage-2 prediction (OOF for train rows).
-Usage: build_guide2.py <stage2_pred_tag> <geom_imag.pkl> <out_guide.pkl>"""
 import sys, numpy as np, pandas as pd
 sys.path.insert(0, '/root/rasr-pairuav/superglue_fusion')
 from fusion_lib import *

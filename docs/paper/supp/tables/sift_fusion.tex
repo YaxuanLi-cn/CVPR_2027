@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{The SIFT pose and scale cues as additional candidates of our fusion} (3{,}000 test pairs; fusions fitted on 3{,}000 training pairs, as in \cref{tab:controls}). Camera frame.}
+\label{tab:sift_fusion}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+& $d$ & \SRd@1\,m & EPE med. & \SRe@1\,m & Dir. med. \\
+& (m) & (\%) & (m) & (\%) & ($^\circ$) \\
+\midrule
+SIFT + E, flight-height prior & 1.06 & 78.4 \ci{76.3}{80.1} & 0.61 & 73.7 \ci{71.7}{75.6} & 0.56 \\
+\midrule Ours, coarse stage & 0.91 & 73.5 \ci{71.8}{75.1} & 0.82 & 60.5 \ci{58.3}{62.6} & 1.01 \\
+\quad + SIFT candidates & 0.70 & 81.8 \ci{80.1}{83.3} & 0.59 & 76.6 \ci{74.6}{78.3} & 0.58 \\
+\midrule Ours, refined stage & 0.70 & 82.7 \ci{80.9}{84.4} & 0.54 & 78.3 \ci{76.2}{80.1} & 0.41 \\
+\quad + SIFT candidates & 0.64 & 84.1 \ci{82.5}{85.6} & 0.51 & 80.6 \ci{78.7}{82.2} & 0.38 \\
+\bottomrule
+\end{tabular}}
+\end{table}

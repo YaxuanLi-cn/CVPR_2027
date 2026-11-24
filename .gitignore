@@ -13,6 +13,14 @@ data/
 *.log
 *.tmp
 
+# Local ordering caches and generated LaTeX build files.
+supp/trackE/_order_*.npz
+docs/paper/supp/*.aux
+docs/paper/supp/*.blg
+docs/paper/supp/*.brf
+docs/paper/supp/*.out
+docs/paper/supp/test.*
+
 *.zip
 *.tar
 *.tar.gz

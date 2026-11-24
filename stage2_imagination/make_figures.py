@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-"""Figures of the imagined intermediate images (module A: imagined target view; module B: imagined bird's-eye candidates).
-Writes stage2_imagination/assets/A_*.jpg and B_bev.jpg."""
 import sys, math, types, numpy as np, pandas as pd, cv2, torch
 sys.path.insert(0, '/root/rasr-pairuav/stage2_imagination'); sys.path.insert(0, '/root/rasr-pairuav/superglue_fusion')
 SG = '/root/rasr-pairuav/outputs/pairuav5d_60k/superglue'; S2 = f'{SG}/stage2'; OUT = '/root/rasr-pairuav/stage2_imagination/assets'

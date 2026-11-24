@@ -1,0 +1,55 @@
+\section{How much depends on the absolute heading?}
+\label{sec:heading}
+
+The reviews ask why the output is expressed in ENU although an image pair cannot observe north, how accurate the learned heading is and whether it generalises, and whether the baselines of Table~2 fail only because of this frame. This section answers the three questions. In short: every number that involves $\Delta x$ and $\Delta y$ in ENU depends on a heading prior that is accurate on PairUAV only because the surroundings of the test buildings were seen in training; the camera-frame results do not depend on it; and the baselines do not fail because of the frame.
+
+\subsection{Two frames}
+\label{sec:frames}
+
+An image pair determines the displacement in the frame of the source camera. DreamNav estimates it in the levelled frame of that camera (\cref{sec:conv}), and rotates the horizontal part into ENU, the frame of the labels and of Tables~2 and~3, with an absolute heading that two networks predict from the images (\cref{sec:absh}). The application does not need this rotation: the closed loop of Sec.~5.4 executes the estimate in the camera frame and never uses the absolute heading (\cref{sec:tablefive}), and an aircraft reads its heading from its compass.
+
+\input{tables/heading_cost}
+\input{tables/heading_err}
+
+\Cref{tab:heading_cost} expresses the same estimates in the two frames. The range error, $\Delta z$, $\dth$ and $\dpsi$ do not depend on the heading; $\Delta x$, $\Delta y$ and the endpoint error do. The endpoint success of the refined stage is \hdCamSRe\% in the camera frame and \hdEnuSRe\% in ENU with the learned heading, and \hdFailFixed\% of the ENU failures succeed with the true heading. With the true heading perturbed by Gaussian noise, as a compass would give it, the success is \hdCompOneSRe\% for $\sigma{=}1^\circ$, \hdCompTwoSRe\% for $2^\circ$ and \hdCompFiveSRe\% for $5^\circ$: at a mean horizontal displacement of 11\,m, one metre corresponds to $5^\circ$. On this test set the learned prior is thus worth a compass with an error between $2^\circ$ and $5^\circ$. The camera-frame numbers should be the primary result, with the ENU numbers reported for a stated heading source.
+
+\subsection{Error of the heading prior}
+\label{sec:headerr}
+
+\Cref{tab:heading_err} gives the error that the main paper does not report. After fusion over the two images and the two networks the mean error is $\hdSiiMean^\circ$ and the median $\hdSiiMed^\circ$; the distribution has a heavy tail, with \hdSiiGtTen\% of the pairs above $10^\circ$ and \hdSiiGtFortyFive\% above $45^\circ$. The error is mostly a bias shared by the images of a building, not image noise: removing the mean error of each building leaves $\hdNoiseOnly^\circ$ of mean error, the building biases alone account for $\hdBiasOnly^\circ$, and five buildings contribute \hdTopFiveShare\% of the total. The predicted concentration is informative: discarding the 5\% least confident pairs lowers the mean error to $\hdCovMae^\circ$ and the share above $45^\circ$ to \hdCovGtFortyFive\%.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/fig_heading.pdf}
+\caption{\textbf{The heading prior depends on having seen the site.} (a) Cumulative distribution of the heading error on the test pairs of six sites, for the raw-view network of the paper, which saw other buildings of these sites during training, and for the same network re-trained without them; dots mark the medians. (b) Endpoint success of the refined stage against the distance from the test building to the nearest training building, in ENU with the learned heading and in the camera frame; the number of test buildings is given in parentheses.}
+\label{fig:heading}
+\end{figure*}
+
+\input{tables/heading_site}
+
+\subsection{Dependence on the training sites}
+\label{sec:headsite}
+
+The test buildings are held out, but their surroundings are not. The buildings of PairUAV are grouped in campuses, and the median test building stands \hdDistMedian\,m from a training building (90th percentile \hdDistPNinety\,m), less than the width of the ground footprint of one image. \Cref{fig:heading}(b) shows the consequence. For the \hdDistAN{} test buildings within 100\,m of a training building the median heading error is $\hdDistAMed^\circ$ and the ENU success \hdDistAEnu\%; between 0.4 and 1\,km they are $\hdDistDMed^\circ$ and \hdDistDEnu\%; for the \hdDistFN{} buildings farther than 5\,km, $\hdDistFMed^\circ$ and \hdDistFEnu\%. The camera-frame success stays between \hdDistDCam\% and \hdDistACam\% up to 5\,km; its lower value for the last \hdDistFN{} buildings (\hdDistFCam\%) has an interval of \ci{\sgZeroSReLo}{\sgZeroSReHi} and is not significant. Over all test buildings the camera-frame success is unrelated to the number of training buildings of the site (Spearman \sgRho).
+
+To measure the prior on sites that were never seen, we re-train the raw-view network after removing all \hdSdRemoved{} training buildings of \hdSdSites{} sites, which contain \hdSdBuildings{} test buildings (\cref{tab:heading_site}, \cref{fig:heading}(a)). On these sites the median heading error rises from $\hdSdSeenMed^\circ$ to $\hdSdUnseenMed^\circ$ and the ENU endpoint success falls from \hdSdSeenSRe\% to \hdSdUnseenSRe\%, a paired difference of \hdSdDelta{} points \ci{\hdSdDeltaLo}{\hdSdDeltaHi}; the camera-frame success on the same pairs is \hdSdCamSRe\%. On the other sites the re-trained network changes the success by \hdSdOtherDelta{} points \ci{\hdSdOtherDeltaLo}{\hdSdOtherDeltaHi}, which is the effect of the smaller training set alone. On an unseen site the error is close to one constant offset for the whole site, between $\hdSdOffMin^\circ$ and $\hdSdOffMax^\circ$ for the six sites, with a resultant length of the signed errors of \hdSdResLo{} to \hdSdResHi. Three limitations apply: only the raw-view network was re-trained, so both rows of \cref{tab:heading_site} use one network instead of two; there is one split and one seed; and a control with the same number of training buildings removed elsewhere was not trained to convergence.
+
+The ENU results of Tables~2 and~3 therefore hold for test buildings that stand next to training buildings. They should not be read as results on unseen scenes, and the statement of the abstract on this point is corrected in \cref{sec:corrections}.
+
+\input{tables/heading_sens}
+
+\subsection{What the prior reads}
+\label{sec:headsens}
+
+\Cref{tab:heading_sens} applies image operations to \hdSensN{} test images. Global changes of brightness, contrast and gamma, lifting the shadows, and even shuffling tiles of 64 pixels leave the prediction almost unchanged: the cue is local, not the layout of the scene. Removing the colour (median error $\hdSensGray^\circ$), rotating the hue ($\hdSensHue^\circ$ for $180^\circ$), strong compression ($\hdSensJpeg^\circ$) and blur degrade it severely, and on the negative image \hdSensNegFlip\% of the predictions turn by $180^\circ$. A change of scale by 3.6, that of the real photographs, gives a median error of $\hdSensZoom^\circ$. For the \hdSouthN{} test buildings of the southern hemisphere the median error is $\hdSouthErr^\circ$. These observations are consistent with a cue tied to the direction of the illumination, such as the shadows, whose relation to north is fixed for the imagery of a site and reverses in the southern hemisphere. We have not verified this interpretation directly: the dataset has one rendering per site, so the illumination cannot be varied in a controlled way. Whatever the cue, it is a property of the imagery from which PairUAV is rendered and not of the scene.
+
+On the real photographs the prior does not transfer: the median error is $\hdRealOneMed^\circ$ from one image and $\hdRealFusedMed^\circ$ after fusion, where chance is $90^\circ$, and the ENU endpoint success is \hdRealEnuSRe\% against \hdRealCamSRe\% in the camera frame (\cref{sec:real}). The failure is at least detectable: the median concentration predicted by the raw-view network falls from \hdRenderKappa{} on the rendered test images to \hdRealKappa{} on the photographs.
+
+\input{tables/camframe}
+
+\subsection{Do the baselines fail because of the frame?}
+\label{sec:camframe}
+
+One review suspects that the baselines of Table~2 fail mainly because they must regress $\Delta x$ and $\Delta y$ in ENU. We re-trained six of the eight with the horizontal target in the camera frame, with otherwise the recipes of Table~2 (\cref{sec:baselines}); $\pi_{0.5}$ and $\pi_0$-FAST could not be re-trained on the shared GPU. \Cref{tab:camframe} shows no effect. In both frames the horizontal error of every re-trained baseline is at or above that of predicting no motion (\cfZeroCamHor\,m), the correlation between its predicted and the true horizontal displacement is at most \cfMaxCamCorr, its endpoint success at 1\,m is at most \cfMaxCamSRe\%, and its \SRd{} (at most \cfMaxCamSRd\%) is at the level of a constant distance equal to the training median (\cfConstSRd\%). These models do not perceive the displacement at all; the frame of the target is not what limits them. Three diagnostics support this. ViNT and NoMaD receive inputs of $85{\times}64$ and $96{\times}96$ pixels, in which one metre on the ground is half a pixel. Heads trained to convergence on the frozen DINOv3 and Sample4Geo descriptors stay at the level of no motion in both frames. For the two world models the planning cost changes by less than 0.1\% when the horizontal displacement of the action is exchanged with that of another pair.
+
+The concern is nevertheless justified for a model that does perceive the displacement. The regression on pooled MASt3R statistics, which is the prior branch of DreamNav, improves from \cfMlpEnuD\,m to \cfMlpCamD\,m of range error and from \cfMlpEnuSRd\% to \cfMlpCamSRd\% \SRd{} when its target is expressed in the camera frame, and the correlation of its horizontal prediction with the truth from \cfMlpEnuCorr{} to \cfMlpCamCorr. For this reason all results of this document are given in the camera frame, and \cref{tab:main_metrics} gives both frames for our method.

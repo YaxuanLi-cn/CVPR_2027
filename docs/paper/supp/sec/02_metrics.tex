@@ -1,0 +1,52 @@
+\section{Metrics: definitions and complete results}
+\label{sec:metrics}
+
+The reviewers asked for the formulas behind the $d$ column, the direction error, the angular MAE and the Pose AUC, and pointed out that a success rate based on position alone does not measure a 5-DoF alignment. This section gives the definitions, states which one each number of the main paper uses, and reports every method under all of them.
+
+\subsection{Definitions}
+
+Let $(\dpv,\dth,\dpsi)$ be the label of a test pair (\cref{sec:conv}) and $(\dpvh,\Delta\hat\theta,\Delta\hat\psi)$ a prediction.
+\begin{align}
+\text{range error}\quad d&=\big|\,\|\dpvh\|-\|\dpv\|\,\big|,\label{eq:d}\\
+\text{endpoint error}\quad \mathrm{EPE}&=\|\dpvh-\dpv\|,\label{eq:epe}\\
+\text{angular errors}\quad e_\theta&=|\Delta\hat\theta\wrapd\dth|,\quad e_\psi=|\Delta\hat\psi-\dpsi|,\label{eq:ang}\\
+\text{direction error}\quad e_{\mathrm{dir}}&=\arccos\frac{\dpvh^{\!\top}\dpv}{\|\dpvh\|\,\|\dpv\|}.\label{eq:dir}
+\end{align}
+The range error compares the predicted and the true \emph{distance} to the goal. The endpoint error is the distance between the goal and the position reached by executing the predicted displacement from the source pose. By the triangle inequality $d\le\mathrm{EPE}$, and the mean EPE is at least as large as each coordinate MAE, whereas the mean of $d$ can be smaller. MAEs are means over the test pairs; for the heading the difference is wrapped before the absolute value is taken (\cref{eq:ang}).
+
+\noindent\textbf{Pose AUC.} With the rotation error $e_{\mathrm{rot}}=\max(e_\theta,e_\psi)$ and $F$ its empirical distribution function over the test pairs,
+\begin{equation}
+\mathrm{AUC}@\tau=\frac{1}{\tau}\int_0^{\tau}F(s)\,\mathrm{d}s,\qquad \tau\in\{5^\circ,10^\circ,20^\circ\},
+\end{equation}
+computed exactly from the sorted errors. It measures the rotation only; unlike the pose AUC of the matching literature it does not include the direction error $e_{\mathrm{dir}}$, which we report separately.
+
+\noindent\textbf{Success rates.} We distinguish
+\begin{align}
+\text{\SRd}@\tau&=\Pr[d\le\tau],\qquad \text{\SRe}@\tau=\Pr[\mathrm{EPE}<\tau],\\
+\text{\SRf}(\tau,\alpha)&=\Pr[\mathrm{EPE}<\tau\ \wedge\ e_\theta<\alpha\ \wedge\ e_\psi<\alpha].
+\end{align}
+\SRf{} is the joint position-and-orientation success that the 5-DoF task definition calls for.
+
+\noindent\textbf{Frames and uncertainty.} $d$, $\Delta z$, $e_\theta$ and $e_\psi$ do not depend on the frame in which the horizontal displacement is expressed. EPE and $e_{\mathrm{dir}}$ do: we report them in ENU, as the labels are defined, and in the camera frame of \cref{eq:level}, where no absolute heading is involved; the camera-frame value equals the ENU value obtained with the true heading of the source camera. All intervals are 95\% percentile intervals of a bootstrap that resamples buildings (1{,}000 resamples), so that pairs of one building stay together.
+
+\subsection{Which definition the main paper uses}
+\label{sec:whichdef}
+
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=2pt]
+\item The $d$ column of Tables~2 and~3 is the range error of \cref{eq:d}. This is why it can be smaller than the coordinate MAEs of the same row (0.68\,m against 0.99, 0.98 and 0.54\,m for Stage~II). ``Distance MAE'' in the text of the main paper always means this quantity. The corresponding mean endpoint error of Stage~II is \SiiEnuEPEmean\,m in ENU and \SiiCamEPEmean\,m in the camera frame.
+\item The SR columns of Tables~2 and~3, and SR@1\,m and SR@2\,m of Table~4, are \SRd. The sentence of Sec.~5 that defines SR through the three-dimensional distance between the final position and the target describes \SRe; it applies to the closed-loop experiment of Table~5, where the position of the UAV in the simulator is compared with the goal, and not to Tables~2--4. We correct this statement here: under the endpoint definition, Stage~II succeeds on \SiiCamSRe\% of the pairs in the camera frame and on \SiiEnuSRe\% in ENU, against 83.3\% under the range definition (\cref{tab:main_metrics}).
+\item ``Pos.'' in Table~4 is the median endpoint error in the camera frame, and ``Dir.'' the median of $e_{\mathrm{dir}}$ in that frame.
+\item The Pose AUC of Table~2 is the rotation-only quantity defined above.
+\end{itemize}
+
+\subsection{All methods under all definitions}
+
+\input{tables/main_metrics}
+
+\Cref{tab:main_metrics} re-scores the per-pair predictions behind Table~2. We draw three conclusions.
+
+\noindent\textbf{The ranking does not depend on the definition; the level does.} Under the endpoint definition DreamNav reaches \SiiCamSRe\% \ci{\SiiCamSReLo}{\SiiCamSReHi} in the camera frame and \SiiEnuSRe\% \ci{\SiiEnuSReLo}{\SiiEnuSReHi} in ENU after refinement, against \SiCamSRe\% and \SiEnuSRe\% for the coarse stage. The gain of the refinement is larger under the endpoint definition (+\gainSReCam{} points in the camera frame, \ci{\gainSReCamLo}{\gainSReCamHi}) than under the range definition (+\gainSRd{} points, \ci{\gainSRdLo}{\gainSRdHi}), because the refinement improves the direction of the displacement more than its length. The difference between the two frames is entirely due to the absolute heading and is analysed in \cref{sec:heading}.
+
+\noindent\textbf{Position and orientation are jointly accurate.} Because the angular errors of DreamNav are a fraction of a degree, the joint success \SRf(1\,m, $1^\circ$) is within half a point of \SRe: \SiiCamSRf\% in the camera frame and \SiiEnuSRf\% in ENU for Stage~II. A pair that is counted as a success in position is thus, with very few exceptions, also aligned in heading and tilt.
+
+\noindent\textbf{The baselines of Table~2 do not fail because of the frame alone.} Their endpoint success at 1\,m rounds to \baseMaxSRe\% for all eight, and their frame-independent errors are those of an uninformed predictor: their $\Delta z$ MAE is between \baseMinZ{} and \baseMaxZ\,m, where predicting zero motion gives \zeroZ\,m. Rotating each prediction about the vertical axis by the angle that best aligns it with the label, which bounds what any heading source could achieve, leaves their endpoint success at or below \baseMaxYawFree\%. The frame does matter for a regression that is otherwise informative: the heads on pooled MASt3R statistics improve from a range error of \mlpWorldD\,m to \mlpCamD\,m when their horizontal target is expressed in the camera frame. We therefore re-train the baselines with camera-frame targets in \cref{sec:heading}, and compare with correspondence-based estimators, which are the appropriate reference for DreamNav, in \cref{sec:geometric}.

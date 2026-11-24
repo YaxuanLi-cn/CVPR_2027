@@ -1,0 +1,28 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{What each second matching pass delivers before any fusion}: tiles matched (at most $3{\times}3$), median number of inliers, share of pairs with fewer than 100 inliers, median displacement between the aligned and the real view, and accuracy of the pose refined with \cref{eq:map}. Unsolved pairs count as $90^\circ$ / $20^\circ$.}
+\label{tab:raw_geometry}
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+& & Inl. & $<$100 & Res. & Dir. ($^\circ$) & Dir. & $\dth$ & $\dpsi$ \\
+Second matching pass & Tiles & med. & (\%) & (px) & med. / mean & $<2^\circ$ & mean & mean \\
+\midrule
+\multicolumn{9}{@{}l}{\emph{All 3{,}000 test pairs of \cref{tab:controls}}}\\
+Zoom pass of the coarse stage & 1 & 468 & 4.4 & -- & 1.22 / 8.4 & 63.7 & 1.18 & 0.86 \\
+Rotation-only alignment, tiles & 4.9 & 2353 & 1.0 & 182.1 & 0.44 / 5.2 & 85.2 & 0.52 & 0.51 \\
+Plane-induced warp, 1 tile & 1.0 & 605 & 2.5 & 7.4 & 0.97 / 6.4 & 70.6 & 0.75 & 0.69 \\
+Plane-induced warp at $512{\times}288$ & 1.0 & 119 & 39.5 & 10.2 & 8.58 / 19.9 & 12.5 & 1.86 & 2.15 \\
+Plane-induced warp, tiles (ours) & 5.0 & 3221 & 0.7 & 7.3 & 0.39 / 4.1 & 87.7 & 0.50 & 0.55 \\
+\midrule\multicolumn{9}{@{}l}{\emph{Subset of 1{,}000 pairs}}\\
+Zoom pass of the coarse stage & 1 & 488 & 4.3 & -- & 1.16 / 7.4 & 66.7 & 0.92 & 0.88 \\
+Plane-induced warp, tiles (ours) & 5.1 & 3408 & 0.6 & 7.2 & 0.36 / 3.5 & 89.1 & 0.32 & 0.37 \\
+Plane-induced warp from the true pose, tiles & 5.1 & 3404 & 0.0 & 6.3 & 0.38 / 3.4 & 89.6 & 0.04 & 0.25 \\
+\midrule\multicolumn{9}{@{}l}{\emph{Subset of 1{,}000 pairs}}\\
+No pose-guided alignment, tiles & 9.0 & 12 & 71.5 & 665.8 & 89.23 / 65.0 & 16.7 & 37.59 & 14.51 \\
+Rotation-only alignment, tiles & 5.0 & 2447 & 1.0 & 182.1 & 0.43 / 4.8 & 86.4 & 0.52 & 0.46 \\
+\bottomrule
+\end{tabular}}
+\end{table}

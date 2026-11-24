@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-"""Stage-1 pose per pair, in the form needed to imagine the target view: relative heading, per-camera tilt, metric displacement in
-cam-a's levelled frame and the height of camera a above the ground. For train rows the stage-1 values are tour-grouped OOF predictions."""
 import sys, numpy as np, pandas as pd
 sys.path.insert(0, '/root/rasr-pairuav/superglue_fusion')
 from fusion_lib import *

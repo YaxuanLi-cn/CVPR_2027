@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-"""Final assembly for stage 2 and the ablation table (same test pairs for every row).
-  stage 1                     : stage-1 fused relative pose + stage-1 absolute heading (CNN v2 on the raw image)
-  + module A                  : relative pose refined with the imagination pass (stage2_fusion.py)
-  + module B                  : absolute heading from the imagined canonical bird's-eye view (bev_heading.py)
-  + A + B                     : both
-World x,y = Rot(abs heading of camera a) . (lx, ly). The absolute heading of camera a combines image a's estimate with
-(image b's estimate - relative heading) through their von Mises natural parameters."""
 import sys, json, argparse, numpy as np, pandas as pd
 sys.path.insert(0, '/root/rasr-pairuav/superglue_fusion')
 from fusion_lib import *

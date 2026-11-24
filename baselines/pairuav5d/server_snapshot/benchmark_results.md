@@ -1,0 +1,42 @@
+# PairUAV 5D Benchmark Results
+
+Distance MAE is computed from xyz: `abs(norm(pred_xyz) - norm(true_xyz))`. A test sample is successful when this distance error is `<= 1.0 m`; success rate is successful samples divided by test samples. All angles are degrees.
+
+The original RASR and general baselines use the fixed 12,313-row test split. RASR SuperGlue and Stage 2 results use the 6,364-row half-result test subset documented in the experiment logs. Success rates across those different test sets should not be interpreted as a strictly paired comparison.
+
+| Stage / model | Test rows | MAE x (m) | MAE y (m) | MAE z (m) | MAE distance (m) | MAE heading (deg) | MAE tilt (deg) | Success <=1 m | Status |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| RASR original | 12,313 | 7.4702 | 7.4461 | 2.6808 | 5.1639 | 5.7064 | 1.8753 | 1,463/12,313 (11.88%) | Measured |
+| RASR + sin/cos | 6,364 | 7.4899 | 7.3952 | 2.7014 | 5.3953 | 1.8188 | 1.8581 | 632/6,364 (9.93%) | Measured |
+| RASR + SuperGlue fusion | 6,364 | 1.3733 | 1.3460 | 0.8086 | 0.9198 | 0.1212 | 0.4417 | 4,649/6,364 (73.05%) | Measured |
+| Stage 2 Module A: imagined view + SuperGlue rematch | 6,364 | 1.0347 | 1.0181 | 0.5444 | 0.6772 | 0.0657 | 0.2006 | 5,299/6,364 (83.27%) | Measured |
+| Stage 2 Module B only: BEV absolute heading | 6,364 | 1.3599 | 1.3238 | 0.8086 | 0.9198 | 0.1212 | 0.4417 | 4,649/6,364 (73.05%) | Measured; mainly improves x/y |
+| Stage 2 final: A+B | 6,364 | 0.9922 | 0.9784 | 0.5444 | 0.6772 | 0.0657 | 0.2006 | 5,299/6,364 (83.27%) | Measured |
+| PI-05 (official checkpoint, LoRA, 1 epoch) | 12,313 | 9.3211 | 9.5166 | 19.3147 | 7.6273 | 81.6059 | 4.1736 | 1,059/12,313 (8.60%) | Measured; one flow-matching sample; learns tilt only |
+| PI0-FAST (official checkpoint, LoRA, 1 epoch) | 12,313 | 10.4055 | 10.4950 | 14.9885 | 6.1563 | 75.5199 | 2.6814 | 1,372/12,313 (11.14%) | Measured; greedy decoding; learns tilt, partly z |
+| AI2THOR adapted | 12,313 | 7.4412 | 7.4204 | 15.3357 | 19.2796 | 85.9645 | 18.3088 | 13/12,313 (0.11%) | Measured |
+| DINOv3 ViT-L adapted | 12,313 | 8.7472 | 7.6828 | 14.6644 | 12.5767 | 86.7199 | 5.2359 | 422/12,313 (3.43%) | Measured |
+| DINOv3 ViT-7B adapted | 12,313 | 7.6686 | 7.6553 | 14.2397 | 13.3182 | 86.4034 | 4.4606 | 377/12,313 (3.06%) | Measured |
+| Sample4Geo adapted (rerun, 1 epoch) | 12,313 | 8.6044 | 8.3342 | 15.8383 | 10.4906 | 86.6463 | 11.3022 | 706/12,313 (5.73%) | Completed; saved checkpoint and test predictions |
+| DINO-WM | 12,313 | 8.9266 | 8.9910 | 19.2358 | 10.2261 | 83.9679 | 11.1902 | 778/12,313 (6.32%) | Measured |
+| ViNT (official checkpoint, fine-tuned) | 12,313 | 7.4496 | 7.4362 | 15.3578 | 5.9366† | 51.3818 | 11.2150 | 1,256/12,313 (10.20%)† | Measured; learns tilt/heading, does not recover translation |
+| NoMaD (official checkpoint, fine-tuned) | 12,313 | 9.6857 | 9.5231 | 19.5637 | 6.7558† | 85.9814 | 15.9330 | 1,165/12,313 (9.46%)† | Measured; one diffusion sample; learns tilt only |
+| Visual Foresight-style adaptation (v2) | 12,313 | 8.6642 | 8.6851 | 18.6293 | 24.7482 | 82.6478 | 7.8596 | 701/12,313 (5.69%) | Action-conditioned latent dynamics + CEM; method adaptation, not official pretrained checkpoint |
+
+Sample4Geo rerun protocol: official University-1652 ConvNeXt-Base checkpoint, frozen visual backbone, PairUAV supervised five-output head, one epoch, fixed 47,687/12,313 train/test split. Metrics and success rate are in `sample4geo/outputs_xyz_mast3r_split_rerun/train.json`; checkpoint is `sample4geo/outputs_xyz_mast3r_split_rerun/train.pt`; per-row predictions are in `sample4geo/outputs_xyz_mast3r_split_rerun/train_test_predictions.npz`.
+
+PI-05 / PI0-FAST protocol (`openpi/pairuav_v2/`): official `pi05_base` / `pi0_fast_base`, LoRA fine-tuning of the language model (and of the action expert for PI-05) with the image encoder trainable, 1 epoch over the 47,687 training pairs at batch 16 (2,980 steps, peak learning rate 5e-5), images resized with padding to 224x224, openpi's random crop / rotation of the first image switched off because the pose label depends on the image geometry. PI-05 predicts (x, y, z, tilt, heading) as a one-step action and the reported prediction is one flow-matching sample (10 Euler steps, policy seed 0); it learns the tilt (correlation 0.97), while x, y, z and heading stay at the level of a randomly drawn training label. For PI0-FAST: The action chunk repeats the relative pose (x, y, z, tilt, heading) over 10 steps and is tokenised by FAST; the prediction is the mean of the greedily decoded chunk (all 12,313 outputs decoded). It learns the tilt (correlation 0.99) and part of z (0.38); x, y and heading stay at chance. Metrics and per-row predictions are in `openpi/pairuav_v2/results/pi0_fast/`. PI-05 metrics and per-row predictions are in `openpi/pairuav_v2/results/pi05/`. The earlier PI-05 checkpoint (1 epoch at batch 8, trained with the crop / rotation augmentation) gave x/y/z 8.9915/9.1920/19.1971 m, distance 8.3129 m, heading 83.6283 deg, tilt 7.4961 deg and 924/12,313 (7.50%) when re-evaluated with all five outputs saved (`openpi/pairuav_v2/results/pi05_old/`).
+
+† ViNT and NoMaD: distance and success come from each model's official distance head (re-targeted from temporal to metric distance), not from the norm of the predicted xyz. From the xyz norm the values are 18.8742 m and 33/12,313 (0.27%) for ViNT, and 7.0943 m and 1,089/12,313 (8.84%) for NoMaD.
+
+ViNT/NoMaD protocol (`visualnav-transformer/pairuav5d_v2/train_v2.py`): official `vint.pth` / `nomad.pth`, all weights fine-tuned for 60 epochs at the official input size (ViNT 85x64, NoMaD 96x96, 4:3 centre crop, ImageNet normalisation), AdamW 3e-4 with cosine decay, pair-swap and brightness/contrast augmentation. Image A fills the observation context and image B is the goal image. Both official heads are kept. ViNT: the action head is re-sized to regress x, y, z, tilt and sin/cos heading; the distance head regresses metric distance. NoMaD: the official diffusion policy (conditional 1-D U-Net, 10 DDPM steps; only the layers tied to the action dimension are re-initialised) generates an 8-step straight-line 5-DoF trajectory whose end point is the predicted relative pose, and the reported prediction is the first of 8 samples as in NoMaD deployment; `dist_pred_net` regresses metric distance. Training used 45,138 pairs from 1,062 train tours; the other 60 train tours (2,549 pairs) were held out to monitor training. The final-epoch EMA weights were evaluated once on the 12,313 test pairs. Metrics, checkpoints, logs and per-row predictions are in `visualnav-transformer/pairuav5d_v2/runs/vint_native/` and `.../runs/nomad_native/`.
+
+How to read the two rows. Reference points on this test split: predicting zero gives x/y/z 7.4398/7.4260/15.3241 m, tilt 20.08 deg, heading 85.96 deg; a constant train-median distance (20.11 m) gives distance MAE 6.10 m and 7.72% success; a randomly drawn train label gives x/y/z 9.88/9.91/20.59 m. ViNT regresses, so where it cannot see the translation it outputs the error-minimising value near zero: its x/y/z equal the zero predictor, while tilt (correlation 0.75) and heading (0.33) are learned. NoMaD samples from its diffusion policy, so its x/y/z are draws with a realistic spread and sit at the random-label level; it learns tilt (correlation 0.57) but not heading. Averaging NoMaD's 8 samples gives x/y/z 7.7181/7.6952/15.8612 m, tilt 14.20 deg, heading 83.68 deg. Neither model recovers the metre-level translation: the cameras fly about 230 m above ground, so 1 m is roughly 0.2 px at these input sizes, and a ViNT run at 256x192 input still had z at the zero-predictor level after 10 epochs (`runs/diag_vint_256.log`).
+
+The earlier ViNT/NoMaD output directories (`visualnav-transformer/outputs_pairuav5d_vint_*` and `outputs_pairuav5d_nomad_*`) are superseded by the runs above: those runs fed images without ImageNet normalisation, trained for at most 14 epochs, and had no distance head. The first Visual Foresight prototype produced near-constant xyz predictions and is retired. Visual Foresight v2 is a method adaptation using cached DINOv3 ViT-7B features, an action-conditioned latent predictor with counterfactual action ranking, and CEM image-goal planning; it is not the paper's original pretrained model.
+
+Sources:
+
+- RASR Stage 1: `../../../SUPERGLUE_EXPERIMENTS.md`
+- RASR Stage 2: `../../../STAGE2_IMAGINATION.md`
+- Baseline metrics and prediction arrays: this directory's method-specific folders

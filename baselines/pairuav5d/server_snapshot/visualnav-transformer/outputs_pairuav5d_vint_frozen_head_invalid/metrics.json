@@ -1,0 +1,16 @@
+{
+  "model": "VINT official pretrained encoder + supervised PairUAV-5D xyz/tilt/heading head",
+  "official_checkpoint": "/root/baseline/visualnav-transformer/pretrained/vint.pth",
+  "adaptation": "frozen official visual-navigation encoder and policy representation; trained regression head",
+  "epoch": 2,
+  "train_rows": 47687,
+  "test_rows": 12313,
+  "train_smooth_l1": 0.08578983060690798,
+  "MAE_x_m": 7.440210342407227,
+  "MAE_y_m": 7.427027225494385,
+  "MAE_z_m": 15.31829833984375,
+  "MAE_distance_from_xyz_m": 19.64209747314453,
+  "MAE_tilt_deg": 20.067258834838867,
+  "MAE_heading_deg_circular": 85.9786605834961,
+  "distance_definition": "MAE between predicted and target xyz vector norms; no distance prediction head"
+}

@@ -1,0 +1,993 @@
+{
+  "model": "nomad",
+  "official_checkpoint": "/root/baseline/visualnav-transformer/pretrained/nomad.pth",
+  "input_size_wh": [
+    96,
+    96
+  ],
+  "epochs": 60,
+  "train_rows": 45138,
+  "held_out_train_tour_rows": 2549,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.8924711868166924,
+      "minutes": 0.8020801623662313
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.2579549047672613,
+      "minutes": 3.6434305906295776,
+      "val": {
+        "MAE_x_m": 9.109598159790039,
+        "MAE_y_m": 8.919692993164062,
+        "MAE_z_m": 19.710485458374023,
+        "MAE_distance_from_xyz_m": 6.099067687988281,
+        "MAE_tilt_deg": 24.512191772460938,
+        "MAE_heading_deg_circular": 90.5787582397461,
+        "distance_success_count": 221,
+        "distance_success_rate": 0.08670066297054291
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.109598159790039,
+        "MAE_y_m": 8.919692993164062,
+        "MAE_z_m": 19.710485458374023,
+        "MAE_distance_from_xyz_m": 8.735502243041992,
+        "MAE_tilt_deg": 24.512191772460938,
+        "MAE_heading_deg_circular": 90.5787582397461,
+        "distance_success_count": 179,
+        "distance_success_rate": 0.0702236145734787
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.11415325079790571,
+      "minutes": 4.341527648766836
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.10230099913579496,
+      "minutes": 4.965265337626139,
+      "val": {
+        "MAE_x_m": 9.099517822265625,
+        "MAE_y_m": 8.970697402954102,
+        "MAE_z_m": 19.47311019897461,
+        "MAE_distance_from_xyz_m": 6.103930950164795,
+        "MAE_tilt_deg": 24.56557273864746,
+        "MAE_heading_deg_circular": 90.63666534423828,
+        "distance_success_count": 215,
+        "distance_success_rate": 0.08434680104255676
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.099517822265625,
+        "MAE_y_m": 8.970697402954102,
+        "MAE_z_m": 19.47311019897461,
+        "MAE_distance_from_xyz_m": 8.813704490661621,
+        "MAE_tilt_deg": 24.56557273864746,
+        "MAE_heading_deg_circular": 90.63666534423828,
+        "distance_success_count": 198,
+        "distance_success_rate": 0.07767751812934875
+      }
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.09849376311864365,
+      "minutes": 5.586256817976634
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.09586040514775297,
+      "minutes": 6.160825081666311,
+      "val": {
+        "MAE_x_m": 9.103212356567383,
+        "MAE_y_m": 8.970722198486328,
+        "MAE_z_m": 19.495410919189453,
+        "MAE_distance_from_xyz_m": 6.095815658569336,
+        "MAE_tilt_deg": 23.310813903808594,
+        "MAE_heading_deg_circular": 90.2989273071289,
+        "distance_success_count": 212,
+        "distance_success_rate": 0.08316987007856369
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.103212356567383,
+        "MAE_y_m": 8.970722198486328,
+        "MAE_z_m": 19.495410919189453,
+        "MAE_distance_from_xyz_m": 8.705669403076172,
+        "MAE_tilt_deg": 23.310813903808594,
+        "MAE_heading_deg_circular": 90.2989273071289,
+        "distance_success_count": 196,
+        "distance_success_rate": 0.0768928974866867
+      }
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.09369613437659362,
+      "minutes": 6.793806429704031
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.09220586996525526,
+      "minutes": 7.443679213523865,
+      "val": {
+        "MAE_x_m": 9.077510833740234,
+        "MAE_y_m": 9.061114311218262,
+        "MAE_z_m": 19.524486541748047,
+        "MAE_distance_from_xyz_m": 6.090784072875977,
+        "MAE_tilt_deg": 21.14514923095703,
+        "MAE_heading_deg_circular": 89.53526306152344,
+        "distance_success_count": 227,
+        "distance_success_rate": 0.08905453234910965
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.077510833740234,
+        "MAE_y_m": 9.061114311218262,
+        "MAE_z_m": 19.524486541748047,
+        "MAE_distance_from_xyz_m": 8.56518268585205,
+        "MAE_tilt_deg": 21.14514923095703,
+        "MAE_heading_deg_circular": 89.53526306152344,
+        "distance_success_count": 209,
+        "distance_success_rate": 0.08199293911457062
+      }
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.09097338103773919,
+      "minutes": 8.117610204219819
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.08986412818458947,
+      "minutes": 10.62798433303833,
+      "val": {
+        "MAE_x_m": 9.071489334106445,
+        "MAE_y_m": 9.143167495727539,
+        "MAE_z_m": 19.51396369934082,
+        "MAE_distance_from_xyz_m": 6.119507312774658,
+        "MAE_tilt_deg": 19.771081924438477,
+        "MAE_heading_deg_circular": 89.23323822021484,
+        "distance_success_count": 232,
+        "distance_success_rate": 0.09101608395576477
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.071489334106445,
+        "MAE_y_m": 9.143167495727539,
+        "MAE_z_m": 19.51396369934082,
+        "MAE_distance_from_xyz_m": 8.440299987792969,
+        "MAE_tilt_deg": 19.771081924438477,
+        "MAE_heading_deg_circular": 89.23323822021484,
+        "distance_success_count": 208,
+        "distance_success_rate": 0.0816006287932396
+      }
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.0884022735143927,
+      "minutes": 11.209279414017995
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.08680225447328253,
+      "minutes": 11.77147560119629,
+      "val": {
+        "MAE_x_m": 9.086018562316895,
+        "MAE_y_m": 9.196077346801758,
+        "MAE_z_m": 19.552274703979492,
+        "MAE_distance_from_xyz_m": 6.171931743621826,
+        "MAE_tilt_deg": 18.861610412597656,
+        "MAE_heading_deg_circular": 89.29650115966797,
+        "distance_success_count": 252,
+        "distance_success_rate": 0.09886229783296585
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.086018562316895,
+        "MAE_y_m": 9.196077346801758,
+        "MAE_z_m": 19.552274703979492,
+        "MAE_distance_from_xyz_m": 8.357369422912598,
+        "MAE_tilt_deg": 18.861610412597656,
+        "MAE_heading_deg_circular": 89.29650115966797,
+        "distance_success_count": 200,
+        "distance_success_rate": 0.0784621387720108
+      }
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.08588603020391682,
+      "minutes": 12.401719872156779
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.08468085095625032,
+      "minutes": 13.045641875267028,
+      "val": {
+        "MAE_x_m": 9.102355003356934,
+        "MAE_y_m": 9.2098388671875,
+        "MAE_z_m": 19.558395385742188,
+        "MAE_distance_from_xyz_m": 6.262104034423828,
+        "MAE_tilt_deg": 18.223554611206055,
+        "MAE_heading_deg_circular": 89.20830535888672,
+        "distance_success_count": 230,
+        "distance_success_rate": 0.09023146331310272
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.102355003356934,
+        "MAE_y_m": 9.2098388671875,
+        "MAE_z_m": 19.558395385742188,
+        "MAE_distance_from_xyz_m": 8.259073257446289,
+        "MAE_tilt_deg": 18.223554611206055,
+        "MAE_heading_deg_circular": 89.20830535888672,
+        "distance_success_count": 195,
+        "distance_success_rate": 0.07650058716535568
+      }
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.0828469980254092,
+      "minutes": 13.710697448253631
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.08166794817556035,
+      "minutes": 16.987404223283132,
+      "val": {
+        "MAE_x_m": 9.13787841796875,
+        "MAE_y_m": 9.206377029418945,
+        "MAE_z_m": 19.575178146362305,
+        "MAE_distance_from_xyz_m": 6.35322904586792,
+        "MAE_tilt_deg": 17.765974044799805,
+        "MAE_heading_deg_circular": 89.19542694091797,
+        "distance_success_count": 252,
+        "distance_success_rate": 0.09886229783296585
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.13787841796875,
+        "MAE_y_m": 9.206377029418945,
+        "MAE_z_m": 19.575178146362305,
+        "MAE_distance_from_xyz_m": 8.102697372436523,
+        "MAE_tilt_deg": 17.765974044799805,
+        "MAE_heading_deg_circular": 89.19542694091797,
+        "distance_success_count": 194,
+        "distance_success_rate": 0.07610827684402466
+      }
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.08011407506736842,
+      "minutes": 17.617895567417143
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.07836461448195306,
+      "minutes": 18.186220161120097,
+      "val": {
+        "MAE_x_m": 9.206380844116211,
+        "MAE_y_m": 9.194684028625488,
+        "MAE_z_m": 19.63382339477539,
+        "MAE_distance_from_xyz_m": 6.466524124145508,
+        "MAE_tilt_deg": 17.396438598632812,
+        "MAE_heading_deg_circular": 88.95673370361328,
+        "distance_success_count": 224,
+        "distance_success_rate": 0.08787759393453598
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.206380844116211,
+        "MAE_y_m": 9.194684028625488,
+        "MAE_z_m": 19.63382339477539,
+        "MAE_distance_from_xyz_m": 7.978158950805664,
+        "MAE_tilt_deg": 17.396438598632812,
+        "MAE_heading_deg_circular": 88.95673370361328,
+        "distance_success_count": 203,
+        "distance_success_rate": 0.07963906973600388
+      }
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.07703254541212862,
+      "minutes": 18.810164785385133
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.07611642655154521,
+      "minutes": 19.443754108746848,
+      "val": {
+        "MAE_x_m": 9.273968696594238,
+        "MAE_y_m": 9.212578773498535,
+        "MAE_z_m": 19.634252548217773,
+        "MAE_distance_from_xyz_m": 6.536949634552002,
+        "MAE_tilt_deg": 17.22168731689453,
+        "MAE_heading_deg_circular": 88.89298248291016,
+        "distance_success_count": 239,
+        "distance_success_rate": 0.09376225620508194
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.273968696594238,
+        "MAE_y_m": 9.212578773498535,
+        "MAE_z_m": 19.634252548217773,
+        "MAE_distance_from_xyz_m": 7.878173351287842,
+        "MAE_tilt_deg": 17.22168731689453,
+        "MAE_heading_deg_circular": 88.89298248291016,
+        "distance_success_count": 199,
+        "distance_success_rate": 0.07806982845067978
+      }
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.07465998629446734,
+      "minutes": 20.11582911014557
+    },
+    {
+      "epoch": 22,
+      "train_loss": 0.07350509173490784,
+      "minutes": 22.557785018285117,
+      "val": {
+        "MAE_x_m": 9.32096004486084,
+        "MAE_y_m": 9.22059440612793,
+        "MAE_z_m": 19.702999114990234,
+        "MAE_distance_from_xyz_m": 6.601038455963135,
+        "MAE_tilt_deg": 17.01743507385254,
+        "MAE_heading_deg_circular": 88.77808380126953,
+        "distance_success_count": 220,
+        "distance_success_rate": 0.08630835264921188
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.32096004486084,
+        "MAE_y_m": 9.22059440612793,
+        "MAE_z_m": 19.702999114990234,
+        "MAE_distance_from_xyz_m": 7.789436340332031,
+        "MAE_tilt_deg": 17.01743507385254,
+        "MAE_heading_deg_circular": 88.77808380126953,
+        "distance_success_count": 205,
+        "distance_success_rate": 0.08042369037866592
+      }
+    },
+    {
+      "epoch": 23,
+      "train_loss": 0.07257865851914341,
+      "minutes": 23.779665184020995
+    },
+    {
+      "epoch": 24,
+      "train_loss": 0.07152779573913325,
+      "minutes": 24.34657726287842,
+      "val": {
+        "MAE_x_m": 9.359023094177246,
+        "MAE_y_m": 9.225247383117676,
+        "MAE_z_m": 19.709562301635742,
+        "MAE_distance_from_xyz_m": 6.621919631958008,
+        "MAE_tilt_deg": 16.819337844848633,
+        "MAE_heading_deg_circular": 88.71165466308594,
+        "distance_success_count": 221,
+        "distance_success_rate": 0.08670066297054291
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.359023094177246,
+        "MAE_y_m": 9.225247383117676,
+        "MAE_z_m": 19.709562301635742,
+        "MAE_distance_from_xyz_m": 7.727587699890137,
+        "MAE_tilt_deg": 16.819337844848633,
+        "MAE_heading_deg_circular": 88.71165466308594,
+        "distance_success_count": 198,
+        "distance_success_rate": 0.07767751812934875
+      }
+    },
+    {
+      "epoch": 25,
+      "train_loss": 0.0709606015377424,
+      "minutes": 24.956489058335624
+    },
+    {
+      "epoch": 26,
+      "train_loss": 0.06994726999916813,
+      "minutes": 25.57710870107015,
+      "val": {
+        "MAE_x_m": 9.383844375610352,
+        "MAE_y_m": 9.242609024047852,
+        "MAE_z_m": 19.724342346191406,
+        "MAE_distance_from_xyz_m": 6.64876127243042,
+        "MAE_tilt_deg": 16.656469345092773,
+        "MAE_heading_deg_circular": 88.51472473144531,
+        "distance_success_count": 229,
+        "distance_success_rate": 0.0898391529917717
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.383844375610352,
+        "MAE_y_m": 9.242609024047852,
+        "MAE_z_m": 19.724342346191406,
+        "MAE_distance_from_xyz_m": 7.655874252319336,
+        "MAE_tilt_deg": 16.656469345092773,
+        "MAE_heading_deg_circular": 88.51472473144531,
+        "distance_success_count": 203,
+        "distance_success_rate": 0.07963906973600388
+      }
+    },
+    {
+      "epoch": 27,
+      "train_loss": 0.06900154282762246,
+      "minutes": 26.243069458007813
+    },
+    {
+      "epoch": 28,
+      "train_loss": 0.06820167283612219,
+      "minutes": 27.14598668018977,
+      "val": {
+        "MAE_x_m": 9.400403022766113,
+        "MAE_y_m": 9.242953300476074,
+        "MAE_z_m": 19.746171951293945,
+        "MAE_distance_from_xyz_m": 6.674666881561279,
+        "MAE_tilt_deg": 16.521406173706055,
+        "MAE_heading_deg_circular": 88.43284606933594,
+        "distance_success_count": 228,
+        "distance_success_rate": 0.08944684267044067
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.400403022766113,
+        "MAE_y_m": 9.242953300476074,
+        "MAE_z_m": 19.746171951293945,
+        "MAE_distance_from_xyz_m": 7.6160454750061035,
+        "MAE_tilt_deg": 16.521406173706055,
+        "MAE_heading_deg_circular": 88.43284606933594,
+        "distance_success_count": 201,
+        "distance_success_rate": 0.07885444909334183
+      }
+    },
+    {
+      "epoch": 29,
+      "train_loss": 0.06737657416273247,
+      "minutes": 30.103107039133707
+    },
+    {
+      "epoch": 30,
+      "train_loss": 0.06676315753297372,
+      "minutes": 30.50847502152125,
+      "val": {
+        "MAE_x_m": 9.407712936401367,
+        "MAE_y_m": 9.263116836547852,
+        "MAE_z_m": 19.750329971313477,
+        "MAE_distance_from_xyz_m": 6.711106777191162,
+        "MAE_tilt_deg": 16.37560272216797,
+        "MAE_heading_deg_circular": 88.35071563720703,
+        "distance_success_count": 221,
+        "distance_success_rate": 0.08670066297054291
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.407712936401367,
+        "MAE_y_m": 9.263116836547852,
+        "MAE_z_m": 19.750329971313477,
+        "MAE_distance_from_xyz_m": 7.558166027069092,
+        "MAE_tilt_deg": 16.37560272216797,
+        "MAE_heading_deg_circular": 88.35071563720703,
+        "distance_success_count": 198,
+        "distance_success_rate": 0.07767751812934875
+      }
+    },
+    {
+      "epoch": 31,
+      "train_loss": 0.06612300741570917,
+      "minutes": 30.964055148760476
+    },
+    {
+      "epoch": 32,
+      "train_loss": 0.06571309391239827,
+      "minutes": 31.404735644658405,
+      "val": {
+        "MAE_x_m": 9.422637939453125,
+        "MAE_y_m": 9.281747817993164,
+        "MAE_z_m": 19.765382766723633,
+        "MAE_distance_from_xyz_m": 6.754802703857422,
+        "MAE_tilt_deg": 16.30449676513672,
+        "MAE_heading_deg_circular": 88.32686614990234,
+        "distance_success_count": 210,
+        "distance_success_rate": 0.08238524943590164
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.422637939453125,
+        "MAE_y_m": 9.281747817993164,
+        "MAE_z_m": 19.765382766723633,
+        "MAE_distance_from_xyz_m": 7.51461935043335,
+        "MAE_tilt_deg": 16.30449676513672,
+        "MAE_heading_deg_circular": 88.32686614990234,
+        "distance_success_count": 216,
+        "distance_success_rate": 0.08473911136388779
+      }
+    },
+    {
+      "epoch": 33,
+      "train_loss": 0.06481134059669619,
+      "minutes": 31.83326845963796
+    },
+    {
+      "epoch": 34,
+      "train_loss": 0.064241448269141,
+      "minutes": 32.25503750642141,
+      "val": {
+        "MAE_x_m": 9.444381713867188,
+        "MAE_y_m": 9.295762062072754,
+        "MAE_z_m": 19.75194549560547,
+        "MAE_distance_from_xyz_m": 6.7681355476379395,
+        "MAE_tilt_deg": 16.20513153076172,
+        "MAE_heading_deg_circular": 88.19473266601562,
+        "distance_success_count": 199,
+        "distance_success_rate": 0.07806982845067978
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.444381713867188,
+        "MAE_y_m": 9.295762062072754,
+        "MAE_z_m": 19.75194549560547,
+        "MAE_distance_from_xyz_m": 7.462292194366455,
+        "MAE_tilt_deg": 16.20513153076172,
+        "MAE_heading_deg_circular": 88.19473266601562,
+        "distance_success_count": 217,
+        "distance_success_rate": 0.08513142168521881
+      }
+    },
+    {
+      "epoch": 35,
+      "train_loss": 0.06362496221184054,
+      "minutes": 32.728672122955324
+    },
+    {
+      "epoch": 36,
+      "train_loss": 0.06309189313006672,
+      "minutes": 33.20829300483068,
+      "val": {
+        "MAE_x_m": 9.458096504211426,
+        "MAE_y_m": 9.305526733398438,
+        "MAE_z_m": 19.74529266357422,
+        "MAE_distance_from_xyz_m": 6.769911766052246,
+        "MAE_tilt_deg": 16.140464782714844,
+        "MAE_heading_deg_circular": 88.1683578491211,
+        "distance_success_count": 206,
+        "distance_success_rate": 0.08081600069999695
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.458096504211426,
+        "MAE_y_m": 9.305526733398438,
+        "MAE_z_m": 19.74529266357422,
+        "MAE_distance_from_xyz_m": 7.432602882385254,
+        "MAE_tilt_deg": 16.140464782714844,
+        "MAE_heading_deg_circular": 88.1683578491211,
+        "distance_success_count": 206,
+        "distance_success_rate": 0.08081600069999695
+      }
+    },
+    {
+      "epoch": 37,
+      "train_loss": 0.0625256566457789,
+      "minutes": 33.74285203615825
+    },
+    {
+      "epoch": 38,
+      "train_loss": 0.06214542221277952,
+      "minutes": 35.197048060099284,
+      "val": {
+        "MAE_x_m": 9.4801664352417,
+        "MAE_y_m": 9.317214012145996,
+        "MAE_z_m": 19.749011993408203,
+        "MAE_distance_from_xyz_m": 6.7702789306640625,
+        "MAE_tilt_deg": 16.113183975219727,
+        "MAE_heading_deg_circular": 88.10514068603516,
+        "distance_success_count": 210,
+        "distance_success_rate": 0.08238524943590164
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.4801664352417,
+        "MAE_y_m": 9.317214012145996,
+        "MAE_z_m": 19.749011993408203,
+        "MAE_distance_from_xyz_m": 7.380884647369385,
+        "MAE_tilt_deg": 16.113183975219727,
+        "MAE_heading_deg_circular": 88.10514068603516,
+        "distance_success_count": 210,
+        "distance_success_rate": 0.08238524943590164
+      }
+    },
+    {
+      "epoch": 39,
+      "train_loss": 0.06157703242603351,
+      "minutes": 35.630537303288776
+    },
+    {
+      "epoch": 40,
+      "train_loss": 0.060908962676132265,
+      "minutes": 36.06135303179423,
+      "val": {
+        "MAE_x_m": 9.498390197753906,
+        "MAE_y_m": 9.333101272583008,
+        "MAE_z_m": 19.768526077270508,
+        "MAE_distance_from_xyz_m": 6.770994663238525,
+        "MAE_tilt_deg": 16.0853271484375,
+        "MAE_heading_deg_circular": 88.1009292602539,
+        "distance_success_count": 221,
+        "distance_success_rate": 0.08670066297054291
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.498390197753906,
+        "MAE_y_m": 9.333101272583008,
+        "MAE_z_m": 19.768526077270508,
+        "MAE_distance_from_xyz_m": 7.332352638244629,
+        "MAE_tilt_deg": 16.0853271484375,
+        "MAE_heading_deg_circular": 88.1009292602539,
+        "distance_success_count": 216,
+        "distance_success_rate": 0.08473911136388779
+      }
+    },
+    {
+      "epoch": 41,
+      "train_loss": 0.06022141008129851,
+      "minutes": 36.557479929924014
+    },
+    {
+      "epoch": 42,
+      "train_loss": 0.060306837845763024,
+      "minutes": 37.04853872060776,
+      "val": {
+        "MAE_x_m": 9.51119327545166,
+        "MAE_y_m": 9.343131065368652,
+        "MAE_z_m": 19.790122985839844,
+        "MAE_distance_from_xyz_m": 6.776637077331543,
+        "MAE_tilt_deg": 16.02996826171875,
+        "MAE_heading_deg_circular": 88.04483032226562,
+        "distance_success_count": 221,
+        "distance_success_rate": 0.08670066297054291
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.51119327545166,
+        "MAE_y_m": 9.343131065368652,
+        "MAE_z_m": 19.790122985839844,
+        "MAE_distance_from_xyz_m": 7.283520221710205,
+        "MAE_tilt_deg": 16.02996826171875,
+        "MAE_heading_deg_circular": 88.04483032226562,
+        "distance_success_count": 215,
+        "distance_success_rate": 0.08434680104255676
+      }
+    },
+    {
+      "epoch": 43,
+      "train_loss": 0.059845510510389104,
+      "minutes": 37.5441180229187
+    },
+    {
+      "epoch": 44,
+      "train_loss": 0.0594020140230317,
+      "minutes": 39.455062576135,
+      "val": {
+        "MAE_x_m": 9.526155471801758,
+        "MAE_y_m": 9.356315612792969,
+        "MAE_z_m": 19.793371200561523,
+        "MAE_distance_from_xyz_m": 6.780862331390381,
+        "MAE_tilt_deg": 15.968121528625488,
+        "MAE_heading_deg_circular": 87.95918273925781,
+        "distance_success_count": 222,
+        "distance_success_rate": 0.08709297329187393
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.526155471801758,
+        "MAE_y_m": 9.356315612792969,
+        "MAE_z_m": 19.793371200561523,
+        "MAE_distance_from_xyz_m": 7.249732971191406,
+        "MAE_tilt_deg": 15.968121528625488,
+        "MAE_heading_deg_circular": 87.95918273925781,
+        "distance_success_count": 209,
+        "distance_success_rate": 0.08199293911457062
+      }
+    },
+    {
+      "epoch": 45,
+      "train_loss": 0.05919610639102757,
+      "minutes": 39.894966292381284
+    },
+    {
+      "epoch": 46,
+      "train_loss": 0.05874457542615181,
+      "minutes": 40.303873542944594,
+      "val": {
+        "MAE_x_m": 9.539040565490723,
+        "MAE_y_m": 9.365078926086426,
+        "MAE_z_m": 19.79757308959961,
+        "MAE_distance_from_xyz_m": 6.789467811584473,
+        "MAE_tilt_deg": 15.929463386535645,
+        "MAE_heading_deg_circular": 87.89390563964844,
+        "distance_success_count": 214,
+        "distance_success_rate": 0.08395449072122574
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.539040565490723,
+        "MAE_y_m": 9.365078926086426,
+        "MAE_z_m": 19.79757308959961,
+        "MAE_distance_from_xyz_m": 7.2280592918396,
+        "MAE_tilt_deg": 15.929463386535645,
+        "MAE_heading_deg_circular": 87.89390563964844,
+        "distance_success_count": 215,
+        "distance_success_rate": 0.08434680104255676
+      }
+    },
+    {
+      "epoch": 47,
+      "train_loss": 0.05810130747373809,
+      "minutes": 40.745583701133725
+    },
+    {
+      "epoch": 48,
+      "train_loss": 0.05817542237822305,
+      "minutes": 41.20449970960617,
+      "val": {
+        "MAE_x_m": 9.554506301879883,
+        "MAE_y_m": 9.37458324432373,
+        "MAE_z_m": 19.81313133239746,
+        "MAE_distance_from_xyz_m": 6.791612148284912,
+        "MAE_tilt_deg": 15.916881561279297,
+        "MAE_heading_deg_circular": 87.8517074584961,
+        "distance_success_count": 212,
+        "distance_success_rate": 0.08316987007856369
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.554506301879883,
+        "MAE_y_m": 9.37458324432373,
+        "MAE_z_m": 19.81313133239746,
+        "MAE_distance_from_xyz_m": 7.191749095916748,
+        "MAE_tilt_deg": 15.916881561279297,
+        "MAE_heading_deg_circular": 87.8517074584961,
+        "distance_success_count": 214,
+        "distance_success_rate": 0.08395449072122574
+      }
+    },
+    {
+      "epoch": 49,
+      "train_loss": 0.057610661765052515,
+      "minutes": 41.70975405375163
+    },
+    {
+      "epoch": 50,
+      "train_loss": 0.05744975896298208,
+      "minutes": 42.41920615832011,
+      "val": {
+        "MAE_x_m": 9.564386367797852,
+        "MAE_y_m": 9.383082389831543,
+        "MAE_z_m": 19.814050674438477,
+        "MAE_distance_from_xyz_m": 6.793367862701416,
+        "MAE_tilt_deg": 15.892635345458984,
+        "MAE_heading_deg_circular": 87.73948669433594,
+        "distance_success_count": 219,
+        "distance_success_rate": 0.08591604232788086
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.564386367797852,
+        "MAE_y_m": 9.383082389831543,
+        "MAE_z_m": 19.814050674438477,
+        "MAE_distance_from_xyz_m": 7.158334732055664,
+        "MAE_tilt_deg": 15.892635345458984,
+        "MAE_heading_deg_circular": 87.73948669433594,
+        "distance_success_count": 219,
+        "distance_success_rate": 0.08591604232788086
+      }
+    },
+    {
+      "epoch": 51,
+      "train_loss": 0.05758233950473368,
+      "minutes": 44.05722041924795
+    },
+    {
+      "epoch": 52,
+      "train_loss": 0.05738882068544626,
+      "minutes": 44.47644396225611,
+      "val": {
+        "MAE_x_m": 9.569180488586426,
+        "MAE_y_m": 9.39156723022461,
+        "MAE_z_m": 19.80611801147461,
+        "MAE_distance_from_xyz_m": 6.795703887939453,
+        "MAE_tilt_deg": 15.86015796661377,
+        "MAE_heading_deg_circular": 87.64949035644531,
+        "distance_success_count": 220,
+        "distance_success_rate": 0.08630835264921188
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.569180488586426,
+        "MAE_y_m": 9.39156723022461,
+        "MAE_z_m": 19.80611801147461,
+        "MAE_distance_from_xyz_m": 7.133437633514404,
+        "MAE_tilt_deg": 15.86015796661377,
+        "MAE_heading_deg_circular": 87.64949035644531,
+        "distance_success_count": 221,
+        "distance_success_rate": 0.08670066297054291
+      }
+    },
+    {
+      "epoch": 53,
+      "train_loss": 0.05717498758299784,
+      "minutes": 44.91309889952342
+    },
+    {
+      "epoch": 54,
+      "train_loss": 0.05687907302159478,
+      "minutes": 45.37753824790319,
+      "val": {
+        "MAE_x_m": 9.577585220336914,
+        "MAE_y_m": 9.396988868713379,
+        "MAE_z_m": 19.79829216003418,
+        "MAE_distance_from_xyz_m": 6.789809226989746,
+        "MAE_tilt_deg": 15.835695266723633,
+        "MAE_heading_deg_circular": 87.61312866210938,
+        "distance_success_count": 219,
+        "distance_success_rate": 0.08591604232788086
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.577585220336914,
+        "MAE_y_m": 9.396988868713379,
+        "MAE_z_m": 19.79829216003418,
+        "MAE_distance_from_xyz_m": 7.1075358390808105,
+        "MAE_tilt_deg": 15.835695266723633,
+        "MAE_heading_deg_circular": 87.61312866210938,
+        "distance_success_count": 223,
+        "distance_success_rate": 0.08748528361320496
+      }
+    },
+    {
+      "epoch": 55,
+      "train_loss": 0.056862089232626284,
+      "minutes": 45.88615132967631
+    },
+    {
+      "epoch": 56,
+      "train_loss": 0.05668860762803392,
+      "minutes": 46.367002340157825,
+      "val": {
+        "MAE_x_m": 9.583250999450684,
+        "MAE_y_m": 9.403179168701172,
+        "MAE_z_m": 19.80926513671875,
+        "MAE_distance_from_xyz_m": 6.790192604064941,
+        "MAE_tilt_deg": 15.81137466430664,
+        "MAE_heading_deg_circular": 87.57611846923828,
+        "distance_success_count": 218,
+        "distance_success_rate": 0.08552373200654984
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.583250999450684,
+        "MAE_y_m": 9.403179168701172,
+        "MAE_z_m": 19.80926513671875,
+        "MAE_distance_from_xyz_m": 7.084269046783447,
+        "MAE_tilt_deg": 15.81137466430664,
+        "MAE_heading_deg_circular": 87.57611846923828,
+        "distance_success_count": 230,
+        "distance_success_rate": 0.09023146331310272
+      }
+    },
+    {
+      "epoch": 57,
+      "train_loss": 0.05640626025640152,
+      "minutes": 48.42533589998881
+    },
+    {
+      "epoch": 58,
+      "train_loss": 0.05660036072896963,
+      "minutes": 48.86712096532186,
+      "val": {
+        "MAE_x_m": 9.5863676071167,
+        "MAE_y_m": 9.408395767211914,
+        "MAE_z_m": 19.820945739746094,
+        "MAE_distance_from_xyz_m": 6.7909417152404785,
+        "MAE_tilt_deg": 15.800819396972656,
+        "MAE_heading_deg_circular": 87.54473114013672,
+        "distance_success_count": 216,
+        "distance_success_rate": 0.08473911136388779
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.5863676071167,
+        "MAE_y_m": 9.408395767211914,
+        "MAE_z_m": 19.820945739746094,
+        "MAE_distance_from_xyz_m": 7.071403503417969,
+        "MAE_tilt_deg": 15.800819396972656,
+        "MAE_heading_deg_circular": 87.54473114013672,
+        "distance_success_count": 228,
+        "distance_success_rate": 0.08944684267044067
+      }
+    },
+    {
+      "epoch": 59,
+      "train_loss": 0.05641511165198277,
+      "minutes": 49.32929069201152
+    },
+    {
+      "epoch": 60,
+      "train_loss": 0.05683015424504199,
+      "minutes": 49.789190820852916,
+      "val": {
+        "MAE_x_m": 9.586605072021484,
+        "MAE_y_m": 9.409255981445312,
+        "MAE_z_m": 19.824769973754883,
+        "MAE_distance_from_xyz_m": 6.791961193084717,
+        "MAE_tilt_deg": 15.793588638305664,
+        "MAE_heading_deg_circular": 87.51983642578125,
+        "distance_success_count": 214,
+        "distance_success_rate": 0.08395449072122574
+      },
+      "val_distance_from_xyz": {
+        "MAE_x_m": 9.586605072021484,
+        "MAE_y_m": 9.409255981445312,
+        "MAE_z_m": 19.824769973754883,
+        "MAE_distance_from_xyz_m": 7.065773010253906,
+        "MAE_tilt_deg": 15.793588638305664,
+        "MAE_heading_deg_circular": 87.51983642578125,
+        "distance_success_count": 231,
+        "distance_success_rate": 0.09062377363443375
+      }
+    }
+  ],
+  "checkpoint_selection": "final epoch (EMA weights); no test-set model selection",
+  "distance_success_threshold_m": 1.0,
+  "test_rows": 12313,
+  "MAE_x_m": 9.685742378234863,
+  "MAE_y_m": 9.523139953613281,
+  "MAE_z_m": 19.56374740600586,
+  "MAE_tilt_deg": 15.932982444763184,
+  "MAE_heading_deg_circular": 85.98143768310547,
+  "distance_success_count": 1165,
+  "distance_success_rate": 0.09461544454097748,
+  "prediction_std": [
+    8.097447395324707,
+    8.134720802307129,
+    16.565799713134766,
+    21.718669891357422,
+    101.08747863769531
+  ],
+  "target_std": [
+    8.550884246826172,
+    8.545760154724121,
+    17.845792770385742,
+    22.940828323364258,
+    99.08997344970703
+  ],
+  "prediction_target_correlation": [
+    -0.012873301282525063,
+    0.014892675913870335,
+    0.017050353810191154,
+    0.566521942615509,
+    0.016760528087615967
+  ],
+  "MAE_distance_m": 6.755763530731201,
+  "distance_definition": "official distance head re-targeted to metric distance: abs(distance_head - norm(true_xyz)); success = this error <= 1 m",
+  "distance_from_xyz_norm": {
+    "MAE_distance_from_xyz_m": 7.094255447387695,
+    "distance_success_count": 1089,
+    "distance_success_rate": 0.08844310790300369
+  },
+  "zero_predictor": {
+    "MAE_x_m": 7.439794540405273,
+    "MAE_y_m": 7.426032066345215,
+    "MAE_z_m": 15.324103355407715,
+    "MAE_distance_from_xyz_m": 20.284955978393555,
+    "MAE_tilt_deg": 20.075714111328125,
+    "MAE_heading_deg_circular": 85.96408081054688,
+    "distance_success_count": 1,
+    "distance_success_rate": 8.121497376123443e-05
+  },
+  "prediction": "first of 8 DDPM samples (as in NoMaD deployment), 10 denoising steps, seed 0",
+  "mean_of_8_samples": {
+    "MAE_x_m": 7.718054294586182,
+    "MAE_y_m": 7.69520902633667,
+    "MAE_z_m": 15.861199378967285,
+    "MAE_distance_from_xyz_m": 6.755763530731201,
+    "MAE_tilt_deg": 14.200746536254883,
+    "MAE_heading_deg_circular": 83.68110656738281,
+    "distance_success_count": 1165,
+    "distance_success_rate": 0.09461544454097748,
+    "prediction_std": [
+      2.861525774002075,
+      2.8716461658477783,
+      6.096482276916504,
+      19.512096405029297,
+      104.83322143554688
+    ],
+    "target_std": [
+      8.550884246826172,
+      8.545760154724121,
+      17.845792770385742,
+      22.940828323364258,
+      99.08997344970703
+    ],
+    "prediction_target_correlation": [
+      0.003026990219950676,
+      0.009566495195031166,
+      0.020151792094111443,
+      0.6316088438034058,
+      -0.00532747944816947
+    ]
+  }
+}

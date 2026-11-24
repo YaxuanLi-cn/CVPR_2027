@@ -1,0 +1,33 @@
+{
+  "model": "Visual Foresight-style PairUAV adaptation: action-conditioned DINOv3 ViT-7B latent dynamics + goal-image CEM MPC",
+  "pretrained_visual_features": "cached DINOv3 ViT-7B CLS features",
+  "dynamics": "xyz/tilt/sin-cos-heading action-conditioned residual latent predictor with counterfactual action ranking, trained on PairUAV train split",
+  "planner": {
+    "method": "CEM minimizing predicted future-goal latent distance",
+    "samples": 16,
+    "topk": 4,
+    "iterations": 3,
+    "horizon": 1
+  },
+  "train_rows": 47687,
+  "test_rows": 12313,
+  "epochs": 5,
+  "train_latent_losses": [
+    0.04164208844304085,
+    0.03814868270394636,
+    0.03657957774034158,
+    0.0356302397415281,
+    0.03488350374733701
+  ],
+  "MAE_x_m": 8.664247512817383,
+  "MAE_y_m": 8.685113906860352,
+  "MAE_z_m": 18.629316329956055,
+  "MAE_distance_from_xyz_m": 24.74822425842285,
+  "MAE_tilt_deg": 7.859649181365967,
+  "MAE_heading_deg_circular": 82.64781188964844,
+  "distance_success_threshold_m": 1.0,
+  "distance_success_count": 701,
+  "distance_success_rate": 0.05693169820514903,
+  "distance_definition": "MAE between predicted and target xyz vector norms; no distance prediction head",
+  "scope_note": "Method adaptation, not an official Visual Foresight pretrained checkpoint; original method learns action-conditioned visual dynamics and plans toward image goals."
+}

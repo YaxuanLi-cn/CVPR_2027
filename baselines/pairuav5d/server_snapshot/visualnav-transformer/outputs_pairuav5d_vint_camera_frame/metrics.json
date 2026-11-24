@@ -1,0 +1,53 @@
+{
+  "model": "VINT official pretrained visual-navigation model, PairUAV fine-tuned fusion/transformer and xyz/tilt/heading head",
+  "official_checkpoint": "/root/baseline/visualnav-transformer/pretrained/vint.pth",
+  "adaptation": "camera-a local xyz/tilt/relative-heading supervision; convert to ENU using the saved image absolute-heading model",
+  "epochs": 3,
+  "train_rows": 47687,
+  "test_rows": 12313,
+  "train_smooth_l1_by_epoch": [
+    0.12753997366605752,
+    0.12007446146642554,
+    0.11347601822410128
+  ],
+  "MAE_x_m": 7.471889019012451,
+  "MAE_y_m": 7.454602241516113,
+  "MAE_z_m": 15.312620162963867,
+  "MAE_distance_from_xyz_m": 19.001928329467773,
+  "MAE_tilt_deg": 14.64578628540039,
+  "MAE_heading_deg_circular": 70.7819595336914,
+  "zero_predictor_MAE": {
+    "x_m": 7.439794540405273,
+    "y_m": 7.426031589508057,
+    "z_m": 15.324105262756348,
+    "distance_from_xyz_m": 20.284955978393555,
+    "tilt_deg": 20.075716018676758,
+    "heading_deg_circular": 85.96407318115234
+  },
+  "prediction_std": [
+    0.9231045246124268,
+    0.9049474000930786,
+    0.6397994160652161,
+    13.03996467590332,
+    112.1010971069336
+  ],
+  "target_std": [
+    8.550884246826172,
+    8.545760154724121,
+    17.845792770385742,
+    22.940828323364258,
+    99.08997344970703
+  ],
+  "prediction_target_correlation": [
+    0.0030238120816648006,
+    0.0005883796256966889,
+    0.04362881928682327,
+    0.623339056968689,
+    0.08724430948495865
+  ],
+  "distance_success_threshold_m": 1.0,
+  "distance_success_count": 23,
+  "distance_success_rate": 0.0018679444489563875,
+  "distance_definition": "MAE between predicted and target xyz vector norms; no distance prediction head",
+  "checkpoint_selection": "final epoch; no test-set model selection"
+}

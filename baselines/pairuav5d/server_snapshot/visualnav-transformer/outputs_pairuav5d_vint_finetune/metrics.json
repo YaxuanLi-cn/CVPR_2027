@@ -1,0 +1,20 @@
+{
+  "model": "VINT official pretrained visual-navigation model, PairUAV fine-tuned fusion/transformer and xyz/tilt/heading head",
+  "official_checkpoint": "/root/baseline/visualnav-transformer/pretrained/vint.pth",
+  "adaptation": "frozen official EfficientNet image backbones; fine-tuned official fusion/Transformer policy layers and supervised output head",
+  "epochs": 2,
+  "train_rows": 47687,
+  "test_rows": 12313,
+  "train_smooth_l1_by_epoch": [
+    0.12925243559455743,
+    0.12901140027367397
+  ],
+  "MAE_x_m": 7.440332412719727,
+  "MAE_y_m": 7.424930095672607,
+  "MAE_z_m": 15.32698917388916,
+  "MAE_distance_from_xyz_m": 19.926477432250977,
+  "MAE_tilt_deg": 20.036441802978516,
+  "MAE_heading_deg_circular": 85.79801940917969,
+  "distance_definition": "MAE between predicted and target xyz vector norms; no distance prediction head",
+  "checkpoint_selection": "final epoch; no test-set model selection"
+}

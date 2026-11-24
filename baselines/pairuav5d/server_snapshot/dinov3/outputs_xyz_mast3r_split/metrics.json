@@ -1,0 +1,13 @@
+{
+  "epoch": 1,
+  "model": "vit_large_patch16_dinov3.lvd1689m",
+  "train_rows": 47687,
+  "test_rows": 12313,
+  "MAE_x_m": 8.74716854095459,
+  "MAE_y_m": 7.682816982269287,
+  "MAE_z_m": 14.664423942565918,
+  "MAE_distance_from_xyz_m": 12.576692581176758,
+  "MAE_tilt_deg": 5.235858917236328,
+  "MAE_heading_deg_circular": 86.71993255615234,
+  "distance_definition": "MAE between norms of predicted and ground-truth xyz; no distance head"
+}

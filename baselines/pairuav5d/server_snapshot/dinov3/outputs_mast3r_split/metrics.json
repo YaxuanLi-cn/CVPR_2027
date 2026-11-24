@@ -1,0 +1,9 @@
+{
+  "epoch": 1,
+  "model": "vit_large_patch16_dinov3.lvd1689m",
+  "train_rows": 47687,
+  "test_rows": 12313,
+  "MAE_distance_m": 6.212531566619873,
+  "MAE_tilt_deg": 4.784360408782959,
+  "MAE_heading_deg_circular": 86.39668273925781
+}

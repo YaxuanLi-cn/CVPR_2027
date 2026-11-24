@@ -69,6 +69,9 @@ re-running the full pipeline still requires the official datasets and external
 MASt3R/SuperGlue model weights. Large feature tables, image tensors, and bulk
 matching caches are intentionally kept out of Git.
 
+The PairUAV-5D baseline adaptations, metric reports, and lightweight prediction
+snapshots are archived in [`baselines/pairuav5d/README.md`](baselines/pairuav5d/README.md).
+
 ## Quick Start
 
 ```bash

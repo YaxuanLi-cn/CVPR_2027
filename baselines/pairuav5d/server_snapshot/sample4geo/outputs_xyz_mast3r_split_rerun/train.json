@@ -1,0 +1,16 @@
+{
+  "epoch": 1,
+  "model": "convnext_base.fb_in22k_ft_in1k_384",
+  "train_rows": 47687,
+  "test_rows": 12313,
+  "MAE_x_m": 8.604355812072754,
+  "MAE_y_m": 8.334206581115723,
+  "MAE_z_m": 15.838312149047852,
+  "MAE_distance_from_xyz_m": 10.490609169006348,
+  "MAE_tilt_deg": 11.302156448364258,
+  "MAE_heading_deg_circular": 86.64630889892578,
+  "distance_success_threshold_m": 1.0,
+  "distance_success_count": 706,
+  "distance_success_rate": 0.05733777308535694,
+  "distance_definition": "MAE between norms of predicted and ground-truth xyz; no distance head"
+}

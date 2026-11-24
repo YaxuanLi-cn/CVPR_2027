@@ -1,0 +1,48 @@
+{
+  "model": "VINT official pretrained visual-navigation model, PairUAV fine-tuned fusion/transformer and xyz/tilt/heading head",
+  "official_checkpoint": "/root/baseline/visualnav-transformer/pretrained/vint.pth",
+  "adaptation": "frozen official EfficientNet image backbones; fine-tuned official fusion/Transformer policy layers and supervised output head",
+  "epochs": 1,
+  "train_rows": 47687,
+  "test_rows": 12313,
+  "train_smooth_l1_by_epoch": [
+    0.12918720828823685
+  ],
+  "MAE_x_m": 7.437721252441406,
+  "MAE_y_m": 7.446260929107666,
+  "MAE_z_m": 15.352094650268555,
+  "MAE_distance_from_xyz_m": 19.542593002319336,
+  "MAE_tilt_deg": 20.077863693237305,
+  "MAE_heading_deg_circular": 85.34895324707031,
+  "zero_predictor_MAE": {
+    "x_m": 7.439794540405273,
+    "y_m": 7.426031589508057,
+    "z_m": 15.324105262756348,
+    "distance_from_xyz_m": 20.284955978393555,
+    "tilt_deg": 20.075716018676758,
+    "heading_deg_circular": 85.96407318115234
+  },
+  "prediction_std": [
+    0.1427251398563385,
+    0.706856369972229,
+    1.2867786884307861,
+    0.5634374022483826,
+    54.02220153808594
+  ],
+  "target_std": [
+    8.550884246826172,
+    8.545760154724121,
+    17.845792770385742,
+    22.940828323364258,
+    99.08997344970703
+  ],
+  "prediction_target_correlation": [
+    0.02257990464568138,
+    -0.010021219961345196,
+    -0.011692788451910019,
+    0.01984420232474804,
+    0.038676366209983826
+  ],
+  "distance_definition": "MAE between predicted and target xyz vector norms; no distance prediction head",
+  "checkpoint_selection": "final epoch; no test-set model selection"
+}

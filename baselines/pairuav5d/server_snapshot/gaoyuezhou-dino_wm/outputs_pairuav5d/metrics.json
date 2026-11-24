@@ -1,0 +1,20 @@
+{
+  "model": "DINO-WM (official DINOv2 ViT-S/14 encoder, one-step latent predictor, CEM pose planning)",
+  "train_rows": 47687,
+  "test_rows": 12313,
+  "world_model_train_latent_mse": 3.0740218601623504,
+  "planner": {
+    "method": "CEM",
+    "samples": 16,
+    "topk": 4,
+    "iterations": 3,
+    "horizon": 1
+  },
+  "MAE_x_m": 8.926617622375488,
+  "MAE_y_m": 8.990994453430176,
+  "MAE_z_m": 19.235788345336914,
+  "MAE_distance_from_xyz_m": 10.226081848144531,
+  "MAE_tilt_deg": 11.19023323059082,
+  "MAE_heading_deg_circular": 83.96791076660156,
+  "distance_definition": "MAE between norms of planned and ground-truth xyz; no distance head"
+}

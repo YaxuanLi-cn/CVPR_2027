@@ -7,23 +7,23 @@
 目录固定放在 `/root/pairUAV_img`（代码和服务脚本里写的是这个绝对路径，见文末“移动目录”）。
 在 CVPR_2027 仓库里它位于 `pairUAV_img/` 子目录，使用时把该子目录复制或链接到 `/root/pairUAV_img`。
 
-**原始 KML 不在 git 仓库里。** `tours_splited_kml/`（1.8 GB、约 44.7 万个文件）被 `.gitignore` 排除。
-使用前把 University-1652 的航线 KML 拆分版放到 `/root/pairUAV_img/tours_splited_kml/`
-（每个 tour 一个目录，`<tour>/0000.kml` …；合并版可用 `dataset_code/step1/split_tours_kml.py` 拆分），
-或者在命令里用 `--input-root <路径>` 指定它的位置。`.venv` 同样不在仓库里，
-用 `dataset_code/build_kml_pair/requirements-lock.txt` 重建。
+**原始 KML 不在本目录里，也不在 git 仓库里。** 使用前把 University-1652 的航线 KML 拆分版放到
+`/root/pairUAV_img/tours_splited_kml/`（每个 tour 一个目录，`<tour>/0000.kml` …；合并版可用
+`dataset_code/step1/split_tours_kml.py` 拆分），或者在命令里用 `--input-root <路径>` 指定它的位置。
+本目录的其余内容全部入库，包括 `.venv`、运行时状态和缓存；`.venv` 里的解释器链接指向
+`/venv/main/bin/python3`，换机器后如不可用，用 `dataset_code/build_kml_pair/requirements-lock.txt` 重建。
 
 ## 目录结构
 
 ```
 /root/pairUAV_img/
 ├── README.md                    本文件
-├── tours_splited_kml/           原始 University-1652 航线 KML（拆分版，1652 个 tour × 271 帧；不入 git）
+├── tours_splited_kml/           原始 University-1652 航线 KML（拆分版，1652 个 tour × 271 帧；需自行放入，不在仓库里）
 ├── dataset_code/
 │   ├── step1/                   合并版 KML → 拆分版 的脚本（拆分版即由它生成，留作记录）
 │   ├── gen_img/                 Google Earth Pro 出图：导出器、环境安装、GUI 恢复、输出校验
 │   ├── build_kml_pair/          设计视角/KML、分阶段出图、视觉审计、选 pair、验证、发布
-│   │   ├── .venv/               流水线用的 Python 环境（numpy/scipy/opencv/pyproj/matplotlib；不入 git）
+│   │   ├── .venv/               流水线用的 Python 环境（numpy/scipy/opencv/pyproj/matplotlib）
 │   │   ├── calibration/         各 tour 的地形高程标定缓存（绑定源 KML 哈希，保证设计可复现）
 │   │   ├── service/             supervisor 配置与启动脚本模板
 │   │   └── README.md            流水线的详细设计说明与历史记录

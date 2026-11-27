@@ -1,0 +1,570 @@
+{
+  "status": "geometry_preflight",
+  "geometry_feasible": true,
+  "audited_tours": [],
+  "partial_tours": [],
+  "remaining_tours_use_optimistic_geometry": true,
+  "solver_status": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "solver_attempts": [
+    {
+      "seconds": 120,
+      "status": 0,
+      "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    }
+  ],
+  "feasibility_status": "feasible",
+  "tours": [
+    "0012",
+    "0013",
+    "0014",
+    "0015"
+  ],
+  "per_tour": 1000,
+  "bins": 5,
+  "tilt_limit_deg": 45.0,
+  "rows": [
+    {
+      "tour": "0012",
+      "images": 150,
+      "geometric_candidates": 6249,
+      "candidate_edges": 6249,
+      "seed_sha256": "0adcc34610cf7527c81620835424ccc51d8899b951b68792e122f373ccaa3734"
+    },
+    {
+      "tour": "0013",
+      "images": 150,
+      "geometric_candidates": 6274,
+      "candidate_edges": 6274,
+      "seed_sha256": "bd18af031716f90ee0823c4c757eec075a5e951e3376cb8f952770038b5f4d20"
+    },
+    {
+      "tour": "0014",
+      "images": 150,
+      "geometric_candidates": 6231,
+      "candidate_edges": 6231,
+      "seed_sha256": "223c1993ef2914c8efa355a01b327ab41489ac3798a74e8673b456329605d49b"
+    },
+    {
+      "tour": "0015",
+      "images": 150,
+      "geometric_candidates": 6237,
+      "candidate_edges": 6237,
+      "seed_sha256": "20100766cbd688f4133002d7400eeff5beba34191bf4f4e8c61318a98888b522"
+    }
+  ],
+  "group_target_per_bin": 800,
+  "render_recommendation": "render only when geometry_feasible=true",
+  "capacity_diagnostics": {
+    "interpretation": "Necessary optimistic bounds only; not a joint feasibility proof.",
+    "per_tour_edges": {
+      "0012": 6249,
+      "0013": 6274,
+      "0014": 6231,
+      "0015": 6237
+    },
+    "tour_shortfalls": {},
+    "axes": {
+      "x_m": {
+        "bin_edges": [
+          -15.0,
+          -9.0,
+          -3.0,
+          3.0,
+          9.0,
+          15.0
+        ],
+        "per_tour_available_unordered_edges": {
+          "0012": [
+            2047,
+            2681,
+            1521,
+            2681,
+            2047
+          ],
+          "0013": [
+            2010,
+            2702,
+            1562,
+            2702,
+            2010
+          ],
+          "0014": [
+            2022,
+            2665,
+            1544,
+            2665,
+            2022
+          ],
+          "0015": [
+            2010,
+            2689,
+            1538,
+            2689,
+            2010
+          ]
+        },
+        "target_per_bin": 800
+      },
+      "y_m": {
+        "bin_edges": [
+          -15.0,
+          -9.0,
+          -3.0,
+          3.0,
+          9.0,
+          15.0
+        ],
+        "per_tour_available_unordered_edges": {
+          "0012": [
+            2011,
+            2688,
+            1550,
+            2688,
+            2011
+          ],
+          "0013": [
+            2044,
+            2700,
+            1530,
+            2700,
+            2044
+          ],
+          "0014": [
+            2017,
+            2683,
+            1531,
+            2683,
+            2017
+          ],
+          "0015": [
+            2005,
+            2685,
+            1547,
+            2685,
+            2005
+          ]
+        },
+        "target_per_bin": 800
+      },
+      "z_m": {
+        "bin_edges": [
+          -33.0,
+          -19.8,
+          -6.600000000000001,
+          6.600000000000001,
+          19.799999999999997,
+          33.0
+        ],
+        "per_tour_available_unordered_edges": {
+          "0012": [
+            1028,
+            3030,
+            2191,
+            3030,
+            1028
+          ],
+          "0013": [
+            997,
+            3045,
+            2232,
+            3045,
+            997
+          ],
+          "0014": [
+            1041,
+            2986,
+            2204,
+            2986,
+            1041
+          ],
+          "0015": [
+            1048,
+            2979,
+            2210,
+            2979,
+            1048
+          ]
+        },
+        "target_per_bin": 800
+      },
+      "tilt_deg": {
+        "bin_edges": [
+          -45.0,
+          -27.0,
+          -9.0,
+          9.0,
+          27.0,
+          45.0
+        ],
+        "per_tour_available_unordered_edges": {
+          "0012": [
+            2471,
+            1475,
+            2303,
+            1475,
+            2471
+          ],
+          "0013": [
+            2671,
+            1317,
+            2286,
+            1317,
+            2671
+          ],
+          "0014": [
+            2675,
+            1219,
+            2337,
+            1219,
+            2675
+          ],
+          "0015": [
+            2539,
+            1373,
+            2325,
+            1373,
+            2539
+          ]
+        },
+        "target_per_bin": 800
+      },
+      "heading_deg": {
+        "bin_edges": [
+          -180.0,
+          -108.0,
+          -36.0,
+          36.0,
+          108.0,
+          180.0
+        ],
+        "per_tour_available_unordered_edges": {
+          "0012": [
+            2527,
+            2489,
+            1233,
+            2489,
+            2527
+          ],
+          "0013": [
+            2546,
+            2456,
+            1272,
+            2456,
+            2546
+          ],
+          "0014": [
+            2521,
+            2495,
+            1215,
+            2495,
+            2521
+          ],
+          "0015": [
+            2495,
+            2529,
+            1213,
+            2529,
+            2495
+          ]
+        },
+        "target_per_bin": 800
+      }
+    },
+    "shortages": [],
+    "necessary_bounds_pass": true
+  }
+}
+{
+  "status": "geometry_preflight",
+  "geometry_feasible": true,
+  "audited_tours": [],
+  "partial_tours": [],
+  "remaining_tours_use_optimistic_geometry": true,
+  "solver_status": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "solver_attempts": [
+    {
+      "seconds": 120,
+      "status": 0,
+      "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)"
+    }
+  ],
+  "feasibility_status": "feasible",
+  "tours": [
+    "0012",
+    "0013",
+    "0014",
+    "0015"
+  ],
+  "per_tour": 1000,
+  "bins": 5,
+  "tilt_limit_deg": 45.0,
+  "rows": [
+    {
+      "tour": "0012",
+      "images": 150,
+      "geometric_candidates": 6249,
+      "candidate_edges": 6249,
+      "seed_sha256": "0adcc34610cf7527c81620835424ccc51d8899b951b68792e122f373ccaa3734"
+    },
+    {
+      "tour": "0013",
+      "images": 150,
+      "geometric_candidates": 6274,
+      "candidate_edges": 6274,
+      "seed_sha256": "bd18af031716f90ee0823c4c757eec075a5e951e3376cb8f952770038b5f4d20"
+    },
+    {
+      "tour": "0014",
+      "images": 150,
+      "geometric_candidates": 6231,
+      "candidate_edges": 6231,
+      "seed_sha256": "223c1993ef2914c8efa355a01b327ab41489ac3798a74e8673b456329605d49b"
+    },
+    {
+      "tour": "0015",
+      "images": 150,
+      "geometric_candidates": 6237,
+      "candidate_edges": 6237,
+      "seed_sha256": "20100766cbd688f4133002d7400eeff5beba34191bf4f4e8c61318a98888b522"
+    }
+  ],
+  "group_target_per_bin": 800,
+  "render_recommendation": "render only when geometry_feasible=true",
+  "capacity_diagnostics": {
+    "interpretation": "Necessary optimistic bounds only; not a joint feasibility proof.",
+    "per_tour_edges": {
+      "0012": 6249,
+      "0013": 6274,
+      "0014": 6231,
+      "0015": 6237
+    },
+    "tour_shortfalls": {},
+    "axes": {
+      "x_m": {
+        "bin_edges": [
+          -15.0,
+          -9.0,
+          -3.0,
+          3.0,
+          9.0,
+          15.0
+        ],
+        "per_tour_available_unordered_edges": {
+          "0012": [
+            2047,
+            2681,
+            1521,
+            2681,
+            2047
+          ],
+          "0013": [
+            2010,
+            2702,
+            1562,
+            2702,
+            2010
+          ],
+          "0014": [
+            2022,
+            2665,
+            1544,
+            2665,
+            2022
+          ],
+          "0015": [
+            2010,
+            2689,
+            1538,
+            2689,
+            2010
+          ]
+        },
+        "target_per_bin": 800
+      },
+      "y_m": {
+        "bin_edges": [
+          -15.0,
+          -9.0,
+          -3.0,
+          3.0,
+          9.0,
+          15.0
+        ],
+        "per_tour_available_unordered_edges": {
+          "0012": [
+            2011,
+            2688,
+            1550,
+            2688,
+            2011
+          ],
+          "0013": [
+            2044,
+            2700,
+            1530,
+            2700,
+            2044
+          ],
+          "0014": [
+            2017,
+            2683,
+            1531,
+            2683,
+            2017
+          ],
+          "0015": [
+            2005,
+            2685,
+            1547,
+            2685,
+            2005
+          ]
+        },
+        "target_per_bin": 800
+      },
+      "z_m": {
+        "bin_edges": [
+          -33.0,
+          -19.8,
+          -6.600000000000001,
+          6.600000000000001,
+          19.799999999999997,
+          33.0
+        ],
+        "per_tour_available_unordered_edges": {
+          "0012": [
+            1028,
+            3030,
+            2191,
+            3030,
+            1028
+          ],
+          "0013": [
+            997,
+            3045,
+            2232,
+            3045,
+            997
+          ],
+          "0014": [
+            1041,
+            2986,
+            2204,
+            2986,
+            1041
+          ],
+          "0015": [
+            1048,
+            2979,
+            2210,
+            2979,
+            1048
+          ]
+        },
+        "target_per_bin": 800
+      },
+      "tilt_deg": {
+        "bin_edges": [
+          -45.0,
+          -27.0,
+          -9.0,
+          9.0,
+          27.0,
+          45.0
+        ],
+        "per_tour_available_unordered_edges": {
+          "0012": [
+            2471,
+            1475,
+            2303,
+            1475,
+            2471
+          ],
+          "0013": [
+            2671,
+            1317,
+            2286,
+            1317,
+            2671
+          ],
+          "0014": [
+            2675,
+            1219,
+            2337,
+            1219,
+            2675
+          ],
+          "0015": [
+            2539,
+            1373,
+            2325,
+            1373,
+            2539
+          ]
+        },
+        "target_per_bin": 800
+      },
+      "heading_deg": {
+        "bin_edges": [
+          -180.0,
+          -108.0,
+          -36.0,
+          36.0,
+          108.0,
+          180.0
+        ],
+        "per_tour_available_unordered_edges": {
+          "0012": [
+            2527,
+            2489,
+            1233,
+            2489,
+            2527
+          ],
+          "0013": [
+            2546,
+            2456,
+            1272,
+            2456,
+            2546
+          ],
+          "0014": [
+            2521,
+            2495,
+            1215,
+            2495,
+            2521
+          ],
+          "0015": [
+            2495,
+            2529,
+            1213,
+            2529,
+            2495
+          ]
+        },
+        "target_per_bin": 800
+      }
+    },
+    "shortages": [],
+    "necessary_bounds_pass": true
+  },
+  "capacity_repair_history": [
+    {
+      "attempt": 1,
+      "status": "feasible",
+      "tours": [
+        "0012",
+        "0013",
+        "0014",
+        "0015"
+      ]
+    }
+  ],
+  "capacity_repair_committed_tours": [
+    "0012",
+    "0013",
+    "0014",
+    "0015"
+  ]
+}

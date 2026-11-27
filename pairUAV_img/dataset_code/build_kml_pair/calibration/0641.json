@@ -1,0 +1,24 @@
+{
+  "source_kml": "/root/pairUAV_img/tours_splited_kml/0641/0000.kml",
+  "source_sha256": "8d2b37dbe50d7eaa1830381e316dd8a8385e069bf60aa7d4308815de35602e1d",
+  "terrain_altitude_msl": 291.45,
+  "method": "Earth Pro NetworkLink nadir probe",
+  "telemetry": {
+    "cameraLon": -84.39826550004388,
+    "cameraLat": 33.77430040034994,
+    "cameraAlt": 20000.0,
+    "lookatLon": -84.39826550004388,
+    "lookatLat": 33.77430040034994,
+    "lookatRange": 20000.0,
+    "lookatTilt": 0.0,
+    "lookatHeading": 0.0,
+    "lookatTerrainLon": -84.39826550116312,
+    "lookatTerrainLat": 33.77430039905167,
+    "lookatTerrainAlt": 291.45,
+    "horizFov": 60.0,
+    "vertFov": 37.786,
+    "horizPixels": 3487.0,
+    "vertPixels": 2067.0,
+    "time": 1795711176.8097138
+  }
+}

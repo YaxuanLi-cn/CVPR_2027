@@ -1,0 +1,24 @@
+{
+  "source_kml": "/root/tours_splited_kml/0020/0000.kml",
+  "source_sha256": "5a9eb1cb9eb565e3a5ef710c33012b7b65822fadb1179afe8f23d1a9fb134d4e",
+  "terrain_altitude_msl": 331.26,
+  "method": "Earth Pro NetworkLink nadir probe",
+  "telemetry": {
+    "cameraLon": -112.0741848005148,
+    "cameraLat": 33.45118669966271,
+    "cameraAlt": 20000.0,
+    "lookatLon": -112.0741848005148,
+    "lookatLat": 33.45118669966271,
+    "lookatRange": 20000.0,
+    "lookatTilt": 0.0,
+    "lookatHeading": 0.0,
+    "lookatTerrainLon": -112.0741848002742,
+    "lookatTerrainLat": 33.45118668744622,
+    "lookatTerrainAlt": 331.26,
+    "horizFov": 60.0,
+    "vertFov": 37.786,
+    "horizPixels": 3487.0,
+    "vertPixels": 2067.0,
+    "time": 1792808604.346529
+  }
+}
